@@ -39,7 +39,7 @@ def loop_through_repo():
         sys.modules[spec.name] = module
         spec.loader.exec_module(module)
         functions = dir(module)
-        link = f"[{module_name}]({module_path})"
+        link = f"[{module_name}](.{module_path.split('..')[1]})"
         docu += f"\n\n### Module: {link}\n"
         summary[module_name] = {"Link": link}
         for func in functions:
