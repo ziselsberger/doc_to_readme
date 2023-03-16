@@ -7,3 +7,13 @@ def mean(x: int = 1, y: int = 2) -> float:
     """
     result = (x + y) / 2
     return result
+
+
+def add(x: int = 4, y: int = 5) -> int:
+    """Add two numbers (x and y).
+
+    :param x: First number
+    :param y: Second number
+    :return: Sum of first and second number
+    """
+    return x + y
