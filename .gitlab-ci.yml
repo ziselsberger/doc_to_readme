@@ -1,5 +1,4 @@
 variables: 
-#  GIT_DEPTH: 1
   BRANCH_NAME: "main"
   BOT_NAME: "MJAM"
   BOT_EMAIL: "mjam@update_readme.com"
@@ -10,12 +9,11 @@ update_docu:
   before_script:
     - apk add bash git
     - apk add --no-cache python3
-    - git fetch
-    - git checkout $BRANCH_NAME
-    - git status
     - git config --global user.name "${BOT_NAME}"
     - git config --global user.email "${BOT_EMAIL}"
     - git config --global pull.rebase false
+    - git fetch
+    - git checkout $BRANCH_NAME
     - git pull
     - cd ./src
   script:
