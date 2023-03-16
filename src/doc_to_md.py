@@ -56,7 +56,7 @@ def loop_through_repo(exclude_modules: Tuple[str] = ("test", "doc_to_md")):
 
     for module_path in modules:
         module_name = os.path.basename(module_path).strip(".py")
-        if module_name in ["test", "doc_to_md"]: continue
+        if module_name in exclude_modules: continue
         spec = iu.spec_from_file_location("test", module_path)
         module = iu.module_from_spec(spec)
         sys.modules[spec.name] = module
