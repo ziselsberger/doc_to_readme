@@ -17,5 +17,5 @@ Super helpful blog post on how to update files in Repo within CI/CD Pipeline: ht
 ## Functions & Classes  
 | Module | Function/Class | Description |
 | --- | --- | --- |
-| [main](./main.py) | `hello_world()` | Just say hello |
+| [main](./main.py) | `hello_world()` | Just says hello |
 | [functions](./src/functions.py) | `mean(x: int = 1, y: int = 2) -> int` | Calculate mean of x and y. |
