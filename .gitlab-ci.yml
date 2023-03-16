@@ -5,6 +5,3 @@ update_docu:
     - cd ./src
   script:
     - python doc_to_md.py
-  artifacts:
-    paths: 
-      - /builds/csat6025/README.md
