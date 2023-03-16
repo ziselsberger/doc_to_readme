@@ -1,4 +1,4 @@
-def mean(x: int = 1, y: int = 2) -> int:
+def mean(x: int = 1, y: int = 2) -> float:
     """Calculate mean of x and y.
 
     :param x: First number
