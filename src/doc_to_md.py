@@ -13,13 +13,21 @@ import importlib.util as iu
 import inspect
 import os
 import sys
-from typing import Callable
+from typing import Callable, Tuple, Dict, Optional
 
 summary = {}
 docu = ""
 
 
-def doc_to_md(func: Callable):
+def doc_to_md(func: Callable) -> Tuple[str, str, str]:
+    """Extract information about function/class and add to a string.
+
+    Info is added to global variable 'docu', which is a string, that can be
+    written to a Markdown file.
+
+    :param func: function/class
+    :return: Function name, call and short description.
+    """
     global docu
     name = func.__name__
     short_description = func.__doc__.split("\n")[0]
@@ -32,7 +40,15 @@ def doc_to_md(func: Callable):
     return name, function_definition, short_description
 
 
-def loop_through_repo():
+def loop_through_repo(exclude_modules: Tuple[str] = ("test", "doc_to_md")):
+    """Collect documentation from functions & classes
+
+    Loop through all .py modules in the current Repo and add
+    function & class infos to a dictionary ('summary').
+    To exclude modules, add their name to argument 'exclude_modules'.
+
+    :param exclude_modules: Names of excluded modules, defaults to ("test", "doc_to_md")
+    """
     global docu
     global summary
     script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -58,8 +74,13 @@ def loop_through_repo():
                 }
 
 
-def add_summary_to_md(overview_dict, readme):
-    with open(readme, 'ab+') as f:
+def add_summary_to_md(overview_dict: Dict[str, Optional[str, Dict[str, str]]], markdown: str):
+    """Add Table with all Functions & Classes to Markdown file.
+
+    :param overview_dict: Dictionary with function & class information
+    :param markdown: Path to markdown file
+    """
+    with open(markdown, 'ab+') as f:
         f.write(f"\n## Functions & Classes  \n".encode('utf-8'))
         table = "| Module | Function/Class | Description |\n| --- | --- | --- |\n"
         for mod, functions in overview_dict.items():
@@ -76,14 +97,11 @@ def add_summary_to_md(overview_dict, readme):
         f.write(table.encode('utf-8'))
 
 
-def update_readme(file):
-    loop_through_repo()
-    add_summary_to_md(summary, file)
+def update_markdown_file(file: str = "../README.md"):
+    """Add/update 'Functions & Classes' Section in Markdown file.
 
-
-def main():
-    file = "../README.md"
-
+    :param file: Path to Markdown file, defaults to '../README.md'
+    """
     with open(file, "r") as f:
         content = []
         for line in f.readlines():
