@@ -13,13 +13,13 @@ update_docu:
     - git config --global user.name "${BOT_NAME}"
     - git config --global user.email "${BOT_EMAIL}"
     - git fetch
-#    - git checkout $BRANCH_NAME
+    - git checkout $BRANCH_NAME
     - cd ./src
   script:
     - python doc_to_md.py
     - git add ../README.md
     - git commit -m "${COMMIT_MESSAGE}"
-    - echo "git push -o ci.skip 'https://${BOT_NAME}:${GIT_PUSH_TOKEN}@${CI_REPOSITORY_URL#*@}'"
-    - git push -o ci.skip "https://${BOT_NAME}:${GIT_PUSH_TOKEN}@${CI_REPOSITORY_URL#*@}"
+    - echo "git push -o ci.skip 'https://${BOT_NAME}:${GIT_PUSH_TOKEN}@${CI_REPOSITORY_URL#*@}' ${BRANCH_NAME}"
+    - git push -o ci.skip "https://${BOT_NAME}:${GIT_PUSH_TOKEN}@${CI_REPOSITORY_URL#*@}" $BRANCH_NAME
 
 
