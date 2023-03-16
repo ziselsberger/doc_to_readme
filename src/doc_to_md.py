@@ -1,6 +1,13 @@
-# Sources:
-# https://www.codeguage.com/courses/python/functions-code-objects
-# https://stackoverflow.com/questions/196960/can-you-list-the-keyword-arguments-a-function-receives
+"""Contains functions to gather information about functions and classes in the current repository.
+
+The gathered information can be added to a Markdown file, either as List or Table.
+
+Helpful sources:
+- https://www.codeguage.com/courses/python/functions-code-objects
+- https://stackoverflow.com/questions/196960/can-you-list-the-keyword-arguments-a-function-receives
+"""
+__author__ = "Mirjam Ziselsberger"
+__email__ = ["ziselsberger@gmail.com", "mirjam.ziselsberger@student.uibk.ac.at"]
 import glob
 import importlib.util as iu
 import inspect
