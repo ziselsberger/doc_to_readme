@@ -30,6 +30,7 @@ def loop_through_repo():
     global summary
     script_dir = os.path.dirname(os.path.abspath(__file__))
     modules = glob.glob(f"{script_dir}/../**/*.py", recursive=True)
+    print(modules)
 
     for module_path in modules:
         module_name = os.path.basename(module_path).strip(".py")
@@ -84,12 +85,16 @@ def main():
                 break
             content.append(line)
 
+    print(content)
+
     with open(file, "w") as f:
         f.writelines(content[:-1]) if content[-1] == "\n" else f.writelines(content)
 
     update_readme(file)
     # with open(file, 'ab+') as f:
     #     f.write(docu.encode('utf-8'))
+
+    print(summary)
 
 
 if __name__ == "__main__":
