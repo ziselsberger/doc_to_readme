@@ -15,9 +15,7 @@ pipelines:
         script:
           - apk add bash git
           - apk add --no-cache python3
-          - git config --global pull.rebase false
           - git fetch
-          - git pull
           - cd ./src
           - python3 doc_to_md.py
           - *push
