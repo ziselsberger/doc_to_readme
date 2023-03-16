@@ -5,3 +5,6 @@ update_docu:
     - cd ./src
   script:
     - python doc_to_md.py
+  artifacts:
+    paths: 
+      - ../README.md
