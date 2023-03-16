@@ -1,0 +1,7 @@
+image: python:latest
+
+update_docu:
+  before_script:
+    - cd ./src
+  script:
+    - python doc_to_md.py
