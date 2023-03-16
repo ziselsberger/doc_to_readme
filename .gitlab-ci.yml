@@ -14,7 +14,7 @@ update_docu:
     - git config --global user.email "${BOT_EMAIL}"
     - git fetch
     - git checkout $BRANCH_NAME
-    - git pull
+    - git config --global pull.rebase false
     - cd ./src
   script:
     - python doc_to_md.py
