@@ -30,10 +30,9 @@ Super helpful blog post on how to update files in Repo within CI/CD Pipeline: ht
     ![](images/create_repo_access_token_small.png)
     ![](images/access_token_info_small.png)  
 
-  * **Name**: GIT_PUSH_TOKEN (does not really matter)    
-  * **Scopes** > `Repositories`  
-      [x] read  
-      [x] write  
+    **Scopes** > `Repositories`  
+    [x] read   
+    [x] write   
 
 
 3. **Add Repository Variables**: Repository Settings > `PIPELINES` > Repository Variables  
@@ -47,28 +46,27 @@ Super helpful blog post on how to update files in Repo within CI/CD Pipeline: ht
 
 4. **Create [bitbucket-pipelines.yml](bitbucket-pipelines.yml)**
 
-
->     image: alpine:latest
-
->     pipelines:
-        default:
-          - step:
-              name: update_docu
-              .push: &push |
-                lines=$(git status -s | wc -l)
-                if [ $lines -gt 0 ];then
-                  git add ../README.md
-                  git commit -m "Auto-update README.md [skip ci]"
-                  echo "git push 'https://x-token-auth:${GIT_PUSH_TOKEN}@${REPO_URL}' ${BRANCH_NAME}"
-                  git push "https://x-token-auth:${GIT_PUSH_TOKEN}@${REPO_URL}" $BRANCH_NAME
-                fi 
-              script:
-                - apk add bash git
-                - apk add --no-cache python3
-                - git fetch
-                - cd ./src
-                - python3 doc_to_md.py
-                - *push
+>      image: alpine:latest
+>      
+>      pipelines:
+>        default:
+>          - step:
+>              name: update_docu
+>              .push: &push |
+>                lines=$(git status -s | wc -l)
+>                if [ $lines -gt 0 ];then
+>                  git add ../README.md
+>                  git commit -m "Auto-update README.md [skip ci]"
+>                  echo "git push 'https://x-token-auth:${GIT_PUSH_TOKEN}@${REPO_URL}' ${BRANCH_NAME}"
+>                  git push "https://x-token-auth:${GIT_PUSH_TOKEN}@${REPO_URL}" $BRANCH_NAME
+>                fi 
+>              script:
+>                - apk add bash git
+>                - apk add --no-cache python3
+>                - git fetch
+>                - cd ./src
+>                - python3 doc_to_md.py
+>                - *push
 
 ## Functions & Classes  
 | Module | Function/Class | Description |
