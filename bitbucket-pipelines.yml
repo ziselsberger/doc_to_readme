@@ -21,6 +21,6 @@ pipelines:
           - git fetch
           - git checkout $BRANCH_NAME
           - git pull
-          - cd ./sr
+          - cd ./src
           - python3 doc_to_md.py
           - *push
