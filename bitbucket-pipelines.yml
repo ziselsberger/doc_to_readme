@@ -15,16 +15,19 @@ variables:
     git push -o ci.skip "https://${BOT_NAME}:${GIT_PUSH_TOKEN}@${BITBUCKET_GIT_SSH_ORIGIN#*@}" $BRANCH_NAME
   fi 
 
-update_docu:
-  image: alpine:latest
-  before_script:
-    - apk add bash git
-    - apk add --no-cache python3
-    - git config --global pull.rebase false
-    - git fetch
-    - git checkout $BRANCH_NAME
-    - git pull
-    - cd ./src
-  script:
-    - python doc_to_md.py
-    - *push
+pipelines:
+  default:
+    - step:
+        name: update_docu
+        image: alpine:latest
+        before_script:
+          - apk add bash git
+          - apk add --no-cache python3
+          - git config --global pull.rebase false
+          - git fetch
+          - git checkout $BRANCH_NAME
+          - git pull
+          - cd ./src
+        script:
+          - python doc_to_md.py
+          - *push
