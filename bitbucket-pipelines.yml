@@ -21,5 +21,6 @@ pipelines:
           - git fetch
           - git pull
           - cd ./src
+          - echo "Update README.md"
           - python3 doc_to_md.py
           - *push
