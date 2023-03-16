@@ -4,6 +4,21 @@ variables:
   BOT_EMAIL: "mjam@update_readme.com"
   COMMIT_MESSAGE: "Auto-update README.md"
 
+.push: &push |
+  git status
+  lines=$(git status -s | wc -l)
+  if [ $lines -gt 0 ];then
+    echo "committing"
+    git config --global user.name "${BOT_NAME}"
+    git config --global user.email "${BOT_EMAIL}"
+    git add ../README.md
+    git commit -m "${COMMIT_MESSAGE} ${CI_RUNNER_ID}"
+    echo "git push -o ci.skip 'https://${BOT_NAME}:${GIT_PUSH_TOKEN}@${CI_REPOSITORY_URL#*@}' ${BRANCH_NAME}"
+    git push -o ci.skip "https://${BOT_NAME}:${GIT_PUSH_TOKEN}@${CI_REPOSITORY_URL#*@}" $BRANCH_NAME
+  else
+    echo "no change, nothing to commit"
+  fi 
+
 update_docu:
   image: alpine:latest
   before_script:
@@ -18,9 +33,9 @@ update_docu:
     - cd ./src
   script:
     - python doc_to_md.py
-    - git add ../README.md
-    - git commit -m "${COMMIT_MESSAGE}"
-    - echo "git push -o ci.skip 'https://${BOT_NAME}:${GIT_PUSH_TOKEN}@${CI_REPOSITORY_URL#*@}' ${BRANCH_NAME}"
-    - git push -o ci.skip "https://${BOT_NAME}:${GIT_PUSH_TOKEN}@${CI_REPOSITORY_URL#*@}" $BRANCH_NAME
-
-
+    - *push
+#  after_script:
+#    - git add ../README.md
+#    - git commit -m "${COMMIT_MESSAGE}"
+#    - echo "git push -o ci.skip 'https://${BOT_NAME}:${GIT_PUSH_TOKEN}@${CI_REPOSITORY_URL#*@}' ${BRANCH_NAME}"
+#    - git push -o ci.skip "https://${BOT_NAME}:${GIT_PUSH_TOKEN}@${CI_REPOSITORY_URL#*@}" $BRANCH_NAME
