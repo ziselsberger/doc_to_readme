@@ -8,18 +8,16 @@ pipelines:
           lines=$(git status -s | wc -l)
           if [ $lines -gt 0 ];then
             git add ../README.md
-            git status
             git commit -m "Auto-update README.md"
-            git status
+            echo "git push -o ci.skip 'https://${BOT_NAME}:${GIT_PUSH_TOKEN}@${REPO_URL}' ${BRANCH_NAME}"
             git push -o ci.skip "https://${BOT_NAME}:${GIT_PUSH_TOKEN}@${REPO_URL}" $BRANCH_NAME
           fi 
         script:
           - apk add bash git
           - apk add --no-cache python3
           - git config --global pull.rebase false
-          - git config --global user.name ${BOT_NAME}
-          - git config --global user.email ${BOT_EMAIL}
-          - git config --global user.email
+          - git config --global user.name "${BOT_NAME}"
+          - git config --global user.email "${BOT_EMAIL}"
           - git fetch
           - git pull
           - cd ./src
