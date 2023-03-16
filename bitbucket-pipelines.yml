@@ -17,11 +17,10 @@ pipelines:
           - apk add bash git
           - apk add --no-cache python3
           - git config --global pull.rebase false
-          - git config --global user.name "${BOT_NAME}"
-          - git config --global user.email "${BOT_EMAIL}"
+          - git config --global user.name ${BOT_NAME}
+          - git config --global user.email ${BOT_EMAIL}
           - git config --global user.email
           - git fetch
-          - git checkout $BRANCH_NAME
           - git pull
           - cd ./src
           - python3 doc_to_md.py
