@@ -8,12 +8,10 @@ variables:
 .push: &push |
   git config --global user.name "${BOT_NAME}"
   git config --global user.email "${BOT_EMAIL}"
-  git status
   git add ../README.md
   git commit -m "${COMMIT_MESSAGE}: ${CI_RUNNER_ID}"
   echo "git push -o ci.skip 'https://${BOT_NAME}:${GIT_PUSH_TOKEN}@${CI_REPOSITORY_URL#*@}' ${BRANCH_NAME}"
   git push -o ci.skip "https://${BOT_NAME}:${GIT_PUSH_TOKEN}@${CI_REPOSITORY_URL#*@}" $BRANCH_NAME
-  fi
 
 update_docu:
   image: alpine:latest  # python:latest
