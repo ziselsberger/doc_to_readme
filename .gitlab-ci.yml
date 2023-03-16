@@ -15,6 +15,7 @@ update_docu:
     - git config --global pull.rebase false
     - git fetch
     - git checkout $BRANCH_NAME
+    - git status
     - git pull
     - cd ./src
   script:
