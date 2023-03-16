@@ -30,7 +30,6 @@ def loop_through_repo():
     global summary
     script_dir = os.path.dirname(os.path.abspath(__file__))
     modules = glob.glob(f"{script_dir}/../**/*.py", recursive=True)
-    print(modules)
 
     for module_path in modules:
         module_name = os.path.basename(module_path).strip(".py")
