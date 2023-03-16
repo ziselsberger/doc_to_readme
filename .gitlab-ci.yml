@@ -13,8 +13,6 @@ variables:
     git add ../README.md
     git commit -m "${COMMIT_MESSAGE}"
     git push -o ci.skip "https://${BOT_NAME}:${GIT_PUSH_TOKEN}@${CI_REPOSITORY_URL#*@}" $BRANCH_NAME
-  else
-    echo "No change, nothing to commit"
   fi 
 
 update_docu:
