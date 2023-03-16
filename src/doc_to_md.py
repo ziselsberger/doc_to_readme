@@ -6,8 +6,10 @@ Helpful sources:
 - https://www.codeguage.com/courses/python/functions-code-objects
 - https://stackoverflow.com/questions/196960/can-you-list-the-keyword-arguments-a-function-receives
 """
+
 __author__ = "Mirjam Ziselsberger"
 __email__ = ["ziselsberger@gmail.com", "mirjam.ziselsberger@student.uibk.ac.at"]
+
 import glob
 import importlib.util as iu
 import inspect
