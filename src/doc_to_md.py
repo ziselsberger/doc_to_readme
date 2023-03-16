@@ -112,11 +112,13 @@ def update_markdown_file(file: str = "../README.md"):
     with open(file, "w") as f:
         f.writelines(content[:-1]) if content[-1] == "\n" else f.writelines(content)
 
-    update_readme(file)
+    loop_through_repo()
+    add_summary_to_md(summary, file)
+
     # with open(file, 'ab+') as f:
     #     f.write(docu.encode('utf-8'))
 
 
 if __name__ == "__main__":
-    main()
+    update_markdown_file()
 
