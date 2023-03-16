@@ -12,8 +12,9 @@ update_docu:
     - apk add --no-cache python3
     - git config --global user.name "${BOT_NAME}"
     - git config --global user.email "${BOT_EMAIL}"
-    - git fetch
-    - git checkout $BRANCH_NAME
+#    - git fetch
+    - git pull
+#    - git checkout $BRANCH_NAME
     - cd ./src
   script:
     - python doc_to_md.py
