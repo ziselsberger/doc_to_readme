@@ -9,8 +9,3 @@ Automated docstring extraction and creation/update of module documentation in RE
 
 ## Why?
 Because it's nice :-)
-
-## Functions & Classes  
-| Module | Function/Class | Description |
-| --- | --- | --- |
-| [functions](./src/functions.py) | `mean(x: int = 1, y: int = 2) -> int` | Calculate mean of x and y. |
