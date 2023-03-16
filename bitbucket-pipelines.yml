@@ -8,9 +8,9 @@ pipelines:
           lines=$(git status -s | wc -l)
           if [ $lines -gt 0 ];then
             git add ../README.md
-            git commit -m "Auto-update README.md [skip ci]"
-            echo "git push 'https://${BOT_NAME}:${GIT_PUSH_TOKEN}@${REPO_URL}' ${BRANCH_NAME}"
-            git push "https://${BOT_NAME}:${GIT_PUSH_TOKEN}@${REPO_URL}" $BRANCH_NAME
+            git commit -m "Auto-update README.md [skip ctps://${BOT]"
+            echo "git push 'https://x-token-auth:${GIT_PUSH_TOKEN}@${REPO_URL}' ${BRANCH_NAME}"
+            git push "https://x-token-auth:${GIT_PUSH_TOKEN}@${REPO_URL}" $BRANCH_NAME
           fi 
         script:
           - apk add bash git
