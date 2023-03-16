@@ -15,7 +15,7 @@ import importlib.util as iu
 import inspect
 import os
 import sys
-from typing import Callable, Tuple, Dict, Optional
+from typing import Callable, Tuple, Dict, Optional, Union
 
 summary = {}
 docu = ""
@@ -76,7 +76,7 @@ def loop_through_repo(exclude_modules: Tuple[str] = ("test", "doc_to_md")):
                 }
 
 
-def add_summary_to_md(overview_dict: Dict[str, Optional[str, Dict[str, str]]], markdown: str):
+def add_summary_to_md(overview_dict: Dict[str, Optional[Union[str, Dict[str, str]]]], markdown: str):
     """Add Table with all Functions & Classes to Markdown file.
 
     :param overview_dict: Dictionary with function & class information
