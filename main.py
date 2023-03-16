@@ -1,5 +1,5 @@
 def hello_world():
-    """Just say hello"""
+    """Just says hello"""
     print("Hello World")
 
 
