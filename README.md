@@ -69,6 +69,7 @@ Super helpful blog post on how to update files in Repo within CI/CD Pipeline: ht
                 - cd ./src
                 - python3 doc_to_md.py
                 - *push
+
 ## Functions & Classes  
 | Module | Function/Class | Description |
 | --- | --- | --- |
