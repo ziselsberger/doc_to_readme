@@ -19,6 +19,7 @@ update_docu:
   image: alpine:latest  # python:latest
   before_script:
     - apk add bash git
+    - apk add --no-cache python3
     - git fetch
     - git checkout $BRANCH_NAME
     - cd ./src
