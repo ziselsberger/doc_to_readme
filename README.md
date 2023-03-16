@@ -9,3 +9,7 @@ Automated docstring extraction and creation/update of module documentation in RE
 
 ## Why?
 Because it's nice :-)
+
+## Current status
+GitLab Pipeline works... Bitbucket will be tested next! ;-)  
+Super helpful blog post on how to update files in Repo within CI/CD Pipeline: https://parsiya.net/blog/2021-10-11-modify-gitlab-repositories-from-the-ci-pipeline/
