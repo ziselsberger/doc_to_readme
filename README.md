@@ -34,11 +34,10 @@ Super helpful blog post on how to update files in Repo within CI/CD Pipeline: ht
    ![](images/create_repo_access_token_small.png)
    ![](images/access_token_info_small.png)  
 
-     * **Name**: GIT_PUSH_TOKEN (does not really matter)    
-     * **Scopes**:
-       Repositories:   
-         [x] read
-         [x] write  
+  * **Name**: GIT_PUSH_TOKEN (does not really matter)    
+  * **Scopes** > `Repositories`  
+      [x] read  
+      [x] write  
 
 
 3. **Add Repository Variables**  
@@ -47,9 +46,9 @@ Super helpful blog post on how to update files in Repo within CI/CD Pipeline: ht
   
    ![](images/repo_variables_small.png)  
 
-    * **GIT_PUSH_TOKEN** = Access Token (**secure!**)  
-    * **BRANCH_NAME** = Branch to be updated automatically  
-    * **REPO_URL** = URL without https://  
+  * **GIT_PUSH_TOKEN** = Access Token (**secure!**)   
+  * **BRANCH_NAME** = Branch to be updated automatically   
+  * **REPO_URL** = URL without https://  
 
 
 4. **Create [bitbucket-pipelines.yml](bitbucket-pipelines.yml)**
