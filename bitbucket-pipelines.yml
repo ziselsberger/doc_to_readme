@@ -4,11 +4,6 @@ pipelines:
   default:
     - step:
         name: update_docu
-        variables: 
-          BRANCH_NAME: "main"
-          BOT_NAME: "MJAM"
-          BOT_EMAIL: "${BOT_EMAIL}"
-          COMMIT_MESSAGE: "Auto-update README.md"
         .push: &push |
           git status
           lines=$(git status -s | wc -l)
@@ -16,7 +11,7 @@ pipelines:
             git config --global user.name "${BOT_NAME}"
             git config --global user.email "${BOT_EMAIL}"
             git add ../README.md
-            git commit -m "${COMMIT_MESSAGE}"
+            git commit -m "Auto-update README.md"
             git push -o ci.skip "https://${BOT_NAME}:${GIT_PUSH_TOKEN}@${BITBUCKET_GIT_SSH_ORIGIN#*@}" $BRANCH_NAME
           fi 
         script:
@@ -26,6 +21,6 @@ pipelines:
           - git fetch
           - git checkout $BRANCH_NAME
           - git pull
-          - cd ./src
+          - cd ./sr
           - python3 doc_to_md.py
           - *push
