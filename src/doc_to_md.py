@@ -85,16 +85,12 @@ def main():
                 break
             content.append(line)
 
-    print(content)
-
     with open(file, "w") as f:
         f.writelines(content[:-1]) if content[-1] == "\n" else f.writelines(content)
 
     update_readme(file)
     # with open(file, 'ab+') as f:
     #     f.write(docu.encode('utf-8'))
-
-    print(summary)
 
 
 if __name__ == "__main__":
