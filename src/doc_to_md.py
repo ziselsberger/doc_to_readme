@@ -1,4 +1,4 @@
-"""Contains functions to gather information about functions and classes in the current repository.
+"""Contains methods to gather information about functions and classes in the current repository.
 
 The gathered information can be added to a Markdown file, either as List or Table.
 
