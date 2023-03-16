@@ -1,28 +1,25 @@
 variables: 
   GIT_DEPTH: 1
-  BRANCH_NAME: "test"
+  BRANCH_NAME: "main"
   BOT_NAME: "MJAM"
   BOT_EMAIL: "mjam@update_readme.com"
   COMMIT_MESSAGE: "Auto-update README.md"
 
-.push: &push |
-  git config --global user.name "${BOT_NAME}"
-  git config --global user.email "${BOT_EMAIL}"
-  git add ../README.md
-  git commit -m "${COMMIT_MESSAGE}: ${CI_RUNNER_ID}"
-  echo "git push -o ci.skip 'https://${BOT_NAME}:${GIT_PUSH_TOKEN}@${CI_REPOSITORY_URL#*@}' ${BRANCH_NAME}"
-  git push -o ci.skip "https://${BOT_NAME}:${GIT_PUSH_TOKEN}@${CI_REPOSITORY_URL#*@}" $BRANCH_NAME
-
 update_docu:
-  image: alpine:latest  # python:latest
+  image: alpine:latest
   before_script:
     - apk add bash git
     - apk add --no-cache python3
+    - git config --global user.name "${BOT_NAME}"
+    - git config --global user.email "${BOT_EMAIL}"
     - git fetch
-    - git checkout $BRANCH_NAME
+#    - git checkout $BRANCH_NAME
     - cd ./src
   script:
     - python doc_to_md.py
-    - *push
+    - git add ../README.md
+    - git commit -m "${COMMIT_MESSAGE}"
+    - echo "git push -o ci.skip 'https://${BOT_NAME}:${GIT_PUSH_TOKEN}@${CI_REPOSITORY_URL#*@}' ${BRANCH_NAME}"
+    - git push -o ci.skip "https://${BOT_NAME}:${GIT_PUSH_TOKEN}@${CI_REPOSITORY_URL#*@}" $BRANCH_NAME
 
 
