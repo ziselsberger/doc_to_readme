@@ -2,7 +2,7 @@
 # https://www.codeguage.com/courses/python/functions-code-objects
 # https://stackoverflow.com/questions/196960/can-you-list-the-keyword-arguments-a-function-receives
 import glob
-import importlib
+import importlib.util as iu
 import inspect
 import os
 import sys
@@ -34,8 +34,8 @@ def loop_through_repo():
     for module_path in modules:
         module_name = os.path.basename(module_path).strip(".py")
         if module_name in ["test", "doc_to_md"]: continue
-        spec = importlib.util.spec_from_file_location("test", module_path)
-        module = importlib.util.module_from_spec(spec)
+        spec = iu.spec_from_file_location("test", module_path)
+        module = iu.module_from_spec(spec)
         sys.modules[spec.name] = module
         spec.loader.exec_module(module)
         functions = dir(module)
