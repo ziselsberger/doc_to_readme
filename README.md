@@ -139,6 +139,13 @@ Super helpful blog post on how to update files in Repo within CI/CD Pipeline: ht
 | Module | Function/Class | Description |
 | --- | --- | --- |
 | [main](./main.py) | `hello_world()` | Just says hello |
-| [functions](./src/functions.py) | `add(x: int = 4, y: int = 5) -> int` | Add two numbers (x and y). |
 | [functions](./src/functions.py) | `mean(x: int = 1, y: int = 2) -> float` | Calculate mean of x and y. |
+| [functions](./src/functions.py) | `add(x: int = 4, y: int = 5) -> int` | Add two numbers (x and y). |
 | [functions](./src/functions.py) | `multiply(x: int = 6, y: int = 7) -> int` | Multiply two numbers (x and y). |
+| [run_qc_checks](./src/run_qc_checks.py) | `reference_file(self) -> str` | Updates path to reference file, in case placeholders are used, which need to be replace for every file, that shall be checked. e.g. when the filename includes a Tile ID. |
+| [run_qc_checks](./src/run_qc_checks.py) | `add_to_dict(self, test_name: str, test_result: Tuple[bool, str]) -> None` | Add QC result to dictionary. |
+| [run_qc_checks](./src/run_qc_checks.py) | `execute_test(self, test_name: str, func: Callable[..., Any], inp: Union[str, RasterProfile, DatasetReader], specification: Optional[Any] = '', header: Optional[str] = '', **kwargs) -> None` | Run QC function and write results in a dictionary. |
+| [run_qc_checks](./src/run_qc_checks.py) | `run_qc(self)` | Run QC checks |
+| [run_qc_checks](./src/run_qc_checks.py) | `finalise_qc(self) -> dict` | Finalise QC checks. |
+| [run_qc_checks](./src/run_qc_checks.py) | `tests(self) -> None` | Includes all QC checks (independent of data format). Only those checks are executed, where a specification could be extracted from the config file. |
+| [run_qc_checks](./src/run_qc_checks.py) | `main(config_file=None, test_input=None)` | None |
