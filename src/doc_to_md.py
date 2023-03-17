@@ -5,6 +5,7 @@ The gathered information can be added to a Markdown file, either as List or Tabl
 Helpful sources:
 - https://www.codeguage.com/courses/python/functions-code-objects
 - https://stackoverflow.com/questions/196960/can-you-list-the-keyword-arguments-a-function-receives
+- https://gabrielelanaro.github.io/blog/2014/12/12/extract-docstrings.html
 """
 
 __author__ = "Mirjam Ziselsberger"
