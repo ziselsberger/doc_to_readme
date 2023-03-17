@@ -7,10 +7,20 @@
 ## What's this?
 Automated docstring extraction and creation/update of module documentation in README File
 
-## Why?
+### Why?
 Because it's nice :-)
 
-## Where & How?
+### How?
+[doc_to_md.py](src/doc_to_md.py) loops through all Python files in the Repository 
+and extracts the function calls + the corresponding short description from the docstrings.  
+These are added to a dictionary and afterwards converted to Markdown Table.  
+Finally, the section 'Function & Classes' is appended / updated in the README File.
+
+#### Open TODOs: 
+- add Classes to the Table
+- add Unittests
+
+### Where?
 Works in GitLab and Bitbucket :-) Yay!  
 > * The Pipeline YAML files differ a little bit, so pay attention to the infos below :-)  
 > * This pipe-internal `*push` script  checks for changes (using git status) and if so, 
