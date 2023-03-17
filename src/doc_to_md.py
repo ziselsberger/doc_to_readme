@@ -64,6 +64,7 @@ def loop_through_repo(exclude_modules: Tuple[str] = ("test", "doc_to_md")):
         sys.modules[spec.name] = module
         spec.loader.exec_module(module)
         functions = dir(module)
+        # local_functions = [(n, m) for (n, m) in inspect.getmembers(module) if not isinstance(m, dict)]
         link = f"[{module_name}](.{module_path.split('..')[1]})"
         docu += f"\n\n### Module: {link}\n"
         summary[module_name] = {"Link": link}
@@ -123,4 +124,3 @@ def update_markdown_file(file: str = "../README.md"):
 
 if __name__ == "__main__":
     update_markdown_file()
-
