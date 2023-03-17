@@ -42,7 +42,7 @@ def doc_to_md(func: Callable) -> Tuple[str, str, str]:
     return name, function_definition, short_description
 
 
-def loop_through_repo(exclude_modules: Tuple[str] = ("test", "doc_to_md, run_qc_checks")):
+def loop_through_repo(exclude_modules: Tuple[str] = ("test", "doc_to_md")):
     """Collect documentation from functions & classes
 
     Loop through all .py modules in the current Repo and add
