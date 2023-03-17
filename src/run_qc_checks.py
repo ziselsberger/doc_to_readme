@@ -5,30 +5,30 @@
 # C0115: Missing class docstring (missing-class-docstring)
 
 """Module containing functions and classes used for execution of QC Checks"""
-
-import argparse
-import json
-import os
-import sys
-from datetime import datetime
-from typing import Callable, Union, Any, Optional, Tuple
-
-import geopandas
-import pandas
-import rasterio
-import yaml
-
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.dirname(SCRIPT_DIR))
-
-import run_qc.aux_functions.s3_functions as s3f
-import qc_raster.aggregation as agg
-from qc_general import crs, extent, filename, attributes_and_values, \
-    ancillary_files
-from qc_raster import border, colormap, raster_properties
-from qc_raster.raster_properties import get_reader, get_profile
-from qc_report import markdown as md
-from qc_vector import vector_properties as vp
+#
+# import argparse
+# import json
+# import os
+# import sys
+# from datetime import datetime
+# from typing import Callable, Union, Any, Optional, Tuple
+#
+# import geopandas
+# import pandas
+# import rasterio
+# import yaml
+#
+# SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+# sys.path.append(os.path.dirname(SCRIPT_DIR))
+#
+# import run_qc.aux_functions.s3_functions as s3f
+# import qc_raster.aggregation as agg
+# from qc_general import crs, extent, filename, attributes_and_values, \
+#     ancillary_files
+# from qc_raster import border, colormap, raster_properties
+# from qc_raster.raster_properties import get_reader, get_profile
+# from qc_report import markdown as md
+# from qc_vector import vector_properties as vp
 
 RasterProfile = rasterio.profiles.Profile
 DatasetReader = rasterio.io.DatasetReader
