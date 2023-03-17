@@ -17,3 +17,13 @@ def add(x: int = 4, y: int = 5) -> int:
     :return: Sum of first and second number
     """
     return x + y
+
+
+def multiply(x: int = 6, y: int = 7) -> int:
+    """Multiply two numbers (x and y).
+
+    :param x: First number
+    :param y: Second number
+    :return: Multiply first and second number
+    """
+    return x * y
