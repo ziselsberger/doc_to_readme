@@ -42,7 +42,7 @@ def doc_to_md(func: Callable) -> Tuple[str, str, str]:
     return name, function_definition, short_description
 
 
-def loop_through_repo(exclude_modules: Tuple[str] = ("test", "doc_to_md")):
+def loop_through_repo(exclude_modules: Tuple[str] = ("test", "doc_to_md, run_qc_checks")):
     """Collect documentation from functions & classes
 
     Loop through all .py modules in the current Repo and add
@@ -120,6 +120,15 @@ def update_markdown_file(file: str = "../README.md"):
 
     # with open(file, 'ab+') as f:
     #     f.write(docu.encode('utf-8'))
+
+
+def parse_through_file():
+    module = "doc_to_readme/src/run_qc_checks.py"
+    with open(module, 'r') as f:
+        for line in f.readlines():
+            strip = line.strip()
+            if strip.startswith("def "):
+                print(strip)
 
 
 if __name__ == "__main__":
