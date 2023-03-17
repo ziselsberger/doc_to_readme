@@ -59,22 +59,10 @@ def loop_through_repo(exclude_modules: Tuple[str] = ("test", "doc_to_md, run_qc_
     for module_path in modules:
         module_name = os.path.basename(module_path).strip(".py")
         if module_name in exclude_modules: continue
-        spec = iu.spec_from_file_location("test", module_path)
-        module = iu.module_from_spec(spec)
-        sys.modules[spec.name] = module
-        spec.loader.exec_module(module)
-        functions = dir(module)
-        # local_functions = [(n, m) for (n, m) in inspect.getmembers(module) if not isinstance(m, dict)]
+        summary[module_name] = parse_through_file(module_path)
         link = f"[{module_name}](.{module_path.split('..')[1]})"
+        summary[module_name]["Link"] = link
         docu += f"\n\n### Module: {link}\n"
-        summary[module_name] = {"Link": link}
-        for func in functions:
-            if not func.startswith("__"):
-                fn, fdef, fdoc = doc_to_md(getattr(module, func))
-                summary[module_name][fn] = {
-                    "function": fdef,
-                    "docu": fdoc
-                }
 
 
 def add_summary_to_md(overview_dict: Dict[str, Optional[Union[str, Dict[str, str]]]], markdown: str):
@@ -122,13 +110,33 @@ def update_markdown_file(file: str = "../README.md"):
     #     f.write(docu.encode('utf-8'))
 
 
-def parse_through_file():
-    module = "doc_to_readme/src/run_qc_checks.py"
-    with open(module, 'r') as f:
+def parse_through_file(file):
+    with open(file) as fd:
+        tree = ast.parse(fd.read())
+        func_docs = {f.name: (ast.get_docstring(f).split("\n\n")[0].replace('\n', ' ').replace('  ', ' ')
+                              if ast.get_docstring(f) else None)
+                     for f in ast.walk(tree) if isinstance(f, ast.FunctionDef)}
+
+    with open(file, 'r') as f:
+        functions = {}
+        end = True
         for line in f.readlines():
-            strip = line.strip()
-            if strip.startswith("def "):
-                print(strip)
+            rm_blanks = line.strip()
+            if rm_blanks.startswith("def "):
+                function_name = rm_blanks.split("def ")[1].split("(")[0]
+                if function_name.startswith("__"): continue
+                functions[function_name] = {"fn": None, "doc": func_docs.get(function_name)}
+                functions[function_name]["fn"] = rm_blanks.split("def ")[1]
+                end = rm_blanks.endswith(":")
+            elif not end:
+                rm_blanks = rm_blanks.split('"""')[0]
+                end = rm_blanks.endswith(":")
+                functions[function_name]["fn"] += rm_blanks
+
+    for name in functions.keys():
+        functions[name]['fn'] = functions[name]['fn'].rstrip(':').replace(',', ', ').replace('  ', ' ')
+
+    return functions
 
 
 if __name__ == "__main__":
