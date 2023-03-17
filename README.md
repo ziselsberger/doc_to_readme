@@ -140,5 +140,14 @@ To skip the Pipeline you have to add `[skip ci]` or `[ci skip]` to the commit me
 | Module | Function/Class | Description |
 | --- | --- | --- |
 | [main](./main.py) | `hello_world()` | Just says hello |
+| [general_functions](./src/general_functions.py) | `Any(*args, **kwds)` | Special type indicating an unconstrained type. |
+| [general_functions](./src/general_functions.py) | `List(*args, **kwargs)` | A generic version of list. |
+| [general_functions](./src/general_functions.py) | `Optional(*args, **kwds)` | Optional type. |
+| [general_functions](./src/general_functions.py) | `Tuple(*args, **kwargs)` | Tuple type; Tuple[X, Y] is the cross-product type of X and Y. |
+| [general_functions](./src/general_functions.py) | `Union(*args, **kwds)` | Union type; Union[X, Y] means either X or Y. |
+| [general_functions](./src/general_functions.py) | `check_property(prop: Any, specified_property: Any, test_result: Optional[bool] = None, additional_message: Union[str, List[str], NoneType] = '', log_op: Optional[str] = '') -> Tuple[bool, str]` |  |
+| [general_functions](./src/general_functions.py) | `start_qc(func)` | Prints the name of the QC check. |
+| [general_functions](./src/general_functions.py) | `start_qc_message(test_name: str)` | Prints a customized message. |
+| [general_functions](./src/general_functions.py) | `wraps(wrapped, assigned=('__module__', '__name__', '__qualname__', '__doc__', '__annotations__'), updated=('__dict__',))` | Decorator factory to apply update_wrapper() to a wrapper function |
 | [functions](./src/functions.py) | `add(x: int = 4, y: int = 5) -> int` | Add two numbers (x and y). |
 | [functions](./src/functions.py) | `mean(x: int = 1, y: int = 2) -> float` | Calculate mean of x and y. |
