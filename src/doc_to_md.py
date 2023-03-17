@@ -10,11 +10,10 @@ Helpful sources:
 __author__ = "Mirjam Ziselsberger"
 __email__ = ["ziselsberger@gmail.com", "mirjam.ziselsberger@student.uibk.ac.at"]
 
+import ast
 import glob
-import importlib.util as iu
 import inspect
 import os
-import sys
 from typing import Callable, Tuple, Dict, Optional, Union
 
 summary = {}
