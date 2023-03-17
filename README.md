@@ -134,9 +134,11 @@ Super helpful blog post on how to update files in Repo within CI/CD Pipeline: ht
 - The **User** in the git push command has to be **x-token-auth**.
 - Bitbucket does not allow push options like GitLab (`-o ci.skip`).  
   To skip the Pipeline you have to add `[skip ci]` or `[ci skip]` to the commit message.
+
 ## Functions & Classes  
 | Module | Function/Class | Description |
 | --- | --- | --- |
 | [main](./main.py) | `hello_world()` | Just says hello |
 | [functions](./src/functions.py) | `add(x: int = 4, y: int = 5) -> int` | Add two numbers (x and y). |
 | [functions](./src/functions.py) | `mean(x: int = 1, y: int = 2) -> float` | Calculate mean of x and y. |
+| [functions](./src/functions.py) | `multiply(x: int = 6, y: int = 7) -> int` | Multiply two numbers (x and y). |
