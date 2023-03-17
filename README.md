@@ -11,14 +11,14 @@ Automated docstring extraction and creation/update of module documentation in RE
 Because it's nice :-)
 
 ### How?
-[doc_to_md.py](src/doc_to_md.py) loops through all Python files in the Repository 
-and extracts the function calls + the corresponding short description from the docstrings.  
+[doc_to_md.py](src/doc_to_md.py) loops through all Python files in the Repository and extracts 
+the function calls + the corresponding short description from the docstrings.
 These are added to a dictionary and afterwards converted to Markdown Table.  
 Finally, the section 'Function & Classes' is appended / updated in the README File.
 
-#### Open TODOs: 
-- add Classes to the Table
-- add Unittests
+**Open TODOs:**  
+- add Classes to the Table  
+- add Unittests  
 
 ### Where?
 Works in GitLab and Bitbucket :-) Yay!  
@@ -144,18 +144,3 @@ Super helpful blog post on how to update files in Repo within CI/CD Pipeline: ht
 - The **User** in the git push command has to be **x-token-auth**.
 - Bitbucket does not allow push options like GitLab (`-o ci.skip`).  
   To skip the Pipeline you have to add `[skip ci]` or `[ci skip]` to the commit message.
-
-## Functions & Classes  
-| Module | Function/Class | Description |
-| --- | --- | --- |
-| [main](./main.py) | `hello_world()` | Just says hello |
-| [functions](./src/functions.py) | `mean(x: int = 1, y: int = 2) -> float` | Calculate mean of x and y. |
-| [functions](./src/functions.py) | `add(x: int = 4, y: int = 5) -> int` | Add two numbers (x and y). |
-| [functions](./src/functions.py) | `multiply(x: int = 6, y: int = 7) -> int` | Multiply two numbers (x and y). |
-| [run_qc_checks](./src/run_qc_checks.py) | `reference_file(self) -> str` | Updates path to reference file, in case placeholders are used, which need to be replace for every file, that shall be checked. e.g. when the filename includes a Tile ID. |
-| [run_qc_checks](./src/run_qc_checks.py) | `add_to_dict(self, test_name: str, test_result: Tuple[bool, str]) -> None` | Add QC result to dictionary. |
-| [run_qc_checks](./src/run_qc_checks.py) | `execute_test(self, test_name: str, func: Callable[..., Any], inp: Union[str, RasterProfile, DatasetReader], specification: Optional[Any] = '', header: Optional[str] = '', **kwargs) -> None` | Run QC function and write results in a dictionary. |
-| [run_qc_checks](./src/run_qc_checks.py) | `run_qc(self)` | Run QC checks |
-| [run_qc_checks](./src/run_qc_checks.py) | `finalise_qc(self) -> dict` | Finalise QC checks. |
-| [run_qc_checks](./src/run_qc_checks.py) | `tests(self) -> None` | Includes all QC checks (independent of data format). Only those checks are executed, where a specification could be extracted from the config file. |
-| [run_qc_checks](./src/run_qc_checks.py) | `main(config_file=None, test_input=None)` | None |
