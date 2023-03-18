@@ -11,6 +11,7 @@ Helpful sources:
 __author__ = "Mirjam Ziselsberger"
 __email__ = ["ziselsberger@gmail.com", "mirjam.ziselsberger@student.uibk.ac.at"]
 
+import argparse
 import ast
 import glob
 import inspect
@@ -42,14 +43,14 @@ def doc_to_md(func: Callable) -> Tuple[str, str, str]:
     return name, function_definition, short_description
 
 
-def loop_through_repo(exclude_modules: Tuple[str] = ("test", "doc_to_md")):
+def loop_through_repo(exclude_modules: Tuple[str, ...] = ()) -> None:
     """Collect documentation from functions & classes
 
     Loop through all .py modules in the current Repo and add
     function & class infos to a dictionary ('summary').
     To exclude modules, add their name to argument 'exclude_modules'.
 
-    :param exclude_modules: Names of excluded modules, defaults to ("test", "doc_to_md")
+    :param exclude_modules: Names of excluded modules
     """
     global docu
     global summary
@@ -88,9 +89,10 @@ def add_summary_to_md(overview_dict: Dict[str, Optional[Union[str, Dict[str, str
         f.write(table.encode('utf-8'))
 
 
-def update_markdown_file(file: str = "../README.md"):
+def update_markdown_file(file: str = "../README.md", exclude_modules: Tuple[str, ...] = ()):
     """Add/update 'Functions & Classes' Section in Markdown file.
 
+    :param exclude_modules: Names of excluded modules
     :param file: Path to Markdown file, defaults to '../README.md'
     """
     with open(file, "r") as f:
@@ -103,7 +105,7 @@ def update_markdown_file(file: str = "../README.md"):
     with open(file, "w") as f:
         f.writelines(content[:-1]) if content[-1] == "\n" else f.writelines(content)
 
-    loop_through_repo()
+    loop_through_repo(exclude_modules=exclude_modules)
     add_summary_to_md(summary, file)
 
     # with open(file, 'ab+') as f:
@@ -140,4 +142,14 @@ def parse_through_file(file):
 
 
 if __name__ == "__main__":
-    update_markdown_file()
+    import argparse
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-e", "--exclude", required=False, help="Exclude models", default=[], nargs='+')
+    args = parser.parse_args()
+
+    exclude = ("test", "doc_to_md")
+    if args.exclude:
+        exclude += tuple(args.exclude)
+
+    update_markdown_file(exclude_modules=exclude)
