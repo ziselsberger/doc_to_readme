@@ -72,18 +72,19 @@ def add_summary_to_md(overview_dict: Dict[str, Optional[Union[str, Dict[str, str
     """
     with open(markdown, 'ab+') as f:
         f.write(f"\n## Functions & Classes  \n".encode('utf-8'))
-        table = "| Module | Function/Class | Description |\n| --- | --- | --- |\n"
+        table = "| Module | Type | Name/Call | Description |\n| --- | --- | --- | --- |\n"
         for mod, functions in overview_dict.items():
             link = overview_dict.get(mod).get("Link")
             for _, info in functions.items():
                 try:
-                    func, desc = info.values()
+                    func, desc, t, p = info.values()
                 except ValueError:
                     pass
                 except AttributeError:
                     pass
                 else:
-                    table += f"| {link} | `{func}` | {desc} |\n"
+                    table += f"| {link} | {t} {f'({p})' if p is not None else ''} | `{func}` | {desc} |\n"
+
         f.write(table.encode('utf-8'))
 
 
@@ -115,7 +116,11 @@ def parse_through_file(file):
         tree = ast.parse(fd.read())
         func_docs = {f.name: (ast.get_docstring(f).split("\n\n")[0].replace('\n', ' ').replace('  ', ' ')
                               if ast.get_docstring(f) else None)
-                     for f in ast.walk(tree) if isinstance(f, ast.FunctionDef)}
+                     for f in ast.walk(tree) if isinstance(f, (ast.FunctionDef, ast.ClassDef))}
+
+        class_definitions = [node for node in tree.body if isinstance(node, ast.ClassDef)]
+        method_names = {node.name: class_def.name for class_def in class_definitions
+                        for node in class_def.body if isinstance(node, ast.FunctionDef)}
 
     with open(file, 'r') as f:
         functions = {}
@@ -125,8 +130,19 @@ def parse_through_file(file):
             if rm_blanks.startswith("def "):
                 function_name = rm_blanks.split("def ")[1].split("(")[0]
                 if function_name.startswith("__"): continue
-                functions[function_name] = {"fn": None, "doc": func_docs.get(function_name)}
+                functions[function_name] = {"fn": None,
+                                            "doc": func_docs.get(function_name),
+                                            "type": "method" if function_name in method_names else "function",
+                                            "parent_class": method_names.get(function_name)}
                 functions[function_name]["fn"] = rm_blanks.split("def ")[1]
+                end = rm_blanks.endswith(":")
+            elif rm_blanks.startswith("class "):
+                function_name = rm_blanks.split("class ")[1].split("(")[0].rstrip(":")
+                if function_name.startswith("__"): continue
+                functions[function_name] = {"fn": None,
+                                            "doc": func_docs.get(function_name),
+                                            "type": "class",
+                                            "parent_class": method_names.get(function_name)}
                 end = rm_blanks.endswith(":")
             elif not end:
                 rm_blanks = rm_blanks.split('"""')[0]
@@ -134,7 +150,10 @@ def parse_through_file(file):
                 functions[function_name]["fn"] += rm_blanks
 
     for name in functions.keys():
-        functions[name]['fn'] = functions[name]['fn'].rstrip(':').replace(',', ', ').replace('  ', ' ')
+        try:
+            functions[name]['fn'] = functions[name]['fn'].replace(',', ', ').replace('  ', ' ').rstrip(':')
+        except AttributeError:
+            functions[name]['fn'] = name
 
     return functions
 
