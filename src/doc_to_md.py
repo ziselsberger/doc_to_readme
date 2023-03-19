@@ -34,7 +34,6 @@ def doc_to_md(func: Callable) -> Tuple[str, str, str]:
     global docu
     name = func.__name__
     short_description = func.__doc__.split("\n")[0]
-    # typeof = func.__class__
 
     function_definition = f"{name}{str(inspect.signature(func))}"
     converted = f"\n* ### `{function_definition}`  \n" \
@@ -63,7 +62,6 @@ def loop_through_repo(exclude_modules: Tuple[str, ...] = ()) -> None:
         summary[module_name] = parse_through_file(module_path)
         link = f"[{module_name}](.{module_path.split('..')[1]})"
         summary[module_name]["Link"] = link
-        docu += f"\n\n### Module: {link}\n"
 
 
 def add_summary_to_md(overview_dict: Dict[str, Optional[Union[str, Dict[str, str]]]], markdown: str):
@@ -142,8 +140,6 @@ def parse_through_file(file):
 
 
 if __name__ == "__main__":
-    import argparse
-
     parser = argparse.ArgumentParser()
     parser.add_argument("-e", "--exclude", required=False, help="Exclude models", default=[], nargs='+')
     args = parser.parse_args()
