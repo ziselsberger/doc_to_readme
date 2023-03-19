@@ -309,8 +309,6 @@ class TechnicalQualityTests:
         # Extent
         if 'extent' in self.tests:
             # spec_extent = None
-            # bvl = r"t:\processing\2771_VLCC_EEA\02_Interim_Products\BVL\BVL_20221014\20221014\30SVH\CLMS_HRLVLCC_BVL_all_years_10m_30SVH_3035_V010.tif"
-            # self.ref_file = bvl.replace("30SVH", self.tile_id)
             if isinstance(self.tests.get('extent'), (list, tuple)):
                 spec_extent = self.tests.get('extent')
             elif self.reference_file is not None:
@@ -607,23 +605,6 @@ class TechnicalQualityTests:
                 header="Minimum mapping unit"
             )
 
-        # # BVL mask
-        # if self.tests.get("mask_layer"):
-        #     bvl = r"t:\processing\2771_VLCC_EEA\02_Interim_Products\BVL\BVL_20221014\20221014\30SVH\CLMS_HRLVLCC_BVL_all_years_10m_30SVH_3035_V010.tif"
-        #     self.ref_file = bvl.replace("30SVH", self.tile_id)
-        #     if self.ref_file is not None:
-        #         valid_border = self.tests["valid_border"]
-        #         correct_border = border.check_mask_vlcc(
-        #             self.test_input,
-        #             boundary_file=self.ref_file,
-        #             inside_value=valid_border.get('inside_value')
-        #         )
-        #         TechnicalQualityTests.add_to_dict(
-        #             self,
-        #             test_name="BVL_mask",
-        #             test_result=correct_border
-        #         )
-
         # Border
         if self.tests.get("valid_border"):
             if self.ref_file is not None:
@@ -734,8 +715,6 @@ def main(config_file=None, test_input=None):
         )
         csv_file = f"_QC_summary_{datetime.today().strftime('%b-%d-%Y_%H-%M')}.csv"
         all_results_df.to_csv(test_input.replace('.txt', csv_file), sep=";")
-        # all_results_df.to_csv(f"{os.path.dirname(test_input)}"
-        #                       f"/QC_summary_{datetime.today().strftime('%b-%d-%Y_%H-%M')}.csv", sep=";")
 
 
 if __name__ == "__main__":
