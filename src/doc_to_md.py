@@ -57,7 +57,7 @@ def loop_through_repo(exclude_modules: Tuple[str, ...] = ()) -> None:
     modules = glob.glob(f"{script_dir}/../**/*.py", recursive=True)
 
     for module_path in modules:
-        module_name = os.path.basename(module_path).strip(".py")
+        module_name = os.path.basename(module_path).replace(".py", "")
         if module_name in exclude_modules: continue
         summary[module_name] = parse_through_file(module_path)
         link = f"[{module_name}](.{module_path.split('..')[1]})"
