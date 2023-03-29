@@ -144,13 +144,14 @@ update_docu:
     - *push
 ```
 
-#### Some further info:
+\note{
 
-- Environment variables: `GIT_PUSH_TOKEN` (Repository Access Token) and `CI_REPOSITORY_URL`
-- Local variables are listed in the YAML File.
-- It's necessary to set the git user.name and user.email
-- It's necessary to check out the main branch and pull again, otherwise a merge conflict happens.
-- `-o ci.skip` is necessary for not triggering the CI again (and again) with the update of the README File
+1. Environment variables: `GIT_PUSH_TOKEN` (Repository Access Token) and `CI_REPOSITORY_URL`
+2. Local variables are listed in the YAML File.
+3. It's necessary to set the git user.name and user.email
+4. It's necessary to check out the main branch and pull again, otherwise a merge conflict happens.
+5. `-o ci.skip` is necessary for not triggering the CI again (and again) with the update of the README File  
+   }
 
 ---
 
@@ -211,7 +212,8 @@ pipelines:
 - Bitbucket does not allow push options like GitLab (`-o ci.skip`).  
   To skip the Pipeline you have to add `[skip ci]` or `[ci skip]` to the commit message.
 
-## Functions & Classes  
+## Functions & Classes
+
 | Module | Type | Name/Call | Description |
 | --- | --- | --- | --- |
 | [main](./main.py) | function  | `hello_world()` | Just says hello |
