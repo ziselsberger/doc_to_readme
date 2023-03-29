@@ -2,49 +2,55 @@
 
 **Author:** Mirjam Ziselsberger  
 **Created:** 15.03.2023  
-**Last Update:** 18.03.2023
+**Last Update:** 29.03.2023
 
 ## What's this?
+
 Automated docstring extraction and creation/update of module documentation in README File
 
 ### Why?
+
 Because it's nice :-)
 
 ### How?
-[doc_to_md.py](src/doc_to_md.py) loops through all Python files in the Repository and extracts 
-the function calls + the corresponding short description from the docstrings.
-These are added to a dictionary and afterwards converted to Markdown Table.  
+
+[doc_to_md.py](src/doc_to_md.py) loops through all Python files in the Repository and extracts the function calls + the
+corresponding short description from the docstrings. These are added to a dictionary and afterwards converted to
+Markdown Table.  
 Finally, the section 'Function & Classes' is appended / updated in the README File.
 
-**Open TODOs:**  
-- add Classes to the Table  
-- add Unittests  
+**Open TODOs:**
+
+- add Unittests
 
 ### Where?
-Works in GitLab and Bitbucket :-) Yay!  
-> * The Pipeline YAML files differ a little bit, so pay attention to the infos below :-)  
-> * This pipe-internal `*push` script  checks for changes (using git status) and if so, 
-> commits and pushes the changes in the README File.
+
+Works in GitLab and Bitbucket :-) Yay!
+> * The Pipeline YAML files differ a little bit, so pay attention to the infos below :-)
+> * This pipe-internal `*push` script  checks for changes (using git status) and if so,
+    > commits and pushes the changes in the README File.
 
 ### GitLab
-Super helpful blog post on how to update files in Repo within CI/CD Pipeline: https://parsiya.net/blog/2021-10-11-modify-gitlab-repositories-from-the-ci-pipeline/
+
+Super helpful blog post on how to update files in Repo within CI/CD
+Pipeline: https://parsiya.net/blog/2021-10-11-modify-gitlab-repositories-from-the-ci-pipeline/
 
 #### How to update files within GitLab Pipeline:
 
 1. **Add Project Access Token**: Settings > `Access Tokens`
 
-    ![](images/create_project_access_token_medium.png)  
-    ![](images/project_access_token.png)
+   ![](images/create_project_access_token_medium.png)  
+   ![](images/project_access_token.png)
 
 
 2. **Add GIT_PUSH_TOKEN to CICD Variables**: Settings > `CICD` > Variables
 
-    ![](images/cicd_variables.png)
+   ![](images/cicd_variables.png)
 
-  * **Key** =  GIT_PUSH_TOKEN
-  * **Value** = Access Token
-  * **Txpe** = Variable
-  * `[x] Mask variable`!
+* **Key** = GIT_PUSH_TOKEN
+* **Value** = Access Token
+* **Txpe** = Variable
+* `[x] Mask variable`!
 
 
 3. **Create [GitLab Pipeline](.gitlab-ci.yml)**
@@ -80,8 +86,8 @@ Super helpful blog post on how to update files in Repo within CI/CD Pipeline: ht
 >            - python doc_to_md.py
 >            - *push
 
-#### Some further info:  
- 
+#### Some further info:
+
 - Environment variables: `GIT_PUSH_TOKEN` (Repository Access Token) and `CI_REPOSITORY_URL`
 - Local variables are listed in the YAML File.
 - It's necessary to set the git user.name and user.email
@@ -96,22 +102,22 @@ Super helpful blog post on how to update files in Repo within CI/CD Pipeline: ht
 
 1. **Enable Pipelines**: Repository Settings > `PIPELINES` > Settings
 
-2. **Create Repository Access Token**: Repository Settings > `SECURITY` > Access tokens    
+2. **Create Repository Access Token**: Repository Settings > `SECURITY` > Access tokens
 
-    ![](images/access_token_info.png)  
+   ![](images/access_token_info.png)
 
-    **Scopes** > `Repositories`  
-    [x] read   
-    [x] write   
+   **Scopes** > `Repositories`  
+   [x] read   
+   [x] write
 
 
-3. **Add Repository Variables**: Repository Settings > `PIPELINES` > Repository Variables  
-  
-    ![](images/repo_variables.png)  
+3. **Add Repository Variables**: Repository Settings > `PIPELINES` > Repository Variables
 
-  * **GIT_PUSH_TOKEN** = Access Token (**secure!**)   
-  * **BRANCH_NAME** = Branch to be updated automatically   
-  * **REPO_URL** = URL without https://  
+   ![](images/repo_variables.png)
+
+* **GIT_PUSH_TOKEN** = Access Token (**secure!**)
+* **BRANCH_NAME** = Branch to be updated automatically
+* **REPO_URL** = URL without https://
 
 
 4. **Create [Bitbucket Pipeline](bitbucket-pipelines.yml)**
@@ -138,14 +144,15 @@ Super helpful blog post on how to update files in Repo within CI/CD Pipeline: ht
 >                - python3 doc_to_md.py
 >                - *push
 
-#### Some further info:  
- 
+#### Some further info:
+
 - All variables are stored as repository variables.
 - The **User** in the git push command has to be **x-token-auth**.
 - Bitbucket does not allow push options like GitLab (`-o ci.skip`).  
   To skip the Pipeline you have to add `[skip ci]` or `[ci skip]` to the commit message.
 
-## Functions & Classes  
+## Functions & Classes
+
 | Module | Type | Name/Call | Description |
 | --- | --- | --- | --- |
 | [main](./main.py) | function  | `hello_world()` | Just says hello |
