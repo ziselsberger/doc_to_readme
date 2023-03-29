@@ -223,5 +223,5 @@ pipelines:
 | [run_qc_checks](./src/run_qc_checks.py) | function  | `main(config_file=None, test_input=None)` | None |
 
 ---
-**Created:** 15.03.2023
+**Created:** 15.03.2023  
 **Last Update:** 2023-03-29
