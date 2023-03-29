@@ -210,3 +210,18 @@ pipelines:
 - The **User** in the git push command has to be **x-token-auth**.
 - Bitbucket does not allow push options like GitLab (`-o ci.skip`).  
   To skip the Pipeline you have to add `[skip ci]` or `[ci skip]` to the commit message.
+## Functions & Classes  
+| Module | Type | Name/Call | Description |
+| --- | --- | --- | --- |
+| [main](./main.py) | function  | `hello_world()` | Just says hello |
+| [functions](./src/functions.py) | function  | `mean(x: int = 1, y: int = 2) -> float` | Calculate mean of x and y. |
+| [functions](./src/functions.py) | function  | `add(x: int = 4, y: int = 5) -> int` | Add two numbers (x and y). |
+| [functions](./src/functions.py) | function  | `multiply(x: int = 6, y: int = 7) -> int` | Multiply two numbers (x and y). |
+| [run_qc_checks](./src/run_qc_checks.py) | class  | `TechnicalQualityTests` | Base class for all technical QC Tests. |
+| [run_qc_checks](./src/run_qc_checks.py) | method (TechnicalQualityTests) | `reference_file(self) -> str` | Updates path to reference file, in case placeholders are used, which need to be replace for every file, that shall be checked. e.g. when the filename includes a Tile ID. |
+| [run_qc_checks](./src/run_qc_checks.py) | method (TechnicalQualityTests) | `add_to_dict(self, test_name: str, test_result: Tuple[bool, str]) -> None` | Add QC result to dictionary. |
+| [run_qc_checks](./src/run_qc_checks.py) | method (TechnicalQualityTests) | `execute_test(self, test_name: str, func: Callable[..., Any], inp: Union[str, RasterProfile, DatasetReader], specification: Optional[Any] = '', header: Optional[str] = '', **kwargs) -> None` | Run QC function and write results in a dictionary. |
+| [run_qc_checks](./src/run_qc_checks.py) | method (TechnicalQualityTests) | `run_qc(self)` | Run QC checks |
+| [run_qc_checks](./src/run_qc_checks.py) | method (TechnicalQualityTests) | `finalise_qc(self) -> dict` | Finalise QC checks. |
+| [run_qc_checks](./src/run_qc_checks.py) | method (TechnicalQualityTests) | `tests(self) -> None` | Includes all QC checks (independent of data format). Only those checks are executed, where a specification could be extracted from the config file. |
+| [run_qc_checks](./src/run_qc_checks.py) | function  | `main(config_file=None, test_input=None)` | None |
