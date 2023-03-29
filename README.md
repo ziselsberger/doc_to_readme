@@ -27,8 +27,7 @@ Finally, the section 'Function & Classes' is appended / updated in the README Fi
 
 Works in GitLab, Bitbucket & GitHub :-) Yay!
 > * The Pipeline YAML files differ a little bit, so pay attention to the infos below :-)
-> * This pipe-internal `*push` script  checks for changes (using git status) and if so,
-    > commits and pushes the changes in the README File.
+> * This pipe-internal `*push` script  checks for changes (using git status) and if so, commits and pushes the changes in the README File.
 
 ### GitHub
 
