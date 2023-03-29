@@ -42,7 +42,10 @@ def doc_to_md(func: Callable) -> Tuple[str, str, str]:
     return name, function_definition, short_description
 
 
-def loop_through_repo(exclude_modules: Tuple[str, ...] = ()) -> None:
+def loop_through_repo(
+        exclude_modules: Tuple[str, ...] = (),
+        specified_modules: Optional[Tuple[str, ...]] = None
+) -> None:
     """Collect documentation from functions & classes
 
     Loop through all .py modules in the current Repo and add
@@ -58,7 +61,10 @@ def loop_through_repo(exclude_modules: Tuple[str, ...] = ()) -> None:
 
     for module_path in modules:
         module_name = os.path.basename(module_path).replace(".py", "")
-        if module_name in exclude_modules: continue
+        if specified_modules:
+            if module_name not in specified_modules: continue
+        elif module_name in exclude_modules:
+            continue
         summary[module_name] = parse_through_file(module_path)
         link = f"[{module_name}](.{module_path.split('..')[1]})"
         summary[module_name]["Link"] = link
@@ -88,10 +94,13 @@ def add_summary_to_md(overview_dict: Dict[str, Optional[Union[str, Dict[str, str
         f.write(table.encode('utf-8'))
 
 
-def update_markdown_file(file: str = "../README.md", exclude_modules: Tuple[str, ...] = ()):
+def update_markdown_file(file: str = "../README.md",
+                         exclude_modules: Tuple[str, ...] = (),
+                         specified_modules: Optional[Tuple[str, ...]] = None):
     """Add/update 'Functions & Classes' Section in Markdown file.
 
     :param exclude_modules: Names of excluded modules
+    :param specified_modules: Names of specified modules
     :param file: Path to Markdown file, defaults to '../README.md'
     """
     with open(file, "r") as f:
@@ -104,7 +113,8 @@ def update_markdown_file(file: str = "../README.md", exclude_modules: Tuple[str,
     with open(file, "w") as f:
         f.writelines(content[:-1]) if content[-1] == "\n" else f.writelines(content)
 
-    loop_through_repo(exclude_modules=exclude_modules)
+    loop_through_repo(exclude_modules=exclude_modules,
+                      specified_modules=specified_modules)
     add_summary_to_md(summary, file)
 
     # with open(file, 'ab+') as f:
@@ -161,10 +171,14 @@ def parse_through_file(file):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("-e", "--exclude", required=False, help="Exclude models", default=[], nargs='+')
+    parser.add_argument("-m", "--modules", required=False, help="Specify models", default=[], nargs='+')
     args = parser.parse_args()
 
     exclude = ("test", "doc_to_md")
     if args.exclude:
         exclude += tuple(args.exclude)
 
-    update_markdown_file(exclude_modules=exclude)
+    specified_modules = args.modules
+
+    update_markdown_file(exclude_modules=exclude,
+                         specified_modules=specified_modules)
