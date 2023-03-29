@@ -33,7 +33,7 @@ jobs:
           if [ $lines -gt 0 ];then
             git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
             git config --global user.email "${{ env.CI_COMMIT_MAIL }}"
-            git add ../README.md"
+            git add ../README.md
             git commit -o skip.ci -m "${{ env.CI_COMMIT_MESSAGE }}"
             git push
           fi
