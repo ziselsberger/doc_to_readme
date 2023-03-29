@@ -1,0 +1,22 @@
+# https://medium.com/@michaelekpang/creating-a-ci-cd-pipeline-using-github-actions-b65bb248edfe
+
+name: Update README.md
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  update-docu:
+    runs-on: ubuntu-latest
+      permissions:
+        contents: write
+      steps:
+        - uses: actions/checkout@v2
+        - name: Install Python
+          uses: actions/setup-python@v2
+          with:
+            python-version: '3.9'
+        - name: Check Python Version
+          run: python --version
