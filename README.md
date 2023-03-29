@@ -108,36 +108,38 @@ Pipeline: https://parsiya.net/blog/2021-10-11-modify-gitlab-repositories-from-th
 
 3. **Create [GitLab Pipeline](.gitlab-ci.yml)**
 
->        variables: 
->          BRANCH_NAME: "main"
->          BOT_NAME: "MJAM"
->          BOT_EMAIL: "mjam@update_readme.com"
->          COMMIT_MESSAGE: "Auto-update README.md"
->        
->        .push: &push |
->          git status
->          lines=$(git status -s | wc -l)
->          if [ $lines -gt 0 ];then
->            git config --global user.name "${BOT_NAME}"
->            git config --global user.email "${BOT_EMAIL}"
->            git add ../README.md
->            git commit -m "${COMMIT_MESSAGE}"
->            git push -o ci.skip "https://${BOT_NAME}:${GIT_PUSH_TOKEN}@${CI_REPOSITORY_URL#*@}" $BRANCH_NAME
->          fi 
->        
->        update_docu:
->          image: alpine:latest
->          before_script:
->            - apk add bash git
->            - apk add --no-cache python3
->            - git config --global pull.rebase false
->            - git fetch
->            - git checkout $BRANCH_NAME
->            - git pull
->            - cd ./src
->          script:
->            - python doc_to_md.py
->            - *push
+```yaml
+variables:
+  BRANCH_NAME: "main"
+  BOT_NAME: "MJAM"
+  BOT_EMAIL: "mjam@update_readme.com"
+  COMMIT_MESSAGE: "Auto-update README.md"
+
+.push: &push |
+  git status
+  lines=$(git status -s | wc -l)
+  if [ $lines -gt 0 ];then
+    git config --global user.name "${BOT_NAME}"
+    git config --global user.email "${BOT_EMAIL}"
+    git add ../README.md
+    git commit -m "${COMMIT_MESSAGE}"
+    git push -o ci.skip "https://${BOT_NAME}:${GIT_PUSH_TOKEN}@${CI_REPOSITORY_URL#*@}" $BRANCH_NAME
+  fi 
+
+update_docu:
+  image: alpine:latest
+  before_script:
+    - apk add bash git
+    - apk add --no-cache python3
+    - git config --global pull.rebase false
+    - git fetch
+    - git checkout $BRANCH_NAME
+    - git pull
+    - cd ./src
+  script:
+    - python doc_to_md.py
+    - *push
+```
 
 #### Some further info:
 
@@ -175,27 +177,29 @@ Pipeline: https://parsiya.net/blog/2021-10-11-modify-gitlab-repositories-from-th
 
 4. **Create [Bitbucket Pipeline](bitbucket-pipelines.yml)**
 
->      image: alpine:latest
->      
->      pipelines:
->        default:
->          - step:
->              name: update_docu
->              .push: &push |
->                lines=$(git status -s | wc -l)
->                if [ $lines -gt 0 ];then
->                  git add ../README.md
->                  git commit -m "Auto-update README.md [skip ci]"
->                  echo "git push 'https://x-token-auth:${GIT_PUSH_TOKEN}@${REPO_URL}' ${BRANCH_NAME}"
->                  git push "https://x-token-auth:${GIT_PUSH_TOKEN}@${REPO_URL}" $BRANCH_NAME
->                fi 
->              script:
->                - apk add bash git
->                - apk add --no-cache python3
->                - git fetch
->                - cd ./src
->                - python3 doc_to_md.py
->                - *push
+```yaml
+image: alpine:latest
+
+pipelines:
+  default:
+    - step:
+        name: update_docu
+        .push: &push |
+          lines=$(git status -s | wc -l)
+          if [ $lines -gt 0 ];then
+            git add ../README.md
+            git commit -m "Auto-update README.md [skip ci]"
+            echo "git push 'https://x-token-auth:${GIT_PUSH_TOKEN}@${REPO_URL}' ${BRANCH_NAME}"
+            git push "https://x-token-auth:${GIT_PUSH_TOKEN}@${REPO_URL}" $BRANCH_NAME
+          fi 
+        script:
+          - apk add bash git
+          - apk add --no-cache python3
+          - git fetch
+          - cd ./src
+          - python3 doc_to_md.py
+          - *push
+```
 
 #### Some further info:
 
