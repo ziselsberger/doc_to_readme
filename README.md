@@ -205,6 +205,7 @@ pipelines:
 - The **User** in the git push command has to be **x-token-auth**.
 - Bitbucket does not allow push options like GitLab (`-o ci.skip`).  
   To skip the Pipeline you have to add `[skip ci]` or `[ci skip]` to the commit message.
+
 ## Functions & Classes  
 | Module | Type | Name/Call | Description |
 | --- | --- | --- | --- |
@@ -220,3 +221,7 @@ pipelines:
 | [run_qc_checks](./src/run_qc_checks.py) | method (TechnicalQualityTests) | `finalise_qc(self) -> dict` | Finalise QC checks. |
 | [run_qc_checks](./src/run_qc_checks.py) | method (TechnicalQualityTests) | `tests(self) -> None` | Includes all QC checks (independent of data format). Only those checks are executed, where a specification could be extracted from the config file. |
 | [run_qc_checks](./src/run_qc_checks.py) | function  | `main(config_file=None, test_input=None)` | None |
+
+---
+**Created:** 15.03.2023
+**Last Update:** 2023-03-29
