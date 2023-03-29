@@ -18,10 +18,9 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: '3.9'
-      - name: Check Python Version
-        run: python --version
-      - name: Check files & git status
+      - name: Update README
         run: |
-          ls -a
+          cd ./src
+          python3 doc_to_md.py
           git status
 
