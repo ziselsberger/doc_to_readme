@@ -204,8 +204,7 @@ Pipeline: https://parsiya.net/blog/2021-10-11-modify-gitlab-repositories-from-th
 - Bitbucket does not allow push options like GitLab (`-o ci.skip`).  
   To skip the Pipeline you have to add `[skip ci]` or `[ci skip]` to the commit message.
 
-## Functions & Classes
-
+## Functions & Classes  
 | Module | Type | Name/Call | Description |
 | --- | --- | --- | --- |
 | [main](./main.py) | function  | `hello_world()` | Just says hello |
