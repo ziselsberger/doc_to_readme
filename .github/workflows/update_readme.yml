@@ -20,3 +20,8 @@ jobs:
           python-version: '3.9'
       - name: Check Python Version
         run: python --version
+      - name: Check files & git status
+        run: |
+          ls -a
+          git status
+
