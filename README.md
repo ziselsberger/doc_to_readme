@@ -25,10 +25,63 @@ Finally, the section 'Function & Classes' is appended / updated in the README Fi
 
 ### Where?
 
-Works in GitLab and Bitbucket :-) Yay!
+Works in GitLab, Bitbucket & GitHub :-) Yay!
 > * The Pipeline YAML files differ a little bit, so pay attention to the infos below :-)
 > * This pipe-internal `*push` script  checks for changes (using git status) and if so,
     > commits and pushes the changes in the README File.
+
+### GitHub
+
+The least complicated one :-)
+
+1. **Add dir `.github/workflows`**
+
+2. **Create [YAML file](.github/workflows/update_readme.yml)**
+
+Sources:
+
+- https://medium.com/@michaelekpang/creating-a-ci-cd-pipeline-using-github-actions-b65bb248edfe
+- https://joht.github.io/johtizen/build/2022/01/20/github-actions-push-into-repository.html
+
+```yaml
+name: Update README.md
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  update-docu:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+      - name: Install Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+      - name: Update README
+        env:
+          CI_COMMIT_MESSAGE: Auto-update README.md [skip ci]
+          CI_COMMIT_AUTHOR: mjam
+          CI_COMMIT_MAIL: ziselsberger@users.noreply.github.com
+        run: |
+          cd ./src
+          python3 doc_to_md.py
+          lines=$(git status -s | wc -l)
+          if [ $lines -gt 0 ];then
+            git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
+            git config --global user.email "${{ env.CI_COMMIT_MAIL }}"
+            git add ../README.md
+            git commit -m "${{ env.CI_COMMIT_MESSAGE }}"
+            git push
+          fi
+```
+
+---
 
 ### GitLab
 
