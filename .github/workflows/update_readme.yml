@@ -10,13 +10,13 @@ on:
 jobs:
   update-docu:
     runs-on: ubuntu-latest
-      permissions:
-        contents: write
-      steps:
-        - uses: actions/checkout@v2
-        - name: Install Python
-          uses: actions/setup-python@v2
-          with:
-            python-version: '3.9'
-        - name: Check Python Version
-          run: python --version
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+      - name: Check Python Version
+        run: python --version
