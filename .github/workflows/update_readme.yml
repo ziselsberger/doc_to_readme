@@ -1,4 +1,6 @@
+# Sources:
 # https://medium.com/@michaelekpang/creating-a-ci-cd-pipeline-using-github-actions-b65bb248edfe
+# https://joht.github.io/johtizen/build/2022/01/20/github-actions-push-into-repository.html
 
 name: Update README.md
 
@@ -20,8 +22,18 @@ jobs:
         with:
           python-version: '3.9'
       - name: Update README
+        env:
+          CI_COMMIT_MESSAGE: Auto-update README.md
+          CI_COMMIT_AUTHOR: MJAM
+          CI_COMMIT_MAIL: ziselsberger@users.noreply.github.com
         run: |
           cd ./src
           python3 doc_to_md.py
-          git status
-
+          lines=$(git status -s | wc -l)
+          if [ $lines -gt 0 ];then
+            git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
+            git config --global user.email "${{ env.CI_COMMIT_MAIL }}"
+            git add ../README.md"
+            git commit -o skip.ci -m "${{ env.CI_COMMIT_MESSAGE }}"
+            git push
+          fi
