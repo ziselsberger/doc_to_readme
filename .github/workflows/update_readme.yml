@@ -24,7 +24,7 @@ jobs:
       - name: Update README
         env:
           CI_COMMIT_MESSAGE: Auto-update README.md [skip ci]
-          CI_COMMIT_AUTHOR: MJAM
+          CI_COMMIT_AUTHOR: mjam
           CI_COMMIT_MAIL: ziselsberger@users.noreply.github.com
         run: |
           cd ./src
