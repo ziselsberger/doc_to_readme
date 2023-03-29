@@ -36,12 +36,10 @@ The least complicated one :-)
 
 1. **Add dir `.github/workflows`**
 
-2. **Create [YAML file](.github/workflows/update_readme.yml)**
+2. **Create [Workflow file (.yml)](.github/workflows/update_readme.yml)**
 
-Sources:
-
-- https://medium.com/@michaelekpang/creating-a-ci-cd-pipeline-using-github-actions-b65bb248edfe
-- https://joht.github.io/johtizen/build/2022/01/20/github-actions-push-into-repository.html
+    - https://medium.com/@michaelekpang/creating-a-ci-cd-pipeline-using-github-actions-b65bb248edfe
+    - https://joht.github.io/johtizen/build/2022/01/20/github-actions-push-into-repository.html
 
 ```yaml
 name: Update README.md
@@ -80,6 +78,11 @@ jobs:
             git push
           fi
 ```
+
+#### Some further info:
+
+- In contrast to GitLab and Bitbucket no access token is needed.
+- To skip the Pipeline `[skip ci]` is added to the commit message.
 
 ---
 
