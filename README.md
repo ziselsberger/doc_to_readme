@@ -185,8 +185,7 @@ pipelines:
           [ ... ]
 ```
 
-## Functions & Classes
-
+## Functions & Classes  
 | Module | Type | Name/Call | Description |
 | --- | --- | --- | --- |
 | [main](./main.py) | function  | `hello_world()` | Just says hello |
@@ -204,4 +203,4 @@ pipelines:
 
 ---
 **Created:** 2023-03-15  
-**Last Update:** 2023-03-29
+**Last Update:** 2023-03-30
