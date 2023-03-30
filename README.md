@@ -22,19 +22,22 @@ Finally, the section 'Functions & Classes' is appended / updated in the README F
 ### Where?
 
 Works in GitLab, Bitbucket & GitHub :-) Yay!
-> * The Pipeline YAML files differ a little bit, so pay attention to the infos below :-)
-> * This pipe-internal `*push` script  checks for changes (using git status) and if so, commits and pushes the changes in the README File.
+> The YAML files differ a little, so pay attention to the infos below :-)
 
 ### GitHub
 
-The least complicated one :-)
+The least complicated one :-)  
+Some helpful blog posts / tutorials:
 
-1. **Add dir `.github/workflows`**
+- https://medium.com/@michaelekpang/creating-a-ci-cd-pipeline-using-github-actions-b65bb248edfe
+- https://joht.github.io/johtizen/build/2022/01/20/github-actions-push-into-repository.html
 
-2. **Create [Workflow file (.yml)](.github/workflows/update_readme.yml)**
+##### 1. Add dir `.github/workflows`
 
-    - https://medium.com/@michaelekpang/creating-a-ci-cd-pipeline-using-github-actions-b65bb248edfe
-    - https://joht.github.io/johtizen/build/2022/01/20/github-actions-push-into-repository.html
+##### 2. Create [Workflow file (.yml)](.github/workflows/update_readme.yml)
+
+- In contrast to GitLab and Bitbucket no access token is needed.
+- To skip the Pipeline `[skip ci]` is added to the commit message.
 
 ```yaml
 name: Update README.md
@@ -74,11 +77,6 @@ jobs:
           fi
 ```
 
-#### Some further info:
-
-- In contrast to GitLab and Bitbucket no access token is needed.
-- To skip the Pipeline `[skip ci]` is added to the commit message.
-
 ---
 
 ### GitLab
@@ -86,25 +84,29 @@ jobs:
 Super helpful blog post on how to update files in Repo within CI/CD
 Pipeline: https://parsiya.net/blog/2021-10-11-modify-gitlab-repositories-from-the-ci-pipeline/
 
-#### How to update files within GitLab Pipeline:
+##### 1. Add [Project Access Token](images/project_access_token.png)
 
-1. **Add Project Access Token**: Settings > `Access Tokens`
+* Settings > `Access Tokens`
+* **Scope**: [write_repository](images/create_project_access_token_medium.png)
 
-   ![](images/create_project_access_token_medium.png)  
-   ![](images/project_access_token.png)
+##### 2. Add GIT_PUSH_TOKEN to [CICD Variables](images/cicd_variables.png)
 
-
-2. **Add GIT_PUSH_TOKEN to CICD Variables**: Settings > `CICD` > Variables
-
-   ![](images/cicd_variables.png)
+* Settings > `CICD` > Variables
 
     * **Key** = GIT_PUSH_TOKEN
     * **Value** = Access Token
     * **Type** = Variable
     * `[x] Mask variable`!
 
+##### 3. Create [GitLab Pipeline](.gitlab-ci.yml)
 
-3. **Create [GitLab Pipeline](.gitlab-ci.yml)**
+- Environment variables: `GIT_PUSH_TOKEN` (Repository Access Token) and `CI_REPOSITORY_URL`
+- All other (local) variables are listed in the YAML File.
+- git user.name and user.email need to be set!
+- The pipe-internal `*push` script checks for changes (using git status) and if so, commits and pushes the changes in
+  the README File.
+- It's necessary to check out the main branch and pull again, otherwise a merge conflict happens.
+- `-o ci.skip` is necessary for not triggering the CI again (and again) with the update of the README File
 
 ```yaml
 variables:
@@ -139,45 +141,34 @@ update_docu:
     - *push
 ```
 
-#### Some further info:
-
-- Environment variables: `GIT_PUSH_TOKEN` (Repository Access Token) and `CI_REPOSITORY_URL`
-- Local variables are listed in the YAML File.
-- It's necessary to set the git user.name and user.email
-- It's necessary to check out the main branch and pull again, otherwise a merge conflict happens.
-- `-o ci.skip` is necessary for not triggering the CI again (and again) with the update of the README File
-
 ---
 
 ### Bitbucket
 
-#### How to update files within Bitbucket Pipeline:
+##### 1. Enable Pipelines
 
-1. **Enable Pipelines**: Repository Settings > `PIPELINES` > Settings
+* Repository Settings > `PIPELINES` > Settings
 
-2. **Create Repository Access Token**: Repository Settings > `SECURITY` > Access tokens
+##### 2. Create [Repository Access Token](images/access_token_info.png)
 
-   ![](images/access_token_info.png)
+* Repository Settings > `SECURITY` > Access tokens
+* Scope > `Repositories` > select: read & write
 
-   **Scopes** > `Repositories`  
-   [x] read   
-   [x] write
+##### 3. Add [Repository Variables](images/repo_variables.png)
 
+* Repository Settings > `PIPELINES` > Repository Variables
+    * **GIT_PUSH_TOKEN** = Access Token (**secure!**)
+    * **BRANCH_NAME** = Branch to be updated automatically
+    * **REPO_URL** = URL without https://
 
-3. **Add Repository Variables**: Repository Settings > `PIPELINES` > Repository Variables
+##### 4. Create [Bitbucket Pipeline](bitbucket-pipelines.yml)
 
-   ![](images/repo_variables.png)
-
-* **GIT_PUSH_TOKEN** = Access Token (**secure!**)
-* **BRANCH_NAME** = Branch to be updated automatically
-* **REPO_URL** = URL without https://
-
-
-4. **Create [Bitbucket Pipeline](bitbucket-pipelines.yml)**
+- All variables are stored as repository variables.
+- The **User** in the git push command must be set to **x-token-auth**.
+- Bitbucket does not allow push options like GitLab (`-o ci.skip`).  
+  To skip the Pipeline you have to add `[skip ci]` or `[ci skip]` to the commit message.
 
 ```yaml
-image: alpine:latest
-
 pipelines:
   default:
     - step:
@@ -191,22 +182,11 @@ pipelines:
             git push "https://x-token-auth:${GIT_PUSH_TOKEN}@${REPO_URL}" $BRANCH_NAME
           fi 
         script:
-          - apk add bash git
-          - apk add --no-cache python3
-          - git fetch
-          - cd ./src
-          - python3 doc_to_md.py
-          - *push
+          [ ... ]
 ```
 
-#### Some further info:
+## Functions & Classes
 
-- All variables are stored as repository variables.
-- The **User** in the git push command has to be **x-token-auth**.
-- Bitbucket does not allow push options like GitLab (`-o ci.skip`).  
-  To skip the Pipeline you have to add `[skip ci]` or `[ci skip]` to the commit message.
-
-## Functions & Classes  
 | Module | Type | Name/Call | Description |
 | --- | --- | --- | --- |
 | [main](./main.py) | function  | `hello_world()` | Just says hello |
