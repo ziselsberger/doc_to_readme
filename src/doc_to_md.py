@@ -54,6 +54,7 @@ def loop_through_repo(
     To exclude modules, add their name to argument 'exclude_modules'.
 
     :param exclude_modules: Names of excluded modules
+    :param specified_modules: Names of specified modules
     """
     global docu
     global summary
