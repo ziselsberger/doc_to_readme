@@ -56,7 +56,6 @@ def loop_through_repo(
     :param exclude_modules: Names of excluded modules
     :param specified_modules: Names of specified modules
     """
-    global docu
     global summary
     script_dir = os.path.dirname(os.path.abspath(__file__))
     modules = glob.glob(f"{script_dir}/../**/*.py", recursive=True)
