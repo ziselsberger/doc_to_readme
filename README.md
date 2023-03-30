@@ -2,7 +2,7 @@
 
 ## What's this?
 
-Automated docstring extraction and creation/update of module documentation in README File
+Automated docstring extraction and creation/update of module documentation in README File.
 
 ### Why?
 
@@ -13,7 +13,7 @@ Because it's nice :-)
 [doc_to_md.py](src/doc_to_md.py) loops through all Python files in the Repository and extracts the function calls + the
 corresponding short description from the docstrings. These are added to a dictionary and afterwards converted to
 Markdown Table.  
-Finally, the section 'Function & Classes' is appended / updated in the README File.
+Finally, the section 'Functions & Classes' is appended / updated in the README File.
 
 **Open TODOs:**
 
@@ -98,10 +98,10 @@ Pipeline: https://parsiya.net/blog/2021-10-11-modify-gitlab-repositories-from-th
 
    ![](images/cicd_variables.png)
 
-* **Key** = GIT_PUSH_TOKEN
-* **Value** = Access Token
-* **Txpe** = Variable
-* `[x] Mask variable`!
+    * **Key** = GIT_PUSH_TOKEN
+    * **Value** = Access Token
+    * **Type** = Variable
+    * `[x] Mask variable`!
 
 
 3. **Create [GitLab Pipeline](.gitlab-ci.yml)**
