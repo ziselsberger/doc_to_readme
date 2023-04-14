@@ -15,13 +15,9 @@ corresponding short description from the docstrings. These are added to a dictio
 Markdown Table.  
 Finally, the section 'Functions & Classes' is appended / updated in the README File.
 
-**Open TODOs:**
-
-- add Unittests
-
 ### Where?
 
-Works in GitLab, Bitbucket & GitHub :-) Yay!
+Works in [GitLab](#gitlab), [Bitbucket](#bitbucket) & [GitHub](#github) :-) Yay!
 > The YAML files differ a little, so pay attention to the infos below :-)
 
 ### GitHub
@@ -189,9 +185,6 @@ pipelines:
 | Module | Type | Name/Call | Description |
 | --- | --- | --- | --- |
 | [main](./main.py) | function  | `hello_world()` | Just says hello |
-| [functions](./src/functions.py) | function  | `mean(x: int = 1, y: int = 2) -> float` | Calculate mean of x and y. |
-| [functions](./src/functions.py) | function  | `add(x: int = 4, y: int = 5) -> int` | Add two numbers (x and y). |
-| [functions](./src/functions.py) | function  | `multiply(x: int = 6, y: int = 7) -> int` | Multiply two numbers (x and y). |
 | [run_qc_checks](./src/run_qc_checks.py) | class  | `TechnicalQualityTests` | Base class for all technical QC Tests. |
 | [run_qc_checks](./src/run_qc_checks.py) | method (TechnicalQualityTests) | `reference_file(self) -> str` | Updates path to reference file, in case placeholders are used, which need to be replace for every file, that shall be checked. e.g. when the filename includes a Tile ID. |
 | [run_qc_checks](./src/run_qc_checks.py) | method (TechnicalQualityTests) | `add_to_dict(self, test_name: str, test_result: Tuple[bool, str]) -> None` | Add QC result to dictionary. |
@@ -200,7 +193,10 @@ pipelines:
 | [run_qc_checks](./src/run_qc_checks.py) | method (TechnicalQualityTests) | `finalise_qc(self) -> dict` | Finalise QC checks. |
 | [run_qc_checks](./src/run_qc_checks.py) | method (TechnicalQualityTests) | `tests(self) -> None` | Includes all QC checks (independent of data format). Only those checks are executed, where a specification could be extracted from the config file. |
 | [run_qc_checks](./src/run_qc_checks.py) | function  | `main(config_file=None, test_input=None)` | None |
+| [functions](./src/functions.py) | function  | `mean(x: int = 1, y: int = 2) -> float` | Calculate mean of x and y. |
+| [functions](./src/functions.py) | function  | `add(x: int = 4, y: int = 5) -> int` | Add two numbers (x and y). |
+| [functions](./src/functions.py) | function  | `multiply(x: int = 6, y: int = 7) -> int` | Multiply two numbers (x and y). |
 
 ---
 **Created:** 2023-03-15  
-**Last Update:** 2023-03-30
+**Last Update:** 2023-04-14
