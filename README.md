@@ -15,13 +15,9 @@ corresponding short description from the docstrings. These are added to a dictio
 Markdown Table.  
 Finally, the section 'Functions & Classes' is appended / updated in the README File.
 
-**Open TODOs:**
-
-- add Unittests
-
 ### Where?
 
-Works in GitLab, Bitbucket & GitHub :-) Yay!
+Works in [GitLab](#gitlab), [Bitbucket](#bitbucket) & [GitHub](#github) :-) Yay!
 > The YAML files differ a little, so pay attention to the infos below :-)
 
 ### GitHub
