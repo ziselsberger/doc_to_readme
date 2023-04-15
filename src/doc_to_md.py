@@ -173,8 +173,8 @@ def parse_through_file(file):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("-e", "--exclude", required=False, help="Exclude models", default=[], nargs='+')
-    parser.add_argument("-m", "--modules", required=False, help="Specify models", default=[], nargs='+')
+    parser.add_argument("-e", "--exclude", required=False, help="Exclude modules", default=[], nargs='+')
+    parser.add_argument("-m", "--modules", required=False, help="Specify modules", default=[], nargs='+')
     args = parser.parse_args()
 
     exclude = ("test", "doc_to_md")
