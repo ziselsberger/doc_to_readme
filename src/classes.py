@@ -15,11 +15,9 @@ class TechnicalQualityTests:
 
         Args:
             config_file (str): Path to config file (YAML).
-            test_input (str): Path to file, which shall be checked.
 
         Raises:
             SystemExit: No configuration file provided.
-            SystemExit: No test dataset provided.
         """
         if not config_file:
             raise SystemExit("No configuration file provided.")
