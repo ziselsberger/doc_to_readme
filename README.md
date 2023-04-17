@@ -1,8 +1,8 @@
-# Automatic Module Documentation in README
+# Automatic (Python) Module Documentation in README
 
 ## What's this?
 
-Automated docstring extraction and creation/update of module documentation in README File.
+Automated docstring extraction and creation/update of documentation (of python modules) in README File.
 
 ### Why?
 
@@ -181,7 +181,8 @@ pipelines:
           [ ... ]
 ```
 
-## Functions & Classes  
+## Functions & Classes
+
 | Module | Type | Name/Call | Description |
 | --- | --- | --- | --- |
 | [main](./main.py) | function  | `hello_world()` | Just says hello |
