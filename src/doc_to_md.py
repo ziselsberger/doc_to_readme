@@ -182,6 +182,8 @@ if __name__ == "__main__":
     if args.exclude:
         exclude += tuple(args.exclude)
 
+    print(f"Path to README: {args.file}")
+
     update_markdown_file(file=args.file,
                          exclude_modules=exclude,
                          specified_modules=args.modules)
