@@ -5,16 +5,16 @@ variables:
   COMMIT_MESSAGE: "Auto-update README.md"
   PATH_TO_README: "README.md"
 
-#.push: &push |
-#  git status
-#  lines=$(git status -s | wc -l)
-#  if [ $lines -gt 0 ];then
-#    git config --global user.name "${BOT_NAME}"
-#    git config --global user.email "${BOT_EMAIL}"
-#    git add $PATH_TO_README
-#    git commit -m "${COMMIT_MESSAGE}"
-#    git push -o ci.skip "https://${BOT_NAME}:${GIT_PUSH_TOKEN}@${CI_REPOSITORY_URL#*@}" $BRANCH_NAME
-#  fi
+.push: &push |
+  git status
+  lines=$(git status -s | wc -l)
+  if [ $lines -gt 0 ];then
+    git config --global user.name "${BOT_NAME}"
+    git config --global user.email "${BOT_EMAIL}"
+    git add $PATH_TO_README
+    git commit -m "${COMMIT_MESSAGE}"
+    git push -o ci.skip "https://${BOT_NAME}:${GIT_PUSH_TOKEN}@${CI_REPOSITORY_URL#*@}" $BRANCH_NAME
+  fi
 
 update_docu:
   image: alpine:latest
@@ -29,13 +29,4 @@ update_docu:
     - rm -rf doc_to_readme
   script:
     - python doc_to_md.py -f $PATH_TO_README
-    - |
-      git status
-      lines=$(git status -s | wc -l)
-      if [ $lines -gt 0 ];then
-        git config --global user.name "${BOT_NAME}"
-        git config --global user.email "${BOT_EMAIL}"
-        git add $PATH_TO_README
-        git commit -m "${COMMIT_MESSAGE}"
-        git push -o ci.skip "https://${BOT_NAME}:${GIT_PUSH_TOKEN}@${CI_REPOSITORY_URL#*@}" $BRANCH_NAME
-      fi
+    - *push
