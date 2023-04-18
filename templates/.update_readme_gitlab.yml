@@ -26,10 +26,8 @@ update_docu:
     - git config --global pull.rebase false
     - git checkout $BRANCH_NAME
     - git pull
-    - ls -a
-    - ls doc_to_readme
-    - cd ./doc_to_readme/src
+    - cp ./doc_to_readme/src/doc_to_md.py .
+    - rm -rf doc_to_readme
   script:
-    - echo "$PATH_TO_README"
     - python doc_to_md.py -f $PATH_TO_README
     - *push
