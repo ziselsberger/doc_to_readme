@@ -22,6 +22,7 @@ update_docu:
   before_script:
     - apk add bash git
     - apk add --no-cache python3
+    - git clone https://github.com/ziselsberger/doc_to_readme.git /doc_to_readme
     - git config --global pull.rebase false
     - git checkout $BRANCH_NAME
     - git pull
