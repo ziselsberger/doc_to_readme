@@ -1,8 +1,8 @@
-# Automatic Module Documentation in README
+# Automatic (Python) Module Documentation in README
 
 ## What's this?
 
-Automated docstring extraction and creation/update of module documentation in README File.
+Automated docstring extraction and creation/update of documentation (of python modules) in README File.
 
 ### Why?
 
@@ -185,12 +185,12 @@ pipelines:
 | Module | Type | Name/Call | Description |
 | --- | --- | --- | --- |
 | [main](./main.py) | function  | `hello_world()` | Just says hello |
+| [classes](./src/classes.py) | class  | `TechnicalQualityTests` | Base class for all technical QC Tests. |
+| [classes](./src/classes.py) | method (TechnicalQualityTests) | `add_to_dict(self, test_name: str, test_result: Tuple[bool, str]) -> None` | Add QC result to dictionary. |
 | [functions](./src/functions.py) | function  | `mean(x: int = 1, y: int = 2) -> float` | Calculate mean of x and y. |
 | [functions](./src/functions.py) | function  | `add(x: int = 4, y: int = 5) -> int` | Add two numbers (x and y). |
 | [functions](./src/functions.py) | function  | `multiply(x: int = 6, y: int = 7) -> int` | Multiply two numbers (x and y). |
-| [classes](./src/classes.py) | class  | `TechnicalQualityTests` | Base class for all technical QC Tests. |
-| [classes](./src/classes.py) | method (TechnicalQualityTests) | `add_to_dict(self, test_name: str, test_result: Tuple[bool, str]) -> None` | Add QC result to dictionary. |
 
 ---
 **Created:** 2023-03-15  
-**Last Update:** 2023-04-15
+**Last Update:** 2023-04-17
