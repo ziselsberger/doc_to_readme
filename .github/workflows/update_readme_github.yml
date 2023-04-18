@@ -21,14 +21,17 @@ jobs:
           CI_COMMIT_MESSAGE: Auto-update README.md [skip ci]
           CI_COMMIT_AUTHOR: AUTO-UPDATE-README
           CI_COMMIT_MAIL: auto_update_readme@users.noreply.github.com
+          PATH_TO_README: "README.md"
         run: |
-          cd ./src
-          python3 doc_to_md.py
+          git clone 'https://github.com/ziselsberger/doc_to_readme.git'
+          cp ./doc_to_readme/src/doc_to_md.py .
+          rm -rf doc_to_readme
+          python3 doc_to_md.py -f "${{ env.PATH_TO_README }}"
           lines=$(git status -s | wc -l)
           if [ $lines -gt 0 ];then
             git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
             git config --global user.email "${{ env.CI_COMMIT_MAIL }}"
-            git add ../README.md
+            git add "${{ env.PATH_TO_README }}"
             git commit -m "${{ env.CI_COMMIT_MESSAGE }}"
             git push
           fi
