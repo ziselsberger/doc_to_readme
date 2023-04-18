@@ -173,6 +173,7 @@ def parse_through_file(file):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
+    parser.add_argument("-f", "--file", required=False, help="Path to README", default="../README.md")
     parser.add_argument("-e", "--exclude", required=False, help="Exclude modules", default=[], nargs='+')
     parser.add_argument("-m", "--modules", required=False, help="Specify modules", default=[], nargs='+')
     args = parser.parse_args()
@@ -181,7 +182,6 @@ if __name__ == "__main__":
     if args.exclude:
         exclude += tuple(args.exclude)
 
-    specified_modules = args.modules
-
-    update_markdown_file(exclude_modules=exclude,
-                         specified_modules=specified_modules)
+    update_markdown_file(file=args.file,
+                         exclude_modules=exclude,
+                         specified_modules=args.modules)
