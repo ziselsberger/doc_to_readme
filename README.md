@@ -191,6 +191,4 @@ pipelines:
 | [functions](./src/functions.py) | function  | `add(x: int = 4, y: int = 5) -> int` | Add two numbers (x and y). |
 | [functions](./src/functions.py) | function  | `multiply(x: int = 6, y: int = 7) -> int` | Multiply two numbers (x and y). |
 
----
-**Created:** 2023-03-15  
-**Last Update:** 2023-04-18
+---**Last Update:** 2023-04-18
