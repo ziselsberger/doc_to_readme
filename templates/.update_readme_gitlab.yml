@@ -29,4 +29,5 @@ update_docu:
     - rm -rf doc_to_readme
   script:
     - python doc_to_md.py -f $PATH_TO_README
+    - rm doc_to_md.py
     - *push
