@@ -29,7 +29,7 @@ jobs:
           git clone 'https://github.com/ziselsberger/doc_to_readme.git'
           cp ./doc_to_readme/src/doc_to_md.py .
           rm -rf doc_to_readme
-          python3 doc_to_md.py -f "${{ env.PATH_TO_README }}"
+          python3 doc_to_md.py -f "${{ env.PATH_TO_README }}" -e "${{ env.EXCLUDED_MODULES }}" -m "${{ env.SELECTED_MODULES }}"
           rm doc_to_md.py
           lines=$(git status -s | wc -l)
           if [ $lines -gt 0 ];then
