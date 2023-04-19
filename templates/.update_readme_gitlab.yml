@@ -18,6 +18,16 @@ variables:
     git push -o ci.skip "https://${BOT_NAME}:${GIT_PUSH_TOKEN}@${CI_REPOSITORY_URL#*@}" $BRANCH_NAME
   fi
 
+.exec: &exec |
+  if [[ ! -z "$EXCLUDED_MODULES" ]]; then
+    python doc_to_md.py -f $PATH_TO_README -e $EXCLUDED_MODULES
+  elif [[ ! -z "$SELECTED_MODULES" ]]; then
+    python doc_to_md.py -f $PATH_TO_README -m $SELECTED_MODULES
+  else
+    python doc_to_md.py -f $PATH_TO_README
+  fi
+  rm doc_to_md.py
+
 update_docu:
   image: alpine:latest
   before_script:
@@ -30,7 +40,5 @@ update_docu:
     - cp ./doc_to_readme/src/doc_to_md.py .
     - rm -rf doc_to_readme
   script:
-    - echo "python doc_to_md.py -f $PATH_TO_README -e $EXCLUDED_MODULES -m $SELECTED_MODULES"
-    - python doc_to_md.py -f $PATH_TO_README -e $EXCLUDED_MODULES -m $SELECTED_MODULES
-    - rm doc_to_md.py
+    - *exec
     - *push
