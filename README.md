@@ -154,8 +154,6 @@ update_docu:
 
 * Repository Settings > `PIPELINES` > Repository Variables
     * **GIT_PUSH_TOKEN** = Access Token (**secure!**)
-    * **BRANCH_NAME** = Branch to be updated automatically
-    * **REPO_URL** = URL without https://
 
 ##### 4. Create [Bitbucket Pipeline](bitbucket-pipelines.yml)
 
@@ -166,19 +164,20 @@ update_docu:
 
 ```yaml
 pipelines:
-  default:
-    - step:
-        name: update_docu
-        .push: &push |
-          lines=$(git status -s | wc -l)
-          if [ $lines -gt 0 ];then
-            git add ../README.md
-            git commit -m "Auto-update README.md [skip ci]"
-            echo "git push 'https://x-token-auth:${GIT_PUSH_TOKEN}@${REPO_URL}' ${BRANCH_NAME}"
-            git push "https://x-token-auth:${GIT_PUSH_TOKEN}@${REPO_URL}" $BRANCH_NAME
-          fi 
-        script:
-          [ ... ]
+  branches:
+    main:
+      - step:
+          name: update_docu
+          .push: &push |
+            lines=$(git status -s | wc -l)
+            if [ $lines -gt 0 ];then
+              git add ../README.md
+              git commit -m "Auto-update README.md [skip ci]"
+              echo "git push 'https://x-token-auth:${GIT_PUSH_TOKEN}@bitbucket.org/${BITBUCKET_REPO_FULL_NAME}' main"
+              git push "https://x-token-auth:${GIT_PUSH_TOKEN}@bitbucket.org/${BITBUCKET_REPO_FULL_NAME}" main
+            fi 
+          script:
+            [ ... ]
 ```
 
 ## Functions & Classes  
