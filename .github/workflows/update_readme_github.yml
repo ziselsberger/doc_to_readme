@@ -42,7 +42,7 @@ jobs:
           if [ $lines -gt 0 ];then
             git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
             git config --global user.email "${{ env.CI_COMMIT_MAIL }}"
-            git add "${{ env.PATH_TO_README }}"
+            git add "${{ inputs.PATH_TO_README }}"
             git commit -m "${{ env.CI_COMMIT_MESSAGE }}"
             git push
           fi
