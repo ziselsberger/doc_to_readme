@@ -4,6 +4,8 @@ variables:
   BOT_EMAIL: "doc@update_readme.com"
   COMMIT_MESSAGE: "Auto-update README.md"
   PATH_TO_README: "README.md"
+  EXCLUDED_MODULES: ""
+  SELECTED_MODULES: ""
 
 .push: &push |
   git status
@@ -28,6 +30,6 @@ update_docu:
     - cp ./doc_to_readme/src/doc_to_md.py .
     - rm -rf doc_to_readme
   script:
-    - python doc_to_md.py -f $PATH_TO_README
+    - python doc_to_md.py -f $PATH_TO_README -e $EXCLUDED_MODULES -m $SELECTED_MODULES
     - rm doc_to_md.py
     - *push
