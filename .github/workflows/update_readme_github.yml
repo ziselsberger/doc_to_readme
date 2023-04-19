@@ -3,6 +3,10 @@ name: use_doc_to_readme
 on:
   workflow_call:
 
+env: 
+  PATH_TO_README: "README.md"
+  EXCLUDED_MODULES: "main"
+  SELECTED_MODULES: ""
 
 jobs:
   update-docu:
@@ -21,9 +25,6 @@ jobs:
           CI_COMMIT_MESSAGE: Auto-update README.md [skip ci]
           CI_COMMIT_AUTHOR: AUTO-UPDATE-README
           CI_COMMIT_MAIL: auto_update_readme@users.noreply.github.com
-          PATH_TO_README: "README.md"
-          EXCLUDED_MODULES: "main"
-          SELECTED_MODULES: ""
         run: |
           env
           git clone 'https://github.com/ziselsberger/doc_to_readme.git'
