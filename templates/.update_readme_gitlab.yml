@@ -31,6 +31,8 @@ update_docu:
     - rm -rf doc_to_readme
     - env
   script:
-    - python doc_to_md.py -f $PATH_TO_README -e $EXCLUDED_MODULES -m $SELECTED_MODULES
+    - if $EXCLUDED_MODULES; then python doc_to_md.py -f $PATH_TO_README -e $EXCLUDED_MODULES
+    - if $SELECTED_MODULES; then python doc_to_md.py -f $PATH_TO_README -m $SELECTED_MODULES
+    - if not ($EXCLUDED_MODULES && $SELECTED_MODULES); then python doc_to_md.py -f $PATH_TO_README
     - rm doc_to_md.py
     - *push
