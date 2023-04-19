@@ -79,6 +79,7 @@ def add_summary_to_md(overview_dict: Dict[str, Optional[Union[str, Dict[str, str
     """
     with open(markdown, 'ab+') as f:
         f.write(f"\n## Functions & Classes  \n".encode('utf-8'))
+        f.write(f"> Created with: [doc_to_readme](https://github.com/ziselsberger/doc_to_readme)  \n".encode('utf-8'))
         table = "| Module | Type | Name/Call | Description |\n| --- | --- | --- | --- |\n"
         for mod, functions in overview_dict.items():
             link = overview_dict.get(mod).get("Link")
