@@ -5,7 +5,7 @@ on:
 
 env: 
   PATH_TO_README: "README.md"
-  EXCLUDED_MODULES: "main"
+  EXCLUDED_MODULES: ""
   SELECTED_MODULES: ""
 
 jobs:
