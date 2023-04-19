@@ -4,6 +4,8 @@
 
 Automated docstring extraction and creation/update of documentation (of python modules) in README File.
 
+> _**This code is free to use under the terms of the MIT license.**_
+
 ### Why?
 
 Because it's nice :-)
@@ -14,8 +16,6 @@ Because it's nice :-)
 corresponding short description from the docstrings. These are added to a dictionary and afterwards converted to
 Markdown Table.  
 Finally, the section 'Functions & Classes' is appended / updated in the README File.
-
-### Where?
 
 Works in [GitLab](#gitlab), [Bitbucket](#bitbucket) & [GitHub](#github) :-) Yay!
 > The YAML files differ a little, so pay attention to the infos below :-)
