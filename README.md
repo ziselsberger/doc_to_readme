@@ -192,5 +192,6 @@ pipelines:
 | [classes](./src/classes.py) | method (TechnicalQualityTests) | `add_to_dict(self, test_name: str, test_result: Tuple[bool, str]) -> None` | Add QC result to dictionary. |
 
 Created with: [doc_to_readme](https://github.com/ziselsberger/doc_to_readme)  
+
 ---
 **Last Update:** 2023-04-19
