@@ -183,6 +183,7 @@ pipelines:
 
 ## Functions & Classes  
 > Created with: [doc_to_readme](https://github.com/ziselsberger/doc_to_readme)  
+
 | Module | Type | Name/Call | Description |
 | --- | --- | --- | --- |
 | [main](./main.py) | function  | `hello_world()` | Just says hello |
