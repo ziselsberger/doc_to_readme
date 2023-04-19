@@ -182,8 +182,6 @@ pipelines:
 ```
 
 ## Functions & Classes  
-> Created with: [doc_to_readme](https://github.com/ziselsberger/doc_to_readme)  
-
 | Module | Type | Name/Call | Description |
 | --- | --- | --- | --- |
 | [main](./main.py) | function  | `hello_world()` | Just says hello |
@@ -192,6 +190,8 @@ pipelines:
 | [functions](./src/functions.py) | function  | `multiply(x: int = 6, y: int = 7) -> int` | Multiply two numbers (x and y). |
 | [classes](./src/classes.py) | class  | `TechnicalQualityTests` | Base class for all technical QC Tests. |
 | [classes](./src/classes.py) | method (TechnicalQualityTests) | `add_to_dict(self, test_name: str, test_result: Tuple[bool, str]) -> None` | Add QC result to dictionary. |
+Created with: [doc_to_readme](https://github.com/ziselsberger/doc_to_readme)  
+
 
 ---
 **Last Update:** 2023-04-19
