@@ -1,21 +1,22 @@
 image: alpine:latest
 
 pipelines:
-  default:
-    - step:
-        name: update_docu
-        .push: &push |
-          lines=$(git status -s | wc -l)
-          if [ $lines -gt 0 ];then
-            git add ../README.md
-            git commit -m "Auto-update README.md [skip ci]"
-            echo "git push 'https://x-token-auth:${GIT_PUSH_TOKEN}@${REPO_URL}' ${BRANCH_NAME}"
-            git push "https://x-token-auth:${GIT_PUSH_TOKEN}@${REPO_URL}" $BRANCH_NAME
-          fi 
-        script:
-          - apk add bash git
-          - apk add --no-cache python3
-          - git fetch
-          - cd ./src
-          - python3 doc_to_md.py
-          - *push
+  branches:
+    main:
+      - step:
+          name: update_docu
+          .push: &push |
+            lines=$(git status -s | wc -l)
+            if [ $lines -gt 0 ];then
+              git add ../README.md
+              git commit -m "Auto-update README.md [skip ci]"
+              echo "git push 'https://x-token-auth:${GIT_PUSH_TOKEN}@bitbucket.org/${BITBUCKET_REPO_FULL_NAME}' main"
+              git push "https://x-token-auth:${GIT_PUSH_TOKEN}@bitbucket.org/${BITBUCKET_REPO_FULL_NAME}" main
+            fi 
+          script:
+            - apk add bash git
+            - apk add --no-cache python3
+            - git fetch
+            - cd ./src
+            - python3 doc_to_md.py
+            - *push
