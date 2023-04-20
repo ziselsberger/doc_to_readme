@@ -145,20 +145,8 @@ update_docu:
 
 * Repository Settings > `PIPELINES` > Settings
 
-##### 2. Create [Repository Access Token](images/access_token_info.png)
+##### 2. Create [Bitbucket Pipeline](bitbucket-pipelines.yml)
 
-* Repository Settings > `SECURITY` > Access tokens
-* Scope > `Repositories` > select: read & write
-
-##### 3. Add [Repository Variables](images/repo_variables.png)
-
-* Repository Settings > `PIPELINES` > Repository Variables
-    * **GIT_PUSH_TOKEN** = Access Token (**secure!**)
-
-##### 4. Create [Bitbucket Pipeline](bitbucket-pipelines.yml)
-
-- All variables are stored as repository variables.
-- The **User** in the git push command must be set to **x-token-auth**.
 - Bitbucket does not allow push options like GitLab (`-o ci.skip`).  
   To skip the Pipeline you have to add `[skip ci]` or `[ci skip]` to the commit message.
 
@@ -173,8 +161,7 @@ pipelines:
             if [ $lines -gt 0 ];then
               git add ../README.md
               git commit -m "Auto-update README.md [skip ci]"
-              echo "git push 'https://x-token-auth:${GIT_PUSH_TOKEN}@bitbucket.org/${BITBUCKET_REPO_FULL_NAME}' main"
-              git push "https://x-token-auth:${GIT_PUSH_TOKEN}@bitbucket.org/${BITBUCKET_REPO_FULL_NAME}" main
+              git push main
             fi 
           script:
             [ ... ]

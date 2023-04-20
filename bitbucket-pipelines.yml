@@ -5,18 +5,19 @@ pipelines:
     main:
       - step:
           name: update_docu
+          .prep: &prep |
+            apk add bash git
+            apk add --no-cache python3
+            git fetch
+            cd ./src
           .push: &push |
             lines=$(git status -s | wc -l)
             if [ $lines -gt 0 ];then
               git add ../README.md
               git commit -m "Auto-update README.md [skip ci]"
-              echo "git push 'https://x-token-auth:${GIT_PUSH_TOKEN}@bitbucket.org/${BITBUCKET_REPO_FULL_NAME}' main"
-              git push "https://x-token-auth:${GIT_PUSH_TOKEN}@bitbucket.org/${BITBUCKET_REPO_FULL_NAME}" main
+              git push main
             fi 
           script:
-            - apk add bash git
-            - apk add --no-cache python3
-            - git fetch
-            - cd ./src
-            - python3 doc_to_md.py
+            - *prep
+            - python3 doc_to_md.py -f "../README.md"
             - *push
