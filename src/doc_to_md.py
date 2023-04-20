@@ -74,7 +74,10 @@ def add_summary_to_md(overview_dict: Dict[str, Optional[Union[str, Dict[str, str
                     table += f"| {link} | {t} {f'({p})' if p is not None else ''} | `{func}` | {desc} |\n"
 
         f.write(table.encode('utf-8'))
-        f.write(f"\nCreated with: [doc_to_readme](https://github.com/ziselsberger/doc_to_readme)  \n".encode('utf-8'))
+        f.write(f"\nCreated with: "
+                f"[doc_to_readme](https://github.com/ziselsberger/doc_to_readme)  \n"
+                f"[MIT](https://github.com/ziselsberger/doc_to_readme/LICENSE) "
+                f"&copy; 2023 Mirjam Ziselsberger\n".encode('utf-8'))
         f.write(f"\n---\n**Last Update:** {datetime.date.today()}".encode('utf-8'))
 
 
