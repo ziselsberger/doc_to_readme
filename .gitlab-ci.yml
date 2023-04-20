@@ -24,7 +24,7 @@ update_docu:
     #- git config --global pull.rebase false
     #- git fetch
     - git checkout $BRANCH_NAME
-    - git pull --ff
+    #- git pull --ff
     - cd ./src
   script:
     - python doc_to_md.py
