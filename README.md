@@ -18,14 +18,12 @@ a Markdown Table. Finally, the section **_Functions & Classes_** is appended / u
 
 > _[Documentation](./How_to_setup_the_pipelines.md) on how to set up the pipelines to update a file on every push._
 
+_Copyright &copy; 2023 by Mirjam Ziselsberger_  
+_This code is free to use under the terms of the [MIT license](/LICENSE)._
+
 ---
 
 ### [**_Step-by-step guide_**](https://github.com/ziselsberger/use_doc_to_readme) on how to integrate _doc_to_readme_ in your Repository
-
----
-
-_Copyright &copy; 2023 by Mirjam Ziselsberger_  
-_This code is free to use under the terms of the [MIT license](/LICENSE)._
 
 ---
 
