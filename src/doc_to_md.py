@@ -182,9 +182,12 @@ if __name__ == "__main__":
     if args.exclude is not None and args.exclude != "":
         exclude += tuple(args.exclude)
 
+    selected_modules = None if args.modules == "" else args.modules
+
     print(f"Path to README: {args.file}")
     print(f"Exclude modules: {exclude}")
+    print(f"Selected modules: {selected_modules}")
 
     update_markdown_file(file=args.file,
                          exclude_modules=exclude,
-                         specified_modules=args.modules)
+                         specified_modules=selected_modules)
