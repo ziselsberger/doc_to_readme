@@ -15,32 +15,10 @@ import argparse
 import ast
 import datetime
 import glob
-import inspect
 import os
-from typing import Callable, Tuple, Dict, Optional, Union
+from typing import Tuple, Dict, Optional, Union
 
 summary = {}
-docu = ""
-
-
-def doc_to_md(func: Callable) -> Tuple[str, str, str]:
-    """Extract information about function/class and add to a string.
-
-    Info is added to global variable 'docu', which is a string, that can be
-    written to a Markdown file.
-
-    :param func: function/class
-    :return: Function name, call and short description.
-    """
-    global docu
-    name = func.__name__
-    short_description = func.__doc__.split("\n")[0]
-
-    function_definition = f"{name}{str(inspect.signature(func))}"
-    converted = f"\n* ### `{function_definition}`  \n" \
-                f"      {short_description}\n"
-    docu += converted
-    return name, function_definition, short_description
 
 
 def loop_through_repo(
@@ -119,9 +97,6 @@ def update_markdown_file(file: str = "../README.md",
     loop_through_repo(exclude_modules=exclude_modules,
                       specified_modules=specified_modules)
     add_summary_to_md(summary, file)
-
-    # with open(file, 'ab+') as f:
-    #     f.write(docu.encode('utf-8'))
 
 
 def parse_through_file(file):
