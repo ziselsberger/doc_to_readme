@@ -31,11 +31,11 @@ _This code is free to use under the terms of the [MIT license](/LICENSE)._
 | Module | Type | Name/Call | Description |
 | --- | --- | --- | --- |
 | [main](./main.py) | function  | `hello_world()` | Just says hello |
+| [classes](./src/classes.py) | class  | `TechnicalQualityTests` | Base class for all technical QC Tests. |
+| [classes](./src/classes.py) | method (TechnicalQualityTests) | `add_to_dict(self, test_name: str, test_result: Tuple[bool, str]) -> None` | Add QC result to dictionary. |
 | [functions](./src/functions.py) | function  | `mean(x: int = 1, y: int = 2) -> float` | Calculate mean of x and y. |
 | [functions](./src/functions.py) | function  | `add(x: int = 4, y: int = 5) -> int` | Add two numbers (x and y). |
 | [functions](./src/functions.py) | function  | `multiply(x: int = 6, y: int = 7) -> int` | Multiply two numbers (x and y). |
-| [classes](./src/classes.py) | class  | `TechnicalQualityTests` | Base class for all technical QC Tests. |
-| [classes](./src/classes.py) | method (TechnicalQualityTests) | `add_to_dict(self, test_name: str, test_result: Tuple[bool, str]) -> None` | Add QC result to dictionary. |
 
 Created with: [doc_to_readme](https://github.com/ziselsberger/doc_to_readme)  
 
