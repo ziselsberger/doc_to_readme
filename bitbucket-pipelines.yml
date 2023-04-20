@@ -15,7 +15,7 @@ pipelines:
             if [ $lines -gt 0 ];then
               git add ../README.md
               git commit -m "Auto-update README.md [skip ci]"
-              git push main
+              git push
             fi 
           script:
             - *prep
