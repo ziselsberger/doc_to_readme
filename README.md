@@ -18,7 +18,7 @@ a Markdown Table. Finally, the section **_Functions & Classes_** is appended / u
 
 **_Works in GitHub, GitLab & Bitbucket :-) Yay!_**
 
-[Documentation](./How_to_setup_the_pipelines.md) on how to set up the pipelines to update a file on every push.
+> _[Documentation](./How_to_setup_the_pipelines.md) on how to set up the pipelines to update a file on every push._
 
 ---
 
