@@ -1,6 +1,6 @@
 """Contains methods to gather information about functions and classes in the current repository.
 
-The gathered information can be added to a Markdown file, either as List or Table.
+The information is converted to a table and appended to a Markdown file.
 
 Helpful sources:
 - https://www.codeguage.com/courses/python/functions-code-objects
