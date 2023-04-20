@@ -1,4 +1,4 @@
-# Automatic (Python) Module Documentation in README
+# Automated (Python) Module Documentation in README
 
 ## What's this?
 
@@ -14,26 +14,28 @@ Because it's nice :-)
 
 [doc_to_md.py](src/doc_to_md.py) loops through all Python files in the Repository and extracts the function calls + the
 corresponding short description from the docstrings. These are added to a dictionary and afterwards converted to
-Markdown Table.  
-Finally, the section 'Functions & Classes' is appended / updated in the README File.
+a Markdown Table.  
+Finally, the section **_Functions & Classes_** is appended / updated in the README File.
 
 Works in [GitLab](#gitlab), [Bitbucket](#bitbucket) & [GitHub](#github) :-) Yay!
-> The YAML files differ a little, so pay attention to the infos below :-)
+
+> For a **_step-by-step Guide_** on how to integrate _doc_to_readme_ in your repository, have a look [**here**](https://github.com/ziselsberger/use_doc_to_readme).
+
+---
+
+## Set up a Pipeline to update README File on every push to the Repository
 
 ### GitHub
 
-The least complicated one :-)  
-Some helpful blog posts / tutorials:
+The least complicated one :-)
 
-- https://medium.com/@michaelekpang/creating-a-ci-cd-pipeline-using-github-actions-b65bb248edfe
-- https://joht.github.io/johtizen/build/2022/01/20/github-actions-push-into-repository.html
+#### 1. Add dir `.github/workflows`
 
-##### 1. Add dir `.github/workflows`
+#### 2. Create [Workflow file (.yml)](.github/workflows/update_readme.yml)
 
-##### 2. Create [Workflow file (.yml)](.github/workflows/update_readme.yml)
-
-- In contrast to GitLab and Bitbucket no access token is needed.
-- To skip the Pipeline `[skip ci]` is added to the commit message.
+- In contrast to GitLab no access token is needed.
+- To avoid an infinite loop of updates, `[skip ci]` is added to the commit message.
+- `on: workflow_dispatch` adds the possibility to trigger the pipeline manually.
 
 ```yaml
 name: Update README.md
@@ -42,6 +44,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   update-docu:
@@ -75,17 +78,21 @@ jobs:
 
 ---
 
+> #### Some helpful blog posts / tutorials:
+> 
+> - https://medium.com/@michaelekpang/creating-a-ci-cd-pipeline-using-github-actions-b65bb248edfe
+> - https://joht.github.io/johtizen/build/2022/01/20/github-actions-push-into-repository.html
+
+---
+
 ### GitLab
 
-Super helpful blog post on how to update files in Repo within CI/CD
-Pipeline: https://parsiya.net/blog/2021-10-11-modify-gitlab-repositories-from-the-ci-pipeline/
-
-##### 1. Add [Project Access Token](images/project_access_token.png)
+#### 1. Add [Project Access Token](images/project_access_token.png)
 
 * Settings > `Access Tokens`
 * **Scope**: [write_repository](images/create_project_access_token_medium.png)
 
-##### 2. Add GIT_PUSH_TOKEN to [CICD Variables](images/cicd_variables.png)
+#### 2. Add GIT_PUSH_TOKEN to [CICD Variables](images/cicd_variables.png)
 
 * Settings > `CICD` > Variables
 
@@ -94,7 +101,7 @@ Pipeline: https://parsiya.net/blog/2021-10-11-modify-gitlab-repositories-from-th
     * **Type** = Variable
     * `[x] Mask variable`!
 
-##### 3. Create [GitLab Pipeline](.gitlab-ci.yml)
+#### 3. Create [GitLab Pipeline](.gitlab-ci.yml)
 
 - Environment variables: `GIT_PUSH_TOKEN` (Repository Access Token) and `CI_REPOSITORY_URL`
 - All other (local) variables are listed in the YAML File.
@@ -139,6 +146,11 @@ update_docu:
 
 ---
 
+> Super helpful blog post on how to update files in Repo within CI/CD Pipeline:  
+> https://parsiya.net/blog/2021-10-11-modify-gitlab-repositories-from-the-ci-pipeline/
+
+---
+
 ### Bitbucket
 
 ##### 1. Enable Pipelines
@@ -166,6 +178,8 @@ pipelines:
           script:
             [ ... ]
 ```
+
+---
 
 ## Functions & Classes  
 | Module | Type | Name/Call | Description |
