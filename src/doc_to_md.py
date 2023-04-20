@@ -179,10 +179,10 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     exclude = ("test", "doc_to_md")
-    if args.exclude is not None and args.exclude != "":
+    if args.exclude is not None and args.exclude != [""]:
         exclude += tuple(args.exclude)
 
-    selected_modules = None if args.modules == "" else args.modules
+    selected_modules = None if args.modules == [""] else args.modules
 
     print(f"Path to README: {args.file}")
     print(f"Exclude modules: {exclude}")
