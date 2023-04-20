@@ -1,10 +1,10 @@
 # Automated (Python) Module Documentation in README
 
+> _**This code is free to use under the terms of the MIT license.**_
+
 ## What's this?
 
 Automated docstring extraction and creation/update of documentation (of python modules) in README File.
-
-> _**This code is free to use under the terms of the MIT license.**_
 
 ### Why?
 
