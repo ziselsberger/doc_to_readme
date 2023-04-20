@@ -1,7 +1,5 @@
 # Automated (Python) Module Documentation in README
 
-> _**This code is free to use under the terms of the MIT license.**_
-
 ## What's this?
 
 Automated docstring extraction and creation/update of documentation (of python modules) in README File.
@@ -26,6 +24,11 @@ a Markdown Table. Finally, the section **_Functions & Classes_** is appended / u
 
 ---
 
+_Copyright &copy; 2023 by Mirjam Ziselsberger_  
+_This code is free to use under the terms of the [MIT license](/LICENSE)._
+
+---
+
 ## Functions & Classes  
 | Module | Type | Name/Call | Description |
 | --- | --- | --- | --- |
@@ -36,7 +39,7 @@ a Markdown Table. Finally, the section **_Functions & Classes_** is appended / u
 | [classes](./src/classes.py) | class  | `TechnicalQualityTests` | Base class for all technical QC Tests. |
 | [classes](./src/classes.py) | method (TechnicalQualityTests) | `add_to_dict(self, test_name: str, test_result: Tuple[bool, str]) -> None` | Add QC result to dictionary. |
 
-Created with: [doc_to_readme](https://github.com/ziselsberger/doc_to_readme)  
+Created with: [doc_to_readme](https://github.com/ziselsberger/doc_to_readme)
 
 ---
 **Last Update:** 2023-04-20
