@@ -9,7 +9,9 @@ Helpful sources:
 """
 
 __author__ = "Mirjam Ziselsberger"
-__email__ = ["ziselsberger@gmail.com", "mirjam.ziselsberger@student.uibk.ac.at"]
+__email__ = "ziselsberger@gmail.com"
+__copyright__ = "Copyright 2023, Mirjam Ziselsberger"
+__license__ = "MIT License"
 
 import argparse
 import ast
