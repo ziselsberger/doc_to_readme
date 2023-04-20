@@ -14,16 +14,17 @@ Because it's nice :-)
 
 [doc_to_md.py](src/doc_to_md.py) loops through all Python files in the Repository and extracts the function calls + the
 corresponding short description from the docstrings. These are added to a dictionary and afterwards converted to
-a Markdown Table.  
-Finally, the section **_Functions & Classes_** is appended / updated in the README File.
+a Markdown Table. Finally, the section **_Functions & Classes_** is appended / updated in the README File.
 
 Works in [GitLab](#gitlab), [Bitbucket](#bitbucket) & [GitHub](#github) :-) Yay!
 
-> For a **_step-by-step Guide_** on how to integrate _doc_to_readme_ in your repository, have a look [**here**](https://github.com/ziselsberger/use_doc_to_readme).
+---
+
+### [**_Step-by-step guide_**](https://github.com/ziselsberger/use_doc_to_readme) on how to integrate _doc_to_readme_ in your Repository
 
 ---
 
-### Set up a Pipeline to update README File on every push to the Repository
+### Set up a pipeline to update README on every push
 
 > * [GitHub](#github)
 > * [GitLab](#gitlab)
