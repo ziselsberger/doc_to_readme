@@ -21,10 +21,8 @@ update_docu:
   before_script:
     - apk add bash git
     - apk add --no-cache python3
-    #- git config --global pull.rebase false
-    #- git fetch
     - git checkout $BRANCH_NAME
-    #- git pull --ff
+    - git pull --ff
     - cd ./src
   script:
     - python doc_to_md.py
