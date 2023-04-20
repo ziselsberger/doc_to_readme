@@ -38,6 +38,7 @@ _This code is free to use under the terms of the [MIT license](/LICENSE)._
 | [functions](./src/functions.py) | function  | `multiply(x: int = 6, y: int = 7) -> int` | Multiply two numbers (x and y). |
 
 Created with: [doc_to_readme](https://github.com/ziselsberger/doc_to_readme)  
+[MIT](https://github.com/ziselsberger/doc_to_readme/LICENSE) &copy; 2023 Mirjam Ziselsberger
 
 ---
 **Last Update:** 2023-04-20
