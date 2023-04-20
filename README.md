@@ -23,11 +23,14 @@ Works in [GitLab](#gitlab), [Bitbucket](#bitbucket) & [GitHub](#github) :-) Yay!
 
 ---
 
-## Set up a Pipeline to update README File on every push to the Repository
+### Set up a Pipeline to update README File on every push to the Repository
+
+> * [GitHub](#github)
+> * [GitLab](#gitlab)
+> * [Bitbucket](#bitbucket)
+
 
 ### GitHub
-
-The least complicated one :-)
 
 #### 1. Add dir `.github/workflows`
 
@@ -103,13 +106,13 @@ jobs:
 
 #### 3. Create [GitLab Pipeline](.gitlab-ci.yml)
 
-- Environment variables: `GIT_PUSH_TOKEN` (Repository Access Token) and `CI_REPOSITORY_URL`
-- All other (local) variables are listed in the YAML File.
-- git user.name and user.email need to be set!
+- CICD variables: `GIT_PUSH_TOKEN`, `CI_REPOSITORY_URL`
+- Local variables are listed in the YAML File.
+- Set `git config user.name` and `user.email`!
+- It's necessary to check out the main branch and pull again to avoid a merge conflict. 
 - The pipe-internal `*push` script checks for changes (using git status) and if so, commits and pushes the changes in
   the README File.
-- It's necessary to check out the main branch and pull again, otherwise a merge conflict happens.
-- `-o ci.skip` is necessary for not triggering the CI again (and again) with the update of the README File
+  - `-o ci.skip` is necessary for not triggering the CI again (and again) with the update of the README File
 
 ```yaml
 variables:
@@ -122,9 +125,9 @@ variables:
   git status
   lines=$(git status -s | wc -l)
   if [ $lines -gt 0 ];then
-    git config --global user.name "${BOT_NAME}"
-    git config --global user.email "${BOT_EMAIL}"
-    git add ../README.md
+    git config user.name "${BOT_NAME}"
+    git config user.email "${BOT_EMAIL}"
+    git add $PATH_TO_README
     git commit -m "${COMMIT_MESSAGE}"
     git push -o ci.skip "https://${BOT_NAME}:${GIT_PUSH_TOKEN}@${CI_REPOSITORY_URL#*@}" $BRANCH_NAME
   fi 
@@ -134,10 +137,8 @@ update_docu:
   before_script:
     - apk add bash git
     - apk add --no-cache python3
-    - git config --global pull.rebase false
-    - git fetch
     - git checkout $BRANCH_NAME
-    - git pull
+    - git pull --ff
     - cd ./src
   script:
     - python doc_to_md.py
