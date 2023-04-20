@@ -18,14 +18,14 @@ a Markdown Table. Finally, the section **_Functions & Classes_** is appended / u
 
 > _[Documentation](./How_to_setup_the_pipelines.md) on how to set up the pipelines to update a file on every push._
 
-_Copyright &copy; 2023 by Mirjam Ziselsberger_  
-_This code is free to use under the terms of the [MIT license](/LICENSE)._
-
 ---
 
 ### [**_Step-by-step guide_**](https://github.com/ziselsberger/use_doc_to_readme) on how to integrate _doc_to_readme_ in your Repository
 
 ---
+
+_Copyright &copy; 2023 by Mirjam Ziselsberger_  
+_This code is free to use under the terms of the [MIT license](/LICENSE)._
 
 ## Functions & Classes  
 | Module | Type | Name/Call | Description |
@@ -38,6 +38,7 @@ _This code is free to use under the terms of the [MIT license](/LICENSE)._
 | [functions](./src/functions.py) | function  | `multiply(x: int = 6, y: int = 7) -> int` | Multiply two numbers (x and y). |
 
 Created with: [doc_to_readme](https://github.com/ziselsberger/doc_to_readme)  
+[MIT](https://github.com/ziselsberger/doc_to_readme/LICENSE) &copy; 2023 Mirjam Ziselsberger
 
 ---
 **Last Update:** 2023-04-20
