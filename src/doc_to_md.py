@@ -1,4 +1,5 @@
-"""Contains methods to gather information about functions and classes in the current repository.
+#!/usr/bin/env python3
+"""Gather information about functions and classes in the current repository.
 
 The information is converted to a table and appended to a Markdown file.
 
