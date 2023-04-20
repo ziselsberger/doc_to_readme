@@ -1,7 +1,5 @@
 # Automated (Python) Module Documentation in README
 
-> _**This code is free to use under the terms of the MIT license.**_
-
 ## What's this?
 
 Automated docstring extraction and creation/update of documentation (of python modules) in README File.
@@ -19,6 +17,9 @@ a Markdown Table. Finally, the section **_Functions & Classes_** is appended / u
 **_Works in GitHub, GitLab & Bitbucket :-) Yay!_**
 
 > _[Documentation](./How_to_setup_the_pipelines.md) on how to set up the pipelines to update a file on every push._
+
+_Copyright &copy; 2023 by Mirjam Ziselsberger_  
+_This code is free to use under the terms of the [MIT license](/LICENSE)._
 
 ---
 
