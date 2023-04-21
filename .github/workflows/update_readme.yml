@@ -24,7 +24,7 @@ jobs:
           CI_COMMIT_AUTHOR: mjam
           CI_COMMIT_MAIL: ziselsberger@users.noreply.github.com
         run: |
-          cd ./src
+          cd ./src/doc_to_md
           python3 doc_to_md.py
           lines=$(git status -s | wc -l)
           if [ $lines -gt 0 ];then

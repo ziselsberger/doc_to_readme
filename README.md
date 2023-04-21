@@ -10,7 +10,7 @@ Because it's nice :-)
 
 ### How?
 
-[doc_to_md.py](src/doc_to_md.py) loops through all Python files in the Repository and extracts the function calls + the
+[doc_to_md.py](src/doc_to_md/doc_to_md.py) loops through all Python files in the Repository and extracts the function calls + the
 corresponding short description from the docstrings. These are added to a dictionary and afterwards converted to
 a Markdown Table. Finally, the section **_Functions & Classes_** is appended / updated in the README File.
 

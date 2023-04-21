@@ -3,7 +3,7 @@ variables:
   BOT_NAME: "MJAM"
   BOT_EMAIL: "mjam@update_readme.com"
   COMMIT_MESSAGE: "Auto-update README.md"
-  PATH_TO_README: "../README.md"
+  PATH_TO_README: "../../README.md"
 
 .push: &push |
   git status
@@ -23,7 +23,7 @@ update_docu:
     - apk add --no-cache python3
     - git checkout $BRANCH_NAME
     - git pull --ff
-    - cd ./src
+    - cd ./src/doc_to_md
   script:
     - python doc_to_md.py
     - *push

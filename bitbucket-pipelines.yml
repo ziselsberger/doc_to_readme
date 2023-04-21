@@ -9,15 +9,15 @@ pipelines:
             apk add bash git
             apk add --no-cache python3
             git fetch
-            cd ./src
+            cd ./src/doc_to_md
           .push: &push |
             lines=$(git status -s | wc -l)
             if [ $lines -gt 0 ];then
-              git add ../README.md
+              git add ../../README.md
               git commit -m "Auto-update README.md [skip ci]"
               git push
             fi 
           script:
             - *prep
-            - python3 doc_to_md.py -f "../README.md"
+            - python3 doc_to_md.py -f "../../README.md"
             - *push
