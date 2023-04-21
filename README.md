@@ -14,7 +14,7 @@ Because it's nice :-)
 corresponding short description from the docstrings. These are added to a dictionary and afterwards converted to
 a Markdown Table. Finally, the section **_Functions & Classes_** is appended / updated in the README File.
 
-**_Works in GitHub, GitLab & Bitbucket :-) Yay!_**
+**_Works in GitHub, GitLab & Bitbucket :-)_**
 
 > _[Documentation](./How_to_setup_the_pipelines.md) on how to set up the pipelines to update a file on every push._
 
@@ -30,12 +30,10 @@ _This code is free to use under the terms of the [MIT license](/LICENSE)._
 ## Functions & Classes  
 | Module | Type | Name/Call | Description |
 | --- | --- | --- | --- |
-| [main](./main.py) | function  | `hello_world()` | Just says hello |
-| [functions](./src/functions.py) | function  | `mean(x: int = 1, y: int = 2) -> float` | Calculate mean of x and y. |
-| [functions](./src/functions.py) | function  | `add(x: int = 4, y: int = 5) -> int` | Add two numbers (x and y). |
-| [functions](./src/functions.py) | function  | `multiply(x: int = 6, y: int = 7) -> int` | Multiply two numbers (x and y). |
-| [classes](./src/classes.py) | class  | `TechnicalQualityTests` | Base class for all technical QC Tests. |
-| [classes](./src/classes.py) | method (TechnicalQualityTests) | `add_to_dict(self, test_name: str, test_result: Tuple[bool, str]) -> None` | Add QC result to dictionary. |
+| [doc_to_md](.\src\doc_to_md\doc_to_md.py) | function  | `loop_through_repo(file: str, root_dir: str = None, exclude_modules: Tuple[str, ...] = (), specified_modules: Optional[Tuple[str, ...]] = None) -> None` | Collect documentation from functions & classes |
+| [doc_to_md](.\src\doc_to_md\doc_to_md.py) | function  | `add_summary_to_md(overview_dict: Dict[str, Optional[Union[str, Dict[str, str]]]], markdown: str)` | Add Table with all Functions & Classes to Markdown file. |
+| [doc_to_md](.\src\doc_to_md\doc_to_md.py) | function  | `update_markdown_file(file: str = "../README.md", exclude_modules: Tuple[str, ...] = (), specified_modules: Optional[Tuple[str, ...]] = None)` | Add/update 'Functions & Classes' Section in Markdown file. |
+| [doc_to_md](.\src\doc_to_md\doc_to_md.py) | function  | `parse_through_file(file: str) -> Dict[str, Dict[str, str]]` | Parse through module and gather info on classes and functions |
 
 Created with: [doc_to_readme](https://github.com/ziselsberger/doc_to_readme)  
 [MIT](https://github.com/ziselsberger/doc_to_readme/blob/main/LICENSE) &copy; 2023 Mirjam Ziselsberger
