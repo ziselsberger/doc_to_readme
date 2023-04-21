@@ -120,7 +120,13 @@ def update_markdown_file(file: str = "../README.md",
     add_summary_to_md(summary, file)
 
 
-def parse_through_file(file):
+def parse_through_file(file: str) -> Dict[str, Dict[str, str]]:
+    """Parse through module and gather info on classes and functions
+
+    :param file: Module path
+    :returns: Dictionary containing information on classes and functions
+    """
+
     with open(file) as fd:
         tree = ast.parse(fd.read())
         func_docs = {f.name: (ast.get_docstring(f).split("\n\n")[0].replace('\n', ' ').replace('  ', ' ')
