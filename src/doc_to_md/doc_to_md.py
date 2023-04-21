@@ -25,21 +25,30 @@ summary = {}
 
 
 def loop_through_repo(
+        file: str,
+        root_dir: str = None,
         exclude_modules: Tuple[str, ...] = (),
         specified_modules: Optional[Tuple[str, ...]] = None
 ) -> None:
     """Collect documentation from functions & classes
 
-    Loop through all .py modules in the current Repo and add
-    function & class infos to a dictionary ('summary').
+    Loop through all .py modules in the root directory of this repo and add
+    function & class info to a dictionary ('summary').
     To exclude modules, add their name to argument 'exclude_modules'.
 
+    :param file: Path to markdown file
+    :param root_dir: Path to root directory
     :param exclude_modules: Names of excluded modules
     :param specified_modules: Names of specified modules
     """
     global summary
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    modules = glob.glob(f"{script_dir}/../**/*.py", recursive=True)
+
+    if not root_dir:
+        root_dir = os.path.dirname(os.path.abspath(file))
+
+    skip = ["site-packages", "venv", "__init__"]
+    modules = [m for m in glob.glob(f"{root_dir}/**/*.py", recursive=True)
+               if not any(map(m.__contains__, skip))]
 
     for module_path in modules:
         module_name = os.path.basename(module_path).replace(".py", "")
@@ -47,8 +56,12 @@ def loop_through_repo(
             if module_name not in specified_modules: continue
         elif module_name in exclude_modules:
             continue
-        summary[module_name] = parse_through_file(module_path)
-        link = f"[{module_name}](.{module_path.split('..')[1]})"
+        print(f"Loop through: {module_path}")
+        try:
+            summary[module_name] = parse_through_file(module_path)
+        except TypeError:
+            continue
+        link = f"[{module_name}]({module_path.replace(root_dir, '.')})"
         summary[module_name]["Link"] = link
 
 
@@ -100,8 +113,10 @@ def update_markdown_file(file: str = "../README.md",
     with open(file, "w") as f:
         f.writelines(content[:-1]) if content[-1] == "\n" else f.writelines(content)
 
-    loop_through_repo(exclude_modules=exclude_modules,
-                      specified_modules=specified_modules)
+    loop_through_repo(
+        file=file,
+        exclude_modules=exclude_modules,
+        specified_modules=specified_modules)
     add_summary_to_md(summary, file)
 
 
