@@ -180,7 +180,7 @@ if __name__ == "__main__":
     parser.add_argument("-m", "--modules", required=False, help="Specify modules", default=[], nargs='+')
     args = parser.parse_args()
 
-    exclude = ("test", "doc_to_md")
+    exclude = ("test", "functions_for_testing", "classes_for_testing")
     if args.exclude is not None and args.exclude != [""]:
         exclude += tuple(args.exclude)
 
