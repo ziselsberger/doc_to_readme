@@ -95,13 +95,15 @@ def add_summary_to_md(overview_dict: Dict[str, Optional[Union[str, Dict[str, str
 
 
 def update_markdown_file(file: str = "../README.md",
+                         root_dir: str = None,
                          exclude_modules: Tuple[str, ...] = (),
                          specified_modules: Optional[Tuple[str, ...]] = None):
     """Add/update 'Functions & Classes' Section in Markdown file.
 
+    :param file: Path to Markdown file, defaults to '../README.md'
+    :param root_dir: Path to root directory
     :param exclude_modules: Names of excluded modules
     :param specified_modules: Names of specified modules
-    :param file: Path to Markdown file, defaults to '../README.md'
     """
     with open(file, "r") as f:
         content = []
@@ -115,6 +117,7 @@ def update_markdown_file(file: str = "../README.md",
 
     loop_through_repo(
         file=file,
+        root_dir=root_dir,
         exclude_modules=exclude_modules,
         specified_modules=specified_modules)
     add_summary_to_md(summary, file)
@@ -176,6 +179,7 @@ def parse_through_file(file: str) -> Dict[str, Dict[str, str]]:
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("-f", "--file", required=False, help="Path to README", default="../../README.md")
+    parser.add_argument("-d", "--root_dir", required=False, help="Path to rood dir", default=None)
     parser.add_argument("-e", "--exclude", required=False, help="Exclude modules", default=[], nargs='+')
     parser.add_argument("-m", "--modules", required=False, help="Specify modules", default=[], nargs='+')
     args = parser.parse_args()
@@ -185,11 +189,15 @@ if __name__ == "__main__":
         exclude += tuple(args.exclude)
 
     selected_modules = None if args.modules == [""] else args.modules
+    root_directory = None if args.root_dir == "" else args.root_dir
 
     print(f"Path to README: {args.file}")
     print(f"Exclude modules: {exclude}")
     print(f"Selected modules: {selected_modules}")
+    if root_directory:
+        print(f"Specified root directory: {root_directory}")
 
     update_markdown_file(file=args.file,
+                         root_dir=root_directory,
                          exclude_modules=exclude,
                          specified_modules=selected_modules)
