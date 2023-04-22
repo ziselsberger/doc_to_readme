@@ -44,7 +44,7 @@ update_docu:
     - git config --global pull.rebase false
     - git checkout $CI_COMMIT_BRANCH
     - git pull
-    - cp ./src/doc_to_md/doc_to_md.py .
+    - cp .doc_to_readme/src/doc_to_md/doc_to_md.py .
     - rm -rf doc_to_readme
   script:
     - *exec
