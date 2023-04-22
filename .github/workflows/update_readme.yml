@@ -26,7 +26,7 @@ jobs:
           PATH_TO_README: ../../README.md
         run: |
           cd ./src/doc_to_md
-          python3 doc_to_md.py -f "${{ env.PATH_TO_README }}"
+          python3 doc_to_md.py -f "${{ env.PATH_TO_README }}" --separated
           lines=$(git status -s | wc -l)
           if [ $lines -gt 0 ];then
             git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
