@@ -215,4 +215,4 @@ if __name__ == "__main__":
                          root_dir=root_directory,
                          exclude_modules=exclude,
                          specified_modules=selected_modules,
-                         separate=args.separate)
+                         separate=args.separated)
