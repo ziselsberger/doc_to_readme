@@ -29,7 +29,7 @@ variables:
   # else
   # python doc_to_md.py -f $PATH_TO_README
   fi
-  if [ "${{ inputs.SEPARATED }}" = true]; then
+  if [ "${{ inputs.SEPARATED }}" = "true"]; then
     cmd=$"$cmd --separated"
   fi
   python $cmd
