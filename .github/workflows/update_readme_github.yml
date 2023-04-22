@@ -13,6 +13,10 @@ on:
       SELECTED_MODULES:
         required: false
         type: string
+      SEPARATED:
+        required: false
+        default: true
+        type: bool
 
 jobs:
   update-docu:
@@ -35,8 +39,11 @@ jobs:
           git clone 'https://github.com/ziselsberger/doc_to_readme.git'
           cp ./doc_to_readme/src/doc_to_md/doc_to_md.py .
           rm -rf doc_to_readme
-          echo "python3 doc_to_md.py -f "${{ inputs.PATH_TO_README }}" -e "${{ inputs.EXCLUDED_MODULES }}" -m "${{ inputs.SELECTED_MODULES }}""
-          python3 doc_to_md.py -f "${{ inputs.PATH_TO_README }}" -e "${{ inputs.EXCLUDED_MODULES }}" -m "${{ inputs.SELECTED_MODULES }}"
+          if [ "${{ inputs.SEPARATED }}" = true]; then
+            python3 doc_to_md.py -f "${{ inputs.PATH_TO_README }}" -e "${{ inputs.EXCLUDED_MODULES }}" -m "${{ inputs.SELECTED_MODULES }}" --separated
+          else
+            python3 doc_to_md.py -f "${{ inputs.PATH_TO_README }}" -e "${{ inputs.EXCLUDED_MODULES }}" -m "${{ inputs.SELECTED_MODULES }}"
+          fi
           rm doc_to_md.py
           lines=$(git status -s | wc -l)
           if [ $lines -gt 0 ];then

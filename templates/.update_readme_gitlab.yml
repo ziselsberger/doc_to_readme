@@ -6,6 +6,7 @@ variables:
   PATH_TO_README: "README.md"
   EXCLUDED_MODULES: ""
   SELECTED_MODULES: ""
+  SEPARATED: true
 
 .push: &push |
   git status
@@ -19,13 +20,20 @@ variables:
   fi
 
 .exec: &exec |
+  cmd=$"doc_to_md.py -f $PATH_TO_README"
   if [[ ! -z "$EXCLUDED_MODULES" ]]; then
-    python doc_to_md.py -f $PATH_TO_README -e $EXCLUDED_MODULES
+    cmd=$"$cmd -e $EXCLUDED_MODULES"
+    # python doc_to_md.py -f $PATH_TO_README -e $EXCLUDED_MODULES
   elif [[ ! -z "$SELECTED_MODULES" ]]; then
-    python doc_to_md.py -f $PATH_TO_README -m $SELECTED_MODULES
-  else
-    python doc_to_md.py -f $PATH_TO_README
+    cmd=$"$cmd -m $SELECTED_MODULES"
+    # python doc_to_md.py -f $PATH_TO_README -m $SELECTED_MODULES
+  # else
+  # python doc_to_md.py -f $PATH_TO_README
   fi
+  if [ "${{ inputs.SEPARATED }}" = true]; then
+    cmd=$"$cmd --separated"
+  fi
+  python $cmd
   rm doc_to_md.py
 
 update_docu:

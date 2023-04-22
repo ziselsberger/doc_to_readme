@@ -195,7 +195,7 @@ if __name__ == "__main__":
     parser.add_argument("-d", "--root_dir", required=False, help="Path to rood dir", default=None)
     parser.add_argument("-e", "--exclude", required=False, help="Exclude modules", default=[], nargs='+')
     parser.add_argument("-m", "--modules", required=False, help="Specify modules", default=[], nargs='+')
-    parser.add_argument("--separate", required=False, help="Separate tables for each module", action='store_false')
+    parser.add_argument("--separated", required=False, help="Separate tables for each module", action='store_true')
     args = parser.parse_args()
 
     exclude = ("test", "functions_for_testing", "classes_for_testing")

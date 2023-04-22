@@ -25,5 +25,5 @@ update_docu:
     - git pull --ff
     - cd ./src/doc_to_md
   script:
-    - python doc_to_md.py
+    - python doc_to_md.py -f $PATH_TO_README --separated
     - *push
