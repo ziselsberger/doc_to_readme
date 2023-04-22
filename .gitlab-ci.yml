@@ -1,5 +1,4 @@
-variables: 
-  BRANCH_NAME: "main"
+variables:
   BOT_NAME: "MJAM"
   BOT_EMAIL: "mjam@update_readme.com"
   COMMIT_MESSAGE: "Auto-update README.md"
@@ -13,7 +12,7 @@ variables:
     git config user.email "${BOT_EMAIL}"
     git add $PATH_TO_README
     git commit -m "${COMMIT_MESSAGE}"
-    git push -o ci.skip "https://${BOT_NAME}:${GIT_PUSH_TOKEN}@${CI_REPOSITORY_URL#*@}" $BRANCH_NAME
+    git push -o ci.skip "https://${BOT_NAME}:${GIT_PUSH_TOKEN}@${CI_REPOSITORY_URL#*@}" $CI_COMMIT_BRANCH
   fi 
 
 update_docu:
@@ -21,7 +20,7 @@ update_docu:
   before_script:
     - apk add bash git
     - apk add --no-cache python3
-    - git checkout $BRANCH_NAME
+    - git checkout $CI_COMMIT_BRANCH
     - git pull --ff
     - cd ./src/doc_to_md
   script:
