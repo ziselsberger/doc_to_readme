@@ -20,17 +20,13 @@ variables:
 
 .exec: &exec |
   cmd="doc_to_md.py -f $PATH_TO_README"
-  echo $cmd
   if [[ ! -z $EXCLUDED_MODULES ]]; then
     cmd="$cmd -e $EXCLUDED_MODULES"
-    echo $cmd
   elif [[ ! -z $SELECTED_MODULES ]]; then
     cmd="$cmd -m $SELECTED_MODULES"
-    echo $cmd
   fi
   if [ $SEPARATED = "true" ]; then
     cmd="$cmd --separated"
-    echo $cmd
   fi
   echo $cmd
   python $cmd
