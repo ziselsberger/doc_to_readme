@@ -43,7 +43,7 @@ jobs:
           if [ "${{ inputs.SEPARATED }}" = "true" ]; then
             cmd="$cmd --separated"
           fi
-          python3 cmd
+          python3 $cmd
           rm doc_to_md.py
           lines=$(git status -s | wc -l)
           if [ $lines -gt 0 ];then
