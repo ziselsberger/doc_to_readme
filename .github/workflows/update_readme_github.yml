@@ -15,8 +15,8 @@ on:
         type: string
       SEPARATED:
         required: false
-        default: true
-        type: bool
+        default: "true"
+        type: string
 
 jobs:
   update-docu:
