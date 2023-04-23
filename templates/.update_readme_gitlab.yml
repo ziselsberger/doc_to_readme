@@ -22,16 +22,13 @@ variables:
   cmd=$"doc_to_md.py -f $PATH_TO_README"
   if [[ ! -z "$EXCLUDED_MODULES" ]]; then
     cmd=$"$cmd -e $EXCLUDED_MODULES"
-    # python doc_to_md.py -f $PATH_TO_README -e $EXCLUDED_MODULES
   elif [[ ! -z "$SELECTED_MODULES" ]]; then
     cmd=$"$cmd -m $SELECTED_MODULES"
-    # python doc_to_md.py -f $PATH_TO_README -m $SELECTED_MODULES
-  # else
-  # python doc_to_md.py -f $PATH_TO_README
   fi
-  if [ "${{ inputs.SEPARATED }}" = "true"]; then
+  if [ "${{ inputs.SEPARATED }}" = "true" ]; then
     cmd=$"$cmd --separated"
   fi
+  echo $cmd
   python $cmd
   rm doc_to_md.py
 
