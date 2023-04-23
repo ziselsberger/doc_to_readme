@@ -39,10 +39,16 @@ jobs:
           git clone 'https://github.com/ziselsberger/doc_to_readme.git'
           cp ./doc_to_readme/src/doc_to_md/doc_to_md.py .
           rm -rf doc_to_readme
-          cmd="doc_to_md.py -f "${{ inputs.PATH_TO_README }}" -e "${{ inputs.EXCLUDED_MODULES }}" -m "${{ inputs.SELECTED_MODULES }}""
+          cmd="doc_to_md.py -f ${{ inputs.PATH_TO_README }}"
+          if [[ ! -z "${{ inputs.EXCLUDED_MODULES }}" ]]; then
+            cmd="$cmd -e ${{ inputs.EXCLUDED_MODULES }}"
+          elif [[ ! -z "${{ inputs.SELECTED_MODULES }}" ]]; then
+            cmd="$cmd -m ${{ inputs.SELECTED_MODULES }}"
+          fi
           if [ "${{ inputs.SEPARATED }}" = "true" ]; then
             cmd="$cmd --separated"
           fi
+          echo $cmd
           python3 $cmd
           rm doc_to_md.py
           lines=$(git status -s | wc -l)
