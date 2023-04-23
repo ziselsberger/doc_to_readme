@@ -40,7 +40,7 @@ jobs:
           cp ./doc_to_readme/src/doc_to_md/doc_to_md.py .
           rm -rf doc_to_readme
           cmd="doc_to_md.py -f "${{ inputs.PATH_TO_README }}" -e "${{ inputs.EXCLUDED_MODULES }}" -m "${{ inputs.SELECTED_MODULES }}""
-          if [ "${{ inputs.SEPARATED }}" = true]; then
+          if [ "${{ inputs.SEPARATED }}" = "true" ]; then
             cmd="$cmd --separated"
           fi
           python3 cmd
