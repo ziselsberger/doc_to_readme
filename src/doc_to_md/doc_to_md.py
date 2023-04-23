@@ -96,8 +96,10 @@ def add_summary_to_md(
                         table += f"| {t} {f'({p})' if p is not None else ''} | `{func}` | {desc} |\n"
                     else:
                         table += f"| {link} | {t} {f'({p})' if p is not None else ''} | `{func}` | {desc} |\n"
-
-        f.write(table.encode('utf-8'))
+            if separate:
+                f.write(table.encode('utf-8'))
+        if not separate:
+            f.write(table.encode('utf-8'))
         f.write(f"\nCreated with: "
                 f"[doc_to_readme](https://github.com/ziselsberger/doc_to_readme)  \n"
                 f"[MIT](https://github.com/ziselsberger/doc_to_readme/blob/main/LICENSE) "
