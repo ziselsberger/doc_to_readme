@@ -20,12 +20,12 @@ variables:
 
 .exec: &exec |
   cmd=$"doc_to_md.py -f $PATH_TO_README"
-  if [[ ! -z "$EXCLUDED_MODULES" ]]; then
+  if [[ ! -z $EXCLUDED_MODULES ]]; then
     cmd=$"$cmd -e $EXCLUDED_MODULES"
-  elif [[ ! -z "$SELECTED_MODULES" ]]; then
+  elif [[ ! -z $SELECTED_MODULES ]]; then
     cmd=$"$cmd -m $SELECTED_MODULES"
   fi
-  if [ "${{ inputs.SEPARATED }}" = "true" ]; then
+  if [ $SEPARATED = "true" ]; then
     cmd=$"$cmd --separated"
   fi
   echo $cmd
