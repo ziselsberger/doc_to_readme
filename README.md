@@ -28,7 +28,7 @@ _Copyright &copy; 2023 by Mirjam Ziselsberger_
 _This code is free to use under the terms of the [MIT license](/LICENSE)._
 
 ## Functions & Classes  
-### [doc_to_md](./src/doc_to_md/doc_to_md.py)
+### [doc_to_md.py](./src/doc_to_md/doc_to_md.py)
 
 | Type | Name/Call | Description |
 | --- | --- | --- |
