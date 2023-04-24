@@ -19,5 +19,5 @@ pipelines:
             fi 
           script:
             - *prep
-            - python3 doc_to_md.py -f "../../README.md"
+            - python3 doc_to_md.py -f "../../README.md" --separated
             - *push

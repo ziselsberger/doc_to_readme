@@ -61,21 +61,30 @@ def loop_through_repo(
             summary[module_name] = parse_through_file(module_path)
         except TypeError:
             continue
-        link = f"[{module_name}]({module_path.replace(root_dir, '.')})"
+        path = module_path.replace(root_dir, '.')
+        link = f"[{os.path.basename(path)}]({path})"
         summary[module_name]["Link"] = link
 
 
-def add_summary_to_md(overview_dict: Dict[str, Optional[Union[str, Dict[str, str]]]], markdown: str):
+def add_summary_to_md(
+        overview_dict: Dict[str, Optional[Union[str, Dict[str, str]]]],
+        markdown: str,
+        separate: bool = True
+):
     """Add Table with all Functions & Classes to Markdown file.
 
     :param overview_dict: Dictionary with function & class information
     :param markdown: Path to markdown file
+    :param separate: Create one table per module
     """
     with open(markdown, 'ab+') as f:
         f.write(f"\n## Functions & Classes  \n".encode('utf-8'))
-        table = "| Module | Type | Name/Call | Description |\n| --- | --- | --- | --- |\n"
+        if not separate:
+            table = "| Module | Type | Name/Call | Description |\n| --- | --- | --- | --- |\n"
         for mod, functions in overview_dict.items():
             link = overview_dict.get(mod).get("Link")
+            if separate:
+                table = f"### {link}\n\n| Type | Name/Call | Description |\n| --- | --- | --- |\n"
             for _, info in functions.items():
                 try:
                     func, desc, t, p = info.values()
@@ -84,9 +93,14 @@ def add_summary_to_md(overview_dict: Dict[str, Optional[Union[str, Dict[str, str
                 except AttributeError:
                     pass
                 else:
-                    table += f"| {link} | {t} {f'({p})' if p is not None else ''} | `{func}` | {desc} |\n"
-
-        f.write(table.encode('utf-8'))
+                    if separate:
+                        table += f"| {t} {f'({p})' if p is not None else ''} | `{func}` | {desc} |\n"
+                    else:
+                        table += f"| {link} | {t} {f'({p})' if p is not None else ''} | `{func}` | {desc} |\n"
+            if separate:
+                f.write(table.encode('utf-8'))
+        if not separate:
+            f.write(table.encode('utf-8'))
         f.write(f"\nCreated with: "
                 f"[doc_to_readme](https://github.com/ziselsberger/doc_to_readme)  \n"
                 f"[MIT](https://github.com/ziselsberger/doc_to_readme/blob/main/LICENSE) "
@@ -97,13 +111,15 @@ def add_summary_to_md(overview_dict: Dict[str, Optional[Union[str, Dict[str, str
 def update_markdown_file(file: str = "../README.md",
                          root_dir: str = None,
                          exclude_modules: Tuple[str, ...] = (),
-                         specified_modules: Optional[Tuple[str, ...]] = None):
+                         specified_modules: Optional[Tuple[str, ...]] = None,
+                         separate: bool = True):
     """Add/update 'Functions & Classes' Section in Markdown file.
 
     :param file: Path to Markdown file, defaults to '../README.md'
     :param root_dir: Path to root directory
     :param exclude_modules: Names of excluded modules
     :param specified_modules: Names of specified modules
+    :param separate: Create one table per module
     """
     with open(file, "r") as f:
         content = []
@@ -120,7 +136,7 @@ def update_markdown_file(file: str = "../README.md",
         root_dir=root_dir,
         exclude_modules=exclude_modules,
         specified_modules=specified_modules)
-    add_summary_to_md(summary, file)
+    add_summary_to_md(summary, file, separate=separate)
 
 
 def parse_through_file(file: str) -> Dict[str, Dict[str, str]]:
@@ -182,6 +198,7 @@ if __name__ == "__main__":
     parser.add_argument("-d", "--root_dir", required=False, help="Path to rood dir", default=None)
     parser.add_argument("-e", "--exclude", required=False, help="Exclude modules", default=[], nargs='+')
     parser.add_argument("-m", "--modules", required=False, help="Specify modules", default=[], nargs='+')
+    parser.add_argument("--separated", required=False, help="Separate tables for each module", action='store_true')
     args = parser.parse_args()
 
     exclude = ("test", "functions_for_testing", "classes_for_testing")
@@ -200,4 +217,5 @@ if __name__ == "__main__":
     update_markdown_file(file=args.file,
                          root_dir=root_directory,
                          exclude_modules=exclude,
-                         specified_modules=selected_modules)
+                         specified_modules=selected_modules,
+                         separate=args.separated)
