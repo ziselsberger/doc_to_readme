@@ -62,7 +62,7 @@ def loop_through_repo(
         except TypeError:
             continue
         path = module_path.replace(root_dir, '.')
-        link = f"[{module_name}]({path})"
+        link = f"[{os.path.basename(path)}]({path})"
         summary[module_name]["Link"] = link
 
 
