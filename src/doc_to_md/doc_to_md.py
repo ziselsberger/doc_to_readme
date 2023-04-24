@@ -61,7 +61,8 @@ def loop_through_repo(
             summary[module_name] = parse_through_file(module_path)
         except TypeError:
             continue
-        link = f"[{module_name}]({module_path.replace(root_dir, '.')})"
+        path = module_path.replace(root_dir, '.')
+        link = f"{path.replace(module_name, "")}[{module_name}]({path})"
         summary[module_name]["Link"] = link
 
 
