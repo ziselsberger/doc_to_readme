@@ -121,15 +121,20 @@ def update_markdown_file(file: str = "../README.md",
     :param specified_modules: Names of specified modules
     :param separate: Create one table per module
     """
-    with open(file, "r") as f:
-        content = []
-        for line in f.readlines():
-            if line.startswith("## Functions & Classes"):
-                break
-            content.append(line)
+    try:
+        with open(file, "r") as f:
+            content = []
+            for line in f.readlines():
+                if line.startswith("## Functions & Classes"):
+                    break
+                content.append(line)
 
-    with open(file, "w") as f:
-        f.writelines(content[:-1]) if content[-1] == "\n" else f.writelines(content)
+        if content:
+            with open(file, "w") as f:
+                f.writelines(content[:-1]) if content[-1] == "\n" else f.writelines(content)
+    except FileNotFoundError:
+        print(f"Create file: {file}")
+        pass
 
     loop_through_repo(
         file=file,
