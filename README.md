@@ -28,7 +28,7 @@ _Copyright &copy; 2023 by Mirjam Ziselsberger_
 _This code is free to use under the terms of the [MIT license](/LICENSE)._
 
 ## Functions & Classes  
-### [doc_to_md](./src/doc_to_md/doc_to_md.py)
+### ./src//.py[doc_to_md](./src/doc_to_md/doc_to_md.py)
 
 | Type | Name/Call | Description |
 | --- | --- | --- |
@@ -41,4 +41,4 @@ Created with: [doc_to_readme](https://github.com/ziselsberger/doc_to_readme)
 [MIT](https://github.com/ziselsberger/doc_to_readme/blob/main/LICENSE) &copy; 2023 Mirjam Ziselsberger
 
 ---
-**Last Update:** 2023-04-23
+**Last Update:** 2023-04-24
