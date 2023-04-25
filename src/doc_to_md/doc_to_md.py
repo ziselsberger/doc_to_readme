@@ -47,8 +47,8 @@ def loop_through_repo(
         root_dir = os.path.dirname(os.path.abspath(file))
 
     skip = ["site-packages", "venv", "__init__"]
-    modules = [m for m in glob.glob(f"{root_dir}/**/*.py", recursive=True)
-               if not any(map(m.__contains__, skip))]
+    modules = sorted([m for m in glob.glob(f"{root_dir}/**/*.py", recursive=True)
+               if not any(map(m.__contains__, skip))])
 
     for module_path in modules:
         module_name = os.path.basename(module_path).replace(".py", "")
