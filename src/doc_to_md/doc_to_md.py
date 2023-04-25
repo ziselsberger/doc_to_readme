@@ -83,6 +83,7 @@ def add_summary_to_md(
             table = "| Module | Type | Name/Call | Description |\n| --- | --- | --- | --- |\n"
         for mod, functions in overview_dict.items():
             link = overview_dict.get(mod).get("Link")
+            if len(funtions) == 0: continue
             if separate:
                 table = f"\n### {link}\n\n| Type | Name/Call | Description |\n| --- | --- | --- |\n"
             for _, info in functions.items():
