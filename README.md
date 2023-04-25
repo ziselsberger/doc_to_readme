@@ -16,10 +16,9 @@ a Markdown Table. Finally, the section **_Functions & Classes_** is appended / u
 
 ### Install & Use Python Package
 
-Currently available on [TestPyPI](https://test.pypi.org/project/doc-to-markdown-mz/).
- 
+Available on [PyPI](https://pypi.org/project/doc-to-readme/1.0.0/)
 ```shell
-pip install -i https://test.pypi.org/simple/ doc-to-markdown-mz
+pip install doc-to-readme==1.0.0
 ```
 
 - **Use within Python** 
