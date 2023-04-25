@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "doc-to-markdown-mz"
-version = "0.1.0"
+version = "0.4.0"
 authors = [
     { name="Mirjam Ziselsberger", email="ziselsberger@gmail.com" },
 ]
