@@ -14,13 +14,43 @@ Because it's nice :-)
 corresponding short description from the docstrings. These are added to a dictionary and afterwards converted to
 a Markdown Table. Finally, the section **_Functions & Classes_** is appended / updated in the README File.
 
-**_Works in GitHub, GitLab & Bitbucket :-)_**
+### Install & Use Python Package
 
-> _[Documentation](./How_to_setup_the_pipelines.md) on how to set up the pipelines to update a file on every push._
+Currently available on [TestPyPI](https://test.pypi.org/project/doc-to-markdown-mz/).
+ 
+```shell
+pip install -i https://test.pypi.org/simple/ doc-to-markdown-mz
+```
+
+- **Use within Python** 
+```python
+import doc_to_md.doc_to_md as dtm
+
+dtm.update_markdown_file(
+    file="README.md",
+    root_dir=None,              # Directory used as root for searching modules, defaults to folder containing README.md
+    exclude_modules=None,       # List of modules to be excluded
+    specified_modules=None,     # Only these modules will be included
+    separate=True               # Create one table per module
+)
+```
+
+- **Command Line**
+```shell
+python -m doc_to_md.doc_to_md -f "README.md" [-r ROOT_DIR] [-e EXCLUDE_MODULES] [-m SELECTED_MODULES] [--separated]
+
+-r ROOT_DIR             # Directory used as root for searching modules, defaults to folder containing README.md
+-e EXCLUDE_MODULES      # List of modules to be excluded
+-s SELECTED_MODULES     # Only these modules will be included
+--separated             # Create one table per module
+```
 
 ---
 
-### [**_Step-by-step guide_**](https://github.com/ziselsberger/use_doc_to_readme) on how to integrate _doc_to_readme_ in your Repository
+### Add to Pipeline (GitHub, GitLab or Bitbucket)
+_[Documentation](./How_to_setup_the_pipelines.md) on how to set up the pipelines to update a file on every push._
+
+> ### [**_Step-by-step guide_**](https://github.com/ziselsberger/use_doc_to_readme) on how to integrate _doc_to_readme_ in your Repository
 
 ---
 
@@ -28,8 +58,7 @@ _Copyright &copy; 2023 by Mirjam Ziselsberger_
 _This code is free to use under the terms of the [MIT license](/LICENSE)._
 
 ## Functions & Classes  
-
-### [doc_to_md.py](./src/doc_to_md/doc_to_md.py)
+### [doc_to_md](./src/doc_to_md/doc_to_md.py)
 
 | Type | Name/Call | Description |
 | --- | --- | --- |
