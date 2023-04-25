@@ -27,7 +27,7 @@ summary = {}
 def loop_through_repo(
         file: str,
         root_dir: str = None,
-        exclude_modules: Tuple[str, ...] = (),
+        exclude_modules: Optional[Tuple[str, ...]] = None,
         specified_modules: Optional[Tuple[str, ...]] = None
 ) -> None:
     """Collect documentation from functions & classes
@@ -48,7 +48,10 @@ def loop_through_repo(
 
     skip = ["site-packages", "venv", "__init__"]
     modules = sorted([m for m in glob.glob(f"{root_dir}/**/*.py", recursive=True)
-               if not any(map(m.__contains__, skip))])
+                      if not any(map(m.__contains__, skip))])
+
+    if exclude_modules is None:
+        exclude_modules = []
 
     for module_path in modules:
         module_name = os.path.basename(module_path).replace(".py", "")
@@ -109,9 +112,12 @@ def add_summary_to_md(
         f.write(f"\n---\n**Last Update:** {datetime.date.today()}".encode('utf-8'))
 
 
-def update_markdown_file(file: str = "../README.md",
+def update_markdown_file(file: str = "../../README.md",
                          root_dir: str = None,
-                         exclude_modules: Tuple[str, ...] = (),
+                         exclude_modules: Optional[Tuple[str, ...]] = ("test",
+                                                                       "functions_for_testing",
+                                                                       "classes_for_testing",
+                                                                       "doc_to_md"),
                          specified_modules: Optional[Tuple[str, ...]] = None,
                          separate: bool = True):
     """Add/update 'Functions & Classes' Section in Markdown file.
