@@ -18,7 +18,7 @@ a Markdown Table. Finally, the section **_Functions & Classes_** is appended / u
 
 Available on [PyPI](https://pypi.org/project/doc-to-readme/1.0.0/)
 ```shell
-pip install doc-to-readme==1.0.0
+pip install doc-to-readme
 ```
 
 - **Use within Python** 
