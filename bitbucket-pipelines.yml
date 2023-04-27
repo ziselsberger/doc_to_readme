@@ -1,23 +1,25 @@
-image: alpine:latest
-
+definitions:
+  steps:
+    - step: &doc_to_readme
+        name: Add module documentation to README
+        image: alpine:latest
+        script:
+          - apk add --no-cache python3 bash git
+          - git fetch
+          - git clone 'https://github.com/ziselsberger/doc_to_readme.git'
+          - cp ./doc_to_readme/src/doc_to_md/doc_to_md.py .
+          - rm -rf doc_to_readme
+          - python3 doc_to_md.py -f "../../README.md" --separated
+          - rm doc_to_md.py
+          - lines=$(git status -s | wc -l)
+          - |
+            if [ $lines -gt 0 ];then
+              git add "../../README.md"
+              git commit -m "Auto-update README.md [skip ci]"
+              git push
+            fi
+            
 pipelines:
   branches:
     main:
-      - step:
-          name: update_docu
-          .prep: &prep |
-            apk add bash git
-            apk add --no-cache python3
-            git fetch
-            cd ./src/doc_to_md
-          .push: &push |
-            lines=$(git status -s | wc -l)
-            if [ $lines -gt 0 ];then
-              git add ../../README.md
-              git commit -m "Auto-update README.md [skip ci]"
-              git push
-            fi 
-          script:
-            - *prep
-            - python3 doc_to_md.py -f "../../README.md" --separated
-            - *push
+      - step: *doc_to_readme
