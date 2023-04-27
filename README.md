@@ -14,7 +14,12 @@ Because it's nice :-)
 corresponding short description from the docstrings. These are added to a dictionary and afterwards converted to
 a Markdown Table. Finally, the section **_Functions & Classes_** is appended / updated in the README File.
 
-### Install & Use Python Package
+> There are several options how to use it:  
+> a) [Python Package](#a-install--use-python-package)   
+> b) [CI Pipeline](#b-add-to-pipeline-github-gitlab-or-bitbucket)  
+
+
+### a) install & use Python Package
 
 Available on [PyPI](https://pypi.org/project/doc-to-readme/1.0.0/)
 ```shell
@@ -46,7 +51,7 @@ python -m doc_to_md.doc_to_md -f "README.md" [-r ROOT_DIR] [-e EXCLUDE_MODULES] 
 
 ---
 
-### Add to Pipeline (GitHub, GitLab or Bitbucket)
+### b) add to Pipeline (GitHub, GitLab or Bitbucket)
 _[Documentation](./How_to_setup_the_pipelines.md) on how to set up the pipelines to update a file on every push._
 
 > ### [**_Step-by-step guide_**](https://github.com/ziselsberger/use_doc_to_readme) on how to integrate _doc_to_readme_ in your Repository
