@@ -1,10 +1,17 @@
 [build-system]
-requires = ["setuptools >=61.0"]
+requires = [
+    "setuptools >= 65.0",
+    "setuptools_scm[toml]",
+    "wheel",
+]
 build-backend = "setuptools.build_meta"
+
+[tool.setuptools_scm]
+write_to = "src/doc_to_md/_version.py"
 
 [project]
 name = "doc-to-readme"
-version = "1.0.0"
+dynamic = ["version"]
 authors = [
     { name="Mirjam Ziselsberger", email="ziselsberger@gmail.com" },
 ]
