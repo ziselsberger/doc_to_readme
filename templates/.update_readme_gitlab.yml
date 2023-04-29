@@ -3,6 +3,7 @@ variables:
   BOT_EMAIL: "doc@update_readme.com"
   COMMIT_MESSAGE: "Auto-update README.md"
   PATH_TO_README: "README.md"
+  ROOT_DIR: ""
   EXCLUDED_MODULES: ""
   SELECTED_MODULES: ""
   SEPARATED: "true"
@@ -24,6 +25,9 @@ variables:
     cmd="$cmd -e $EXCLUDED_MODULES"
   elif [[ ! -z $SELECTED_MODULES ]]; then
     cmd="$cmd -m $SELECTED_MODULES"
+  fi
+  if [ ! -z $ROOT_DIR ]; then
+    cmd="$cmd -r $ROOT_DIR"
   fi
   if [ $SEPARATED = "true" ]; then
     cmd="$cmd --separated"
