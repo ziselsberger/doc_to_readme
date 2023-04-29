@@ -21,7 +21,7 @@ a Markdown Table. Finally, the section **_Functions & Classes_** is appended / u
 
 ### a) install & use Python Package
 
-Available on [PyPI](https://pypi.org/project/doc-to-readme/1.0.0/)
+Available on [PyPI](https://pypi.org/project/doc-to-readme)
 ```shell
 pip install doc-to-readme
 ```
@@ -52,7 +52,7 @@ python -m doc_to_md.doc_to_md -f "README.md" [-r ROOT_DIR] [-e EXCLUDE_MODULES] 
 ---
 
 ### b) add to Pipeline (GitHub, GitLab or Bitbucket)
-_[Documentation](./How_to_setup_the_pipelines.md) on how to set up the pipelines to update a file on every push._
+_[Documentation](https://github.com/ziselsberger/doc_to_readme/blob/main/How_to_setup_the_pipelines.md) on how to set up the pipelines to update a file on every push._
 
 > ### [**_Step-by-step guide_**](https://github.com/ziselsberger/use_doc_to_readme) on how to integrate _doc_to_readme_ in your Repository
 
