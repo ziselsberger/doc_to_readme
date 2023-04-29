@@ -7,6 +7,9 @@ on:
         required: false
         default: "README.md"
         type: string
+      ROOT_DIR:
+        required: false
+        type: string
       EXCLUDED_MODULES:
         required: false
         type: string
@@ -44,6 +47,9 @@ jobs:
             cmd="$cmd -e ${{ inputs.EXCLUDED_MODULES }}"
           elif [[ ! -z "${{ inputs.SELECTED_MODULES }}" ]]; then
             cmd="$cmd -m ${{ inputs.SELECTED_MODULES }}"
+          fi
+          if [ ! -z "${{ inputs.ROOT_DIR }}" ]; then
+            cmd="$cmd -r ${{ inputs.ROOT_DIR }}"
           fi
           if [ "${{ inputs.SEPARATED }}" = "true" ]; then
             cmd="$cmd --separated"
