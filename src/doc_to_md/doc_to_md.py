@@ -47,8 +47,11 @@ def loop_through_repo(
         root_dir = os.path.dirname(os.path.abspath(file))
 
     skip = ["site-packages", "venv", "__init__"]
-    modules = sorted([m for m in glob.glob(f"{root_dir}/**/*.py", recursive=True)
-                      if not any(map(m.__contains__, skip))])
+    python_modules = sorted([m for m in glob.glob(f"{root_dir}/**/*.py", recursive=True)
+                             if not any(map(m.__contains__, skip))])
+
+    julia_modules = sorted([m for m in glob.glob(f"{root_dir}/**/*.jl", recursive=True)])
+    modules = python_modules + julia_modules
 
     if exclude_modules is None:
         exclude_modules = []
