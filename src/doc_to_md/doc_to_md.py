@@ -171,13 +171,15 @@ def parse_through_file(file: str) -> Dict[str, Dict[str, str]]:
     with open(file, 'r') as f:
         functions = {}
         end = True
+        wrong_docu = (":", "Args:", "Returns:")
         for line in f.readlines():
             rm_blanks = line.strip()
             if rm_blanks.startswith("def "):
                 function_name = rm_blanks.split("def ")[1].split("(")[0]
                 if function_name.startswith("__"): continue
+                docu = func_docs.get(function_name)
                 functions[function_name] = {"fn": None,
-                                            "doc": func_docs.get(function_name),
+                                            "doc": docu if docu and not docu.startswith(wrong_docu) else None,
                                             "type": "method" if function_name in method_names else "function",
                                             "parent_class": method_names.get(function_name)}
                 functions[function_name]["fn"] = rm_blanks.split("def ")[1]
@@ -185,8 +187,9 @@ def parse_through_file(file: str) -> Dict[str, Dict[str, str]]:
             elif rm_blanks.startswith("class "):
                 function_name = rm_blanks.split("class ")[1].split("(")[0].rstrip(":")
                 if function_name.startswith("__"): continue
+                docu = func_docs.get(function_name)
                 functions[function_name] = {"fn": None,
-                                            "doc": func_docs.get(function_name),
+                                            "doc": docu if docu and not docu.startswith(wrong_docu) else None,
                                             "type": "class",
                                             "parent_class": method_names.get(function_name)}
                 end = rm_blanks.endswith(":")
