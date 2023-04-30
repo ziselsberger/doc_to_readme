@@ -30,7 +30,7 @@ def loop_through_repo(
         exclude_modules: Optional[Tuple[str, ...]] = None,
         specified_modules: Optional[Tuple[str, ...]] = None
 ) -> None:
-    """Collect documentation from functions & classes
+    """Collect documentation from functions & classes.
 
     Loop through all .py modules in the root directory of this repo and add
     function & class info to a dictionary ('summary').
@@ -152,7 +152,7 @@ def update_markdown_file(file: str = "../../README.md",
 
 
 def parse_through_file(file: str) -> Dict[str, Dict[str, str]]:
-    """Parse through module and gather info on classes and functions
+    """Parse through file, return dict with classes and functions.
 
     :param file: Module path
     :returns: Dictionary containing information on classes and functions
