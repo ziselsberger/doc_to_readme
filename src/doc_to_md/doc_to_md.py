@@ -57,14 +57,14 @@ def loop_through_repo(
         exclude_modules = []
 
     for module_path in modules:
-        module_name = os.path.basename(module_path).replace(".py", "")
+        module_name, ext = os.path.splitext(os.path.basename(module_path))
         if specified_modules:
             if module_name not in specified_modules: continue
         elif module_name in exclude_modules:
             continue
         print(f"Loop through: {module_path}")
         try:
-            summary[module_name] = parse_through_file(module_path)
+            summary[module_name] = parse_through_file(module_path, ext=ext)
         except TypeError:
             continue
         path = module_path.replace(root_dir, '.')
@@ -154,22 +154,30 @@ def update_markdown_file(file: str = "../../README.md",
     add_summary_to_md(summary, file, separate=separate)
 
 
-def parse_through_file(file: str) -> Dict[str, Dict[str, str]]:
+def parse_through_file(
+        file: str,
+        ext: str = ".py"
+) -> Dict[str, Dict[str, str]]:
     """Parse through module and gather info on classes and functions
 
     :param file: Module path
+    :param ext: File extension (used to extract programming language), defaults to ".py"
     :returns: Dictionary containing information on classes and functions
     """
 
-    with open(file) as fd:
-        tree = ast.parse(fd.read())
-        func_docs = {f.name: (ast.get_docstring(f).split("\n\n")[0].replace('\n', ' ').replace('  ', ' ')
-                              if ast.get_docstring(f) else None)
-                     for f in ast.walk(tree) if isinstance(f, (ast.FunctionDef, ast.ClassDef))}
+    func_docs = method_names = {}
+    if ext == ".py":
+        with open(file) as fd:
+            tree = ast.parse(fd.read())
+            func_docs = {f.name: (ast.get_docstring(f).split("\n\n")[0].replace('\n', ' ').replace('  ', ' ')
+                                  if ast.get_docstring(f) else None)
+                         for f in ast.walk(tree) if isinstance(f, (ast.FunctionDef, ast.ClassDef))}
 
-        class_definitions = [node for node in tree.body if isinstance(node, ast.ClassDef)]
-        method_names = {node.name: class_def.name for class_def in class_definitions
-                        for node in class_def.body if isinstance(node, ast.FunctionDef)}
+            class_definitions = [node for node in tree.body if isinstance(node, ast.ClassDef)]
+            method_names = {node.name: class_def.name for class_def in class_definitions
+                            for node in class_def.body if isinstance(node, ast.FunctionDef)}
+    elif ext == ".jl":
+        pass
 
     with open(file, 'r') as f:
         functions = {}
