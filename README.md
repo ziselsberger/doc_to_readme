@@ -45,7 +45,7 @@ python -m doc_to_md.doc_to_md -f "README.md" [-r ROOT_DIR] [-e EXCLUDE_MODULES] 
 
 -r ROOT_DIR             # Directory used as root for searching modules, defaults to folder containing README.md
 -e EXCLUDE_MODULES      # List of modules to be excluded
--s SELECTED_MODULES     # Only these modules will be included
+-m SELECTED_MODULES     # Only these modules will be included
 --separated             # Create one table per module
 ```
 
