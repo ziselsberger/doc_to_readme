@@ -9,13 +9,13 @@ variables:
   SEPARATED: "true"
 
 .push: &push |
-  git status
-  lines=$(git status -s | wc -l)
-  if [ $lines -gt 0 ];then
-    git add $PATH_TO_README
-    git commit -m "${COMMIT_MESSAGE}"
-    git push -o ci.skip "https://${BOT_NAME}:${GIT_PUSH_TOKEN}@${CI_REPOSITORY_URL#*@}" $CI_COMMIT_BRANCH
-  fi
+  #git status
+  #lines=$(git status -s | wc -l)
+  #if [ $lines -gt 0 ];then
+  git add $PATH_TO_README
+  git commit -m "${COMMIT_MESSAGE}"
+  git push -o ci.skip "https://${BOT_NAME}:${GIT_PUSH_TOKEN}@${CI_REPOSITORY_URL#*@}" $CI_COMMIT_BRANCH
+  #fi
 
 .exec: &exec |
   cmd="doc_to_md.py -f $PATH_TO_README"
@@ -33,6 +33,7 @@ variables:
   echo $cmd
   python $cmd
   rm doc_to_md.py
+  git log --oneline -n 5 
 
 update_docu:
   image: alpine:latest
@@ -46,7 +47,6 @@ update_docu:
     - git clone 'https://github.com/ziselsberger/doc_to_readme.git'
     - cp ./doc_to_readme/src/doc_to_md/doc_to_md.py .
     - rm -rf doc_to_readme
-    - ls
   script:
     - *exec
     - *push
