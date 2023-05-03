@@ -14,8 +14,8 @@ variables:
   if [ $lines -gt 0 ];then
     git add $PATH_TO_README
     git commit -m "${COMMIT_MESSAGE}"
-    git push -o ci.skip "https://${BOT_NAME}:${GIT_PUSH_TOKEN}@${CI_REPOSITORY_URL#*@}" $CI_COMMIT_BRANCH
   fi
+  git push -o ci.skip "https://${BOT_NAME}:${GIT_PUSH_TOKEN}@${CI_REPOSITORY_URL#*@}" $CI_COMMIT_BRANCH
 
 .exec: &exec |
   cmd="doc_to_md.py -f $PATH_TO_README"
@@ -48,13 +48,4 @@ update_docu:
     - rm -rf doc_to_readme
   script:
     - *exec
-    - git log --oneline -n 5 
-    - git status
-    #- git add .
-    #- git commit -m "${COMMIT_MESSAGE}"
-    - echo $BOT_NAME
-    - echo $GIT_PUSH_TOKEN
-    - echo $CI_REPOSITORY_URL
-    - echo $CI_COMMIT_BRANCH
-    - git push -o ci.skip "https://${BOT_NAME}:${GIT_PUSH_TOKEN}@${CI_REPOSITORY_URL#*@}" $CI_COMMIT_BRANCH
-    #- *push
+    - *push
