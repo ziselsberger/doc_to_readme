@@ -50,8 +50,8 @@ update_docu:
     - *exec
     - git log --oneline -n 5 
     - git status
-    - git add .
-    - git commit -m "${COMMIT_MESSAGE}"
+    #- git add .
+    #- git commit -m "${COMMIT_MESSAGE}"
     - echo $BOT_NAME
     - echo $GIT_PUSH_TOKEN
     - echo $CI_REPOSITORY_URL
