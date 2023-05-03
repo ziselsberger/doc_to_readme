@@ -41,12 +41,12 @@ update_docu:
     - apk add --no-cache python3
     - git config --global user.name "${BOT_NAME}"
     - git config --global user.email "${BOT_EMAIL}"
-    - git config --global pull.rebase false
-    - git clone 'https://github.com/ziselsberger/doc_to_readme.git'
     - git checkout $CI_COMMIT_BRANCH
-    - git pull
+    - git pull --ff
+    - git clone 'https://github.com/ziselsberger/doc_to_readme.git'
     - cp ./doc_to_readme/src/doc_to_md/doc_to_md.py .
     - rm -rf doc_to_readme
+    - ls
   script:
     - *exec
     - *push
