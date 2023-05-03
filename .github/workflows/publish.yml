@@ -1,4 +1,4 @@
-# Source: https://carpentries-incubator.github.io/python_packaging/instructor/05-publishing.html
+# Source: https://carpentries-incubator.github.io/python_packaging/instructor/05-publishing.html#extra-automating-package-publishing-with-github-actions
 
 name: Upload to PyPI
 
