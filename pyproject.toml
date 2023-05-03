@@ -1,3 +1,7 @@
+# Sources:
+# https://packaging.python.org/en/latest/tutorials/packaging-projects
+# https://carpentries-incubator.github.io/python_packaging/instructor/05-publishing.html#extra-consistent-versioning-with-setuptools-scm
+
 [build-system]
 requires = [
     "setuptools >= 65.0",
