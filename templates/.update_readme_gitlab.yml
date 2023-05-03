@@ -52,5 +52,6 @@ update_docu:
     - git status
     - git add .
     - git commit -m "${COMMIT_MESSAGE}"
+    - echo 'git push -o ci.skip "https://${BOT_NAME}:${GIT_PUSH_TOKEN}@${CI_REPOSITORY_URL#*@}" $CI_COMMIT_BRANCH'
     - git push -o ci.skip "https://${BOT_NAME}:${GIT_PUSH_TOKEN}@${CI_REPOSITORY_URL#*@}" $CI_COMMIT_BRANCH
     #- *push
