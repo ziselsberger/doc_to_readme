@@ -1,6 +1,6 @@
 import unittest
 
-import doc_to_readme.src.doc_to_md.doc_to_md as dtm
+import src.doc_to_md.doc_to_md as dtm
 
 
 class LoopThroughRepo(unittest.TestCase):
