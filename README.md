@@ -72,6 +72,16 @@ _This code is free to use under the terms of the [MIT license](/LICENSE)._
 | function  | `update_markdown_file(file: str = "../../README.md", root_dir: str = None, exclude_modules: Optional[Tuple[str, ...]] = ("test", "functions_for_testing", "classes_for_testing", "doc_to_md"), specified_modules: Optional[Tuple[str, ...]] = None, separate: bool = True)` | Add/update 'Functions & Classes' Section in Markdown file. |
 | function  | `parse_through_file(file: str) -> Dict[str, Dict[str, str]]` | Parse through file, return dict with classes and functions. |
 
+### [test_dtm.py](./tests/test_dtm.py)
+
+| Type | Name/Call | Description |
+| --- | --- | --- |
+| class  | `LoopThroughRepo` | None |
+| method (LoopThroughRepo) | `setUp(self) -> None` | None |
+| method (LoopThroughRepo) | `test_loop_through_repo(self)` | None |
+| method (LoopThroughRepo) | `test_loop_through_repo_specified_modules(self)` | None |
+| method (LoopThroughRepo) | `test_loop_through_repo_exclude_modules(self)` | None |
+
 Created with: [doc_to_readme](https://github.com/ziselsberger/doc_to_readme)  
 [MIT](https://github.com/ziselsberger/doc_to_readme/blob/main/LICENSE) &copy; 2023 Mirjam Ziselsberger
 
