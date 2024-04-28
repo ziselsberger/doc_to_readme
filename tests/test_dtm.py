@@ -9,8 +9,8 @@ class LoopThroughRepo(unittest.TestCase):
         self.file = "./TEST_README.md"
         self.module = "functions_for_testing"
         self.function = "add"
-        self.remaining_modules = ['classes_for_testing', 'test']
-        self.correct_link = '[functions_for_testing](.\\functions_for_testing.py)'
+        self.remaining_modules = ['classes_for_testing', 'test_dtm']
+        self.correct_link = '[functions_for_testing.py](./functions_for_testing.py)'
         self.correct_dict = {
             'doc': 'Add two numbers (x and y).',
             'fn': 'add(x: int = 4, y: int = 5) -> int',
