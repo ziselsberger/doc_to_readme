@@ -1,5 +1,5 @@
-import unittest
 import os
+import unittest
 
 import src.doc_to_md.doc_to_md as dtm
 
