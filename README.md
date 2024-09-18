@@ -14,14 +14,15 @@ Because it's nice :-)
 corresponding short description from the docstrings. These are added to a dictionary and afterwards converted to
 a Markdown Table. Finally, the section **_Functions & Classes_** is appended / updated in the README File.
 
-> There are several options how to use it:  
-> a) [Python Package](#a-install--use-python-package)   
-> b) [CI Pipeline](#b-add-to-pipeline-github-gitlab-or-bitbucket)  
+There are several options how to use it:  
+a) [Python Package](#a-install--use-python-package)   
+b) [CI Pipeline](#b-add-to-pipeline-github-gitlab-or-bitbucket)  
 
 
 ### a) install & use Python Package
 
-Available on [PyPI](https://pypi.org/project/doc-to-readme)
+> [!NOTE]
+> Available on [PyPI](https://pypi.org/project/doc-to-readme)
 ```shell
 pip install doc-to-readme
 ```
@@ -54,9 +55,9 @@ python -m doc_to_md.doc_to_md -f "README.md" [-r ROOT_DIR] [-e EXCLUDE_MODULES] 
 ### b) add to Pipeline (GitHub, GitLab or Bitbucket)
 _[Documentation](https://github.com/ziselsberger/doc_to_readme/blob/main/How_to_setup_the_pipelines.md) on how to set up the pipelines to update a file on every push._
 
-> ### [**_Step-by-step guide_**](https://github.com/ziselsberger/use_doc_to_readme) on how to integrate _doc_to_readme_ in your Repository
+> [!TIP]
+> [**_Step-by-step guide_**](https://github.com/ziselsberger/use_doc_to_readme) on how to integrate _doc_to_readme_ in your Repository.
 
----
 
 _Copyright &copy; 2023 by Mirjam Ziselsberger_  
 _This code is free to use under the terms of the [MIT license](/LICENSE)._
