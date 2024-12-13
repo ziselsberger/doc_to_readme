@@ -54,8 +54,7 @@ jobs:
 
 ---
 
-> #### Some helpful blog posts / tutorials:
-> 
+> [!TIP]
 > - https://medium.com/@michaelekpang/creating-a-ci-cd-pipeline-using-github-actions-b65bb248edfe
 > - https://joht.github.io/johtizen/build/2022/01/20/github-actions-push-into-repository.html
 
@@ -118,7 +117,6 @@ update_docu:
     - *push
 ```
 
----
-
+> [!TIP]
 > Super helpful blog post on how to update files in Repo within CI/CD Pipeline:  
 > https://parsiya.net/blog/2021-10-11-modify-gitlab-repositories-from-the-ci-pipeline/
