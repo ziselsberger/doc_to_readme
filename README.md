@@ -1,28 +1,29 @@
-# Automated (Python) Module Documentation in README
-
-## What's this?
-
-Automated docstring extraction and creation/update of documentation (of python modules) in README File.
-
-### Why?
-
-Because it's nice :-)
-
-### How?
-
-[doc_to_md.py](src/doc_to_md/doc_to_md.py) loops through all Python files in the Repository and extracts the function calls + the
-corresponding short description from the docstrings. These are added to a dictionary and afterwards converted to
-a Markdown Table. Finally, the section **_Functions & Classes_** is appended / updated in the README File.
-
-There are several options how to use it:  
-a) [Python Package](#a-install--use-python-package)   
-b) [CI Pipeline](#b-add-to-pipeline-github-gitlab-or-bitbucket)  
-
-
-### a) install & use Python Package
+# Automated Python Documentation in README file
 
 > [!NOTE]
 > Available on [PyPI](https://pypi.org/project/doc-to-readme)
+
+## What's this?
+
+Automated docstring extraction and creation/update of documentation of python modules in the README File.
+
+### Why should I use it?
+
+Because it's nice to have a quick overview of all the functions, classes and methods of your module documented in the README file ;-)
+
+### How does it work?
+
+[doc_to_md.py](src/doc_to_md/doc_to_md.py) loops through all Python files in the Repository, and extracts the function calls & the corresponding short description from the docstrings. These are added to a dictionary and afterwards converted to a Markdown Table. Finally, the section **_Functions & Classes_** is appended / updated in the README File.
+
+There are two options how to use it:  
+a) [CI Pipeline](#a-add-to-pipeline-github-gitlab-bitbucket-or-azure-devops)  
+b) [Python Package](#b-install--use-the-python-package)   
+
+### a) include it in your CI Pipeline (GitHub, GitLab, Bitbucket or Azure Devops)
+Check out this [**_Step-by-step guide_**](https://github.com/ziselsberger/use_doc_to_readme) on how to integrate _doc_to_readme_ in your Repository.
+
+### b) install & use the Python Package
+
 ```shell
 pip install doc-to-readme
 ```
@@ -51,13 +52,6 @@ python -m doc_to_md.doc_to_md -f "README.md" [-r ROOT_DIR] [-e EXCLUDE_MODULES] 
 ```
 
 ---
-
-### b) add to Pipeline (GitHub, GitLab or Bitbucket)
-_[Documentation](https://github.com/ziselsberger/doc_to_readme/blob/main/How_to_setup_the_pipelines.md) on how to set up the pipelines to update a file on every push._
-
-> [!TIP]
-> [**_Step-by-step guide_**](https://github.com/ziselsberger/use_doc_to_readme) on how to integrate _doc_to_readme_ in your Repository.
-
 
 _Copyright &copy; 2023 by Mirjam Ziselsberger_  
 _This code is free to use under the terms of the [MIT license](/LICENSE)._
