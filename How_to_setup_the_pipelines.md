@@ -3,6 +3,7 @@
 > * [GitHub](#github)
 > * [GitLab](#gitlab)
 > * [Bitbucket](#bitbucket)
+> * [Azure DevOps](#azure-devops)
 
 
 ### GitHub
@@ -129,14 +130,13 @@ update_docu:
 
 ### Bitbucket
 
-##### 1. Enable Pipelines
+#### 1. Enable Pipelines
 
 * Repository Settings > `PIPELINES` > Settings
 
-##### 2. Create [Bitbucket Pipeline](bitbucket-pipelines.yml)
+#### 2. Create [Bitbucket Pipeline](bitbucket-pipelines.yml)
 
-- Bitbucket does not allow push options like GitLab (`-o ci.skip`).  
-  To skip the Pipeline you have to add `[skip ci]` or `[ci skip]` to the commit message.
+- To skip the Pipeline you have to add `[skip ci]` or `[ci skip]` to the commit message.
 
 ```yaml
 pipelines:
@@ -153,4 +153,44 @@ pipelines:
             fi 
           script:
             [ ... ]
+```
+
+---
+
+### Azure DevOps
+
+#### 1. Create [Pipeline file](azure-pipelines.yml)
+
+- To avoid an infinite loop of updates, `[skip ci]` is added to the commit message.
+
+```yaml
+pool: 
+  vmImage: ubuntu-latest
+
+jobs:
+- job:
+  displayName: Doc2Readme
+  steps:
+  - checkout: self
+    persistCredentials: true 
+    clean: true 
+    fetchDepth: 0
+  - script: |
+      git config --global user.email "$(Build.RequestedForEmail)"
+      git config --global user.name "$(Build.RequestedFor)"
+    displayName: Set git config
+  - script: |
+      git pull --rebase origin $(Build.SourceBranch)
+      git clone 'https://github.com/ziselsberger/doc_to_readme.git'
+      cp ./doc_to_readme/src/doc_to_md/doc_to_md.py .
+      rm -rf doc_to_readme
+      python doc_to_md.py -f README.md -e doc_to_md --separated
+      rm doc_to_md.py
+      lines=$(git status -s | wc -l)
+      if [ $lines -gt 0 ];then
+        git add "README.md"
+        git commit -m "Auto-update README.md [skip ci]"
+        git push origin HEAD:$(Build.SourceBranch)
+      fi
+    displayName: Add module documentation to README
 ```
