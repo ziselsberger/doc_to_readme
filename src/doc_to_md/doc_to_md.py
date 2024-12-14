@@ -97,16 +97,16 @@ def add_summary_to_md(
                 table = f"\n### {link}\n\n| Type | Name/Call | Description |\n| --- | --- | --- |\n"
             for _, info in functions.items():
                 try:
-                    func, desc, t, p = info.values()
+                    func, description, t, p = info.values()
                 except ValueError:
                     pass
                 except AttributeError:
                     pass
                 else:
                     if separate:
-                        table += f"| {t} {f'({p})' if p is not None else ''} | <pre>{func}</pre> | {desc} |\n"
+                        table += f"| {t} {f'({p})' if p is not None else ''} | <pre>{func}</pre> | {description} |\n"
                     else:
-                        table += f"| {link} | {t} {f'({p})' if p is not None else ''} | <pre>{func}</pre> | {desc} |\n"
+                        table += f"| {link} | {t} {f'({p})' if p is not None else ''} | <pre>{func}</pre> | {description} |\n"
             if separate:
                 f.write(table.encode("utf-8"))
         if not separate:
