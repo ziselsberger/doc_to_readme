@@ -25,10 +25,10 @@ summary = {}
 
 
 def loop_through_repo(
-        file: str,
-        root_dir: str = None,
-        exclude_modules: Optional[Tuple[str, ...]] = None,
-        specified_modules: Optional[Tuple[str, ...]] = None
+    file: str,
+    root_dir: str = None,
+    exclude_modules: Optional[Tuple[str, ...]] = None,
+    specified_modules: Optional[Tuple[str, ...]] = None,
 ) -> None:
     """Collect documentation from functions & classes.
 
@@ -47,8 +47,13 @@ def loop_through_repo(
         root_dir = os.path.dirname(os.path.abspath(file))
 
     skip = ["site-packages", "venv", "__init__"]
-    modules = sorted([m for m in glob.glob(f"{root_dir}/**/*.py", recursive=True)
-                      if not any(map(m.__contains__, skip))])
+    modules = sorted(
+        [
+            m
+            for m in glob.glob(f"{root_dir}/**/*.py", recursive=True)
+            if not any(map(m.__contains__, skip))
+        ]
+    )
 
     if exclude_modules is None:
         exclude_modules = []
@@ -56,7 +61,8 @@ def loop_through_repo(
     for module_path in modules:
         module_name = os.path.basename(module_path).replace(".py", "")
         if specified_modules:
-            if module_name not in specified_modules: continue
+            if module_name not in specified_modules: 
+                continue
         elif module_name in exclude_modules:
             continue
         print(f"Loop through: {module_path}")
@@ -64,15 +70,15 @@ def loop_through_repo(
             summary[module_name] = parse_through_file(module_path)
         except TypeError:
             continue
-        path = module_path.replace(root_dir, '.')
+        path = module_path.replace(root_dir, ".")
         link = f"[{os.path.basename(path)}]({path})"
         summary[module_name]["Link"] = link
 
 
 def add_summary_to_md(
-        overview_dict: Dict[str, Optional[Union[str, Dict[str, str]]]],
-        markdown: str,
-        separate: bool = True
+    overview_dict: Dict[str, Optional[Union[str, Dict[str, str]]]],
+    markdown: str,
+    separate: bool = True,
 ):
     """Add Table with all Functions & Classes to Markdown file.
 
@@ -80,8 +86,8 @@ def add_summary_to_md(
     :param markdown: Path to markdown file
     :param separate: Create one table per module
     """
-    with open(markdown, 'ab+') as f:
-        f.write("\n## Functions & Classes  \n".encode('utf-8'))
+    with open(markdown, "ab+") as f:
+        f.write("\n## Functions & Classes  \n".encode("utf-8"))
         if not separate:
             table = "| Module | Type | Name/Call | Description |\n| --- | --- | --- | --- |\n"
         for mod, functions in overview_dict.items():
@@ -102,24 +108,30 @@ def add_summary_to_md(
                     else:
                         table += f"| {link} | {t} {f'({p})' if p is not None else ''} | <pre>{func}</pre> | {desc} |\n"
             if separate:
-                f.write(table.encode('utf-8'))
+                f.write(table.encode("utf-8"))
         if not separate:
-            f.write(table.encode('utf-8'))
-        f.write("\nCreated with: "
-                "[doc_to_readme](https://github.com/ziselsberger/doc_to_readme)  \n"
-                "[MIT](https://github.com/ziselsberger/doc_to_readme/blob/main/LICENSE) "
-                "&copy; 2023 Mirjam Ziselsberger\n".encode('utf-8'))
-        f.write(f"\n---\n**Last Update:** {datetime.date.today()}".encode('utf-8'))
+            f.write(table.encode("utf-8"))
+        f.write(
+            "\nCreated with: "
+            "[doc_to_readme](https://github.com/ziselsberger/doc_to_readme)  \n"
+            "[MIT](https://github.com/ziselsberger/doc_to_readme/blob/main/LICENSE) "
+            "&copy; 2023 Mirjam Ziselsberger\n".encode("utf-8")
+        )
+        f.write(f"\n---\n**Last Update:** {datetime.date.today()}".encode("utf-8"))
 
 
-def update_markdown_file(file: str = "../../README.md",
-                         root_dir: str = None,
-                         exclude_modules: Optional[Tuple[str, ...]] = ("test",
-                                                                       "functions_for_testing",
-                                                                       "classes_for_testing",
-                                                                       "doc_to_md"),
-                         specified_modules: Optional[Tuple[str, ...]] = None,
-                         separate: bool = True):
+def update_markdown_file(
+    file: str = "../../README.md",
+    root_dir: str = None,
+    exclude_modules: Optional[Tuple[str, ...]] = (
+        "test",
+        "functions_for_testing",
+        "classes_for_testing",
+        "doc_to_md",
+    ),
+    specified_modules: Optional[Tuple[str, ...]] = None,
+    separate: bool = True,
+):
     """Add/update 'Functions & Classes' Section in Markdown file.
 
     :param file: Path to Markdown file, defaults to '../README.md'
@@ -147,7 +159,8 @@ def update_markdown_file(file: str = "../../README.md",
         file=file,
         root_dir=root_dir,
         exclude_modules=exclude_modules,
-        specified_modules=specified_modules)
+        specified_modules=specified_modules,
+    )
     add_summary_to_md(summary, file, separate=separate)
 
 
@@ -160,15 +173,30 @@ def parse_through_file(file: str) -> Dict[str, Dict[str, str]]:
 
     with open(file) as fd:
         tree = ast.parse(fd.read())
-        func_docs = {f.name: (ast.get_docstring(f).split("\n\n")[0].replace('\n', ' ').replace('  ', ' ')
-                              if ast.get_docstring(f) else None)
-                     for f in ast.walk(tree) if isinstance(f, (ast.FunctionDef, ast.ClassDef))}
+        func_docs = {
+            f.name: (
+                ast.get_docstring(f)
+                .split("\n\n")[0]
+                .replace("\n", " ")
+                .replace("  ", " ")
+                if ast.get_docstring(f)
+                else None
+            )
+            for f in ast.walk(tree)
+            if isinstance(f, (ast.FunctionDef, ast.ClassDef))
+        }
 
-        class_definitions = [node for node in tree.body if isinstance(node, ast.ClassDef)]
-        method_names = {node.name: class_def.name for class_def in class_definitions
-                        for node in class_def.body if isinstance(node, ast.FunctionDef)}
+        class_definitions = [
+            node for node in tree.body if isinstance(node, ast.ClassDef)
+        ]
+        method_names = {
+            node.name: class_def.name
+            for class_def in class_definitions
+            for node in class_def.body
+            if isinstance(node, ast.FunctionDef)
+        }
 
-    with open(file, 'r') as f:
+    with open(file, "r") as f:
         functions = {}
         end = True
         wrong_docu = (":", "Args:", "Returns:")
@@ -178,20 +206,24 @@ def parse_through_file(file: str) -> Dict[str, Dict[str, str]]:
                 function_name = rm_blanks.split("def ")[1].split("(")[0]
                 if function_name.startswith("__"): continue
                 docu = func_docs.get(function_name)
-                functions[function_name] = {"fn": None,
-                                            "doc": docu if docu and not docu.startswith(wrong_docu) else None,
-                                            "type": "method" if function_name in method_names else "function",
-                                            "parent_class": method_names.get(function_name)}
+                functions[function_name] = {
+                    "fn": None,
+                    "doc": docu if docu and not docu.startswith(wrong_docu) else None,
+                    "type": "method" if function_name in method_names else "function",
+                    "parent_class": method_names.get(function_name),
+                }
                 functions[function_name]["fn"] = rm_blanks.split("def ")[1]
                 end = rm_blanks.endswith(":")
             elif rm_blanks.startswith("class "):
                 function_name = rm_blanks.split("class ")[1].split("(")[0].rstrip(":")
                 if function_name.startswith("__"): continue
                 docu = func_docs.get(function_name)
-                functions[function_name] = {"fn": None,
-                                            "doc": docu if docu and not docu.startswith(wrong_docu) else None,
-                                            "type": "class",
-                                            "parent_class": method_names.get(function_name)}
+                functions[function_name] = {
+                    "fn": None,
+                    "doc": docu if docu and not docu.startswith(wrong_docu) else None,
+                    "type": "class",
+                    "parent_class": method_names.get(function_name),
+                }
                 end = rm_blanks.endswith(":")
             elif not end:
                 rm_blanks = rm_blanks.split('"""')[0]
@@ -200,20 +232,35 @@ def parse_through_file(file: str) -> Dict[str, Dict[str, str]]:
 
     for name in functions.keys():
         try:
-            functions[name]['fn'] = functions[name]['fn'].replace(',', ', ').replace('  ', ' ').rstrip(':')
+            functions[name]["fn"] = (
+                functions[name]["fn"].replace(",", ", ").replace("  ", " ").rstrip(":")
+            )
         except AttributeError:
-            functions[name]['fn'] = name
+            functions[name]["fn"] = name
 
     return functions
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("-f", "--file", required=False, help="Path to README", default="../../README.md")
-    parser.add_argument("-r", "--root_dir", required=False, help="Path to rood dir", default=None)
-    parser.add_argument("-e", "--exclude", required=False, help="Exclude modules", default=[], nargs='+')
-    parser.add_argument("-m", "--modules", required=False, help="Specify modules", default=[], nargs='+')
-    parser.add_argument("--separated", required=False, help="Separate tables for each module", action='store_true')
+    parser.add_argument(
+        "-f", "--file", required=False, help="Path to README", default="../../README.md"
+    )
+    parser.add_argument(
+        "-r", "--root_dir", required=False, help="Path to rood dir", default=None
+    )
+    parser.add_argument(
+        "-e", "--exclude", required=False, help="Exclude modules", default=[], nargs="+"
+    )
+    parser.add_argument(
+        "-m", "--modules", required=False, help="Specify modules", default=[], nargs="+"
+    )
+    parser.add_argument(
+        "--separated",
+        required=False,
+        help="Separate tables for each module",
+        action="store_true",
+    )
     args = parser.parse_args()
 
     exclude = ("test", "functions_for_testing", "classes_for_testing")
@@ -229,8 +276,10 @@ if __name__ == "__main__":
     if root_directory:
         print(f"Specified root directory: {root_directory}")
 
-    update_markdown_file(file=args.file,
-                         root_dir=root_directory,
-                         exclude_modules=exclude,
-                         specified_modules=selected_modules,
-                         separate=args.separated)
+    update_markdown_file(
+        file=args.file,
+        root_dir=root_directory,
+        exclude_modules=exclude,
+        specified_modules=selected_modules,
+        separate=args.separated,
+    )
