@@ -7,7 +7,7 @@
 
 #### 1. Add dir `.github/workflows`
 
-#### 2. Create [Workflow file (.yml)](.github/workflows/update_readme.yml)
+#### 2. Create [Workflow file (.yml)](../.github/workflows/update_readme.yml)
 
 - In contrast to GitLab no access token is needed.
 - To avoid an infinite loop of updates, `[skip ci]` is added to the commit message.
@@ -62,12 +62,12 @@ jobs:
 
 ### GitLab
 
-#### 1. Add [Project Access Token](images/project_access_token.png)
+#### 1. Add [Project Access Token](../images/project_access_token.png)
 
 * Settings > `Access Tokens`
-* **Scope**: [write_repository](images/create_project_access_token_medium.png)
+* **Scope**: [write_repository](../images/create_project_access_token_medium.png)
 
-#### 2. Add GIT_PUSH_TOKEN to [CICD Variables](images/cicd_variables.png)
+#### 2. Add GIT_PUSH_TOKEN to [CICD Variables](../images/cicd_variables.png)
 
 * Settings > `CICD` > Variables
 
