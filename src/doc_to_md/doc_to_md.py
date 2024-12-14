@@ -208,7 +208,7 @@ def parse_through_file(file: str) -> Dict[str, Dict[str, str]]:
                 docu = func_docs.get(function_name)
                 functions[function_name] = {
                     "fn": None,
-                    "doc": None if docu.startswith(wrong_docu) else docu,
+                    "doc": docu if docu and not docu.startswith(wrong_docu) else None,
                     "type": "method" if function_name in method_names else "function",
                     "parent_class": method_names.get(function_name),
                 }
