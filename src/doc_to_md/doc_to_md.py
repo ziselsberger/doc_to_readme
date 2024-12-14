@@ -228,7 +228,7 @@ def parse_through_file(file: str) -> Dict[str, Dict[str, str]]:
             elif not end:
                 rm_blanks = line.split('"""')[0].rstrip()
                 end = rm_blanks.endswith(":")
-                functions[function_name]["fn"] += f"<br>{rm_blanks}"
+                functions[function_name]["fn"] += f"&#13;{rm_blanks}"
 
     for name in functions.keys():
         try:
