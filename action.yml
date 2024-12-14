@@ -1,0 +1,77 @@
+name: 'Doc2Readme'
+author: Mirjam Ziselsberger
+description: |
+  Automated extraction of function and class docstrings, 
+  and further creation/update of documentation in README File.
+
+inputs:
+  PATH_TO_README:
+    description: Path to README file. Defaults to "README.md".
+    required: false
+    default: "README.md"
+    type: string
+  ROOT_DIR:
+    description: Directory used as root for searching modules, defaults to folder containing README.md.
+    required: false
+    type: string
+  EXCLUDED_MODULES:
+    description: List of modules to be excluded.
+    required: false
+    type: string
+  SELECTED_MODULES:
+    description: List of selected modules.
+    required: false
+    type: string
+  SEPARATED:
+    description: Create one table per module. Defaults to "true".
+    required: false
+    default: "true"
+    type: string
+
+runs:
+  using: "composite"
+  runs-on: ubuntu-latest
+  permissions:
+    contents: write
+  steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v4
+
+    - name: Install Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '>=3.9'
+
+    - name: Update README
+      env:
+        CI_COMMIT_MESSAGE: Auto-update README.md [skip ci]
+        CI_COMMIT_AUTHOR: AUTO-UPDATE-README
+        CI_COMMIT_MAIL: auto_update_readme@users.noreply.github.com
+      shell: bash
+      run: |
+        git clone 'https://github.com/ziselsberger/doc_to_readme.git'
+        cp ./doc_to_readme/src/doc_to_md/doc_to_md.py .
+        rm -rf doc_to_readme
+        cmd="doc_to_md.py -f ${{ inputs.PATH_TO_README }}"
+        if [[ ! -z "${{ inputs.EXCLUDED_MODULES }}" ]]; then
+          cmd="$cmd -e ${{ inputs.EXCLUDED_MODULES }}"
+        elif [[ ! -z "${{ inputs.SELECTED_MODULES }}" ]]; then
+          cmd="$cmd -m ${{ inputs.SELECTED_MODULES }}"
+        fi
+        if [ ! -z "${{ inputs.ROOT_DIR }}" ]; then
+          cmd="$cmd -r ${{ inputs.ROOT_DIR }}"
+        fi
+        if [ "${{ inputs.SEPARATED }}" = "true" ]; then
+          cmd="$cmd --separated"
+        fi
+        echo $cmd
+        python3 $cmd
+        rm doc_to_md.py
+        lines=$(git status -s | wc -l)
+        if [ $lines -gt 0 ];then
+          git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
+          git config --global user.email "${{ env.CI_COMMIT_MAIL }}"
+          git add "${{ inputs.PATH_TO_README }}"
+          git commit -m "${{ env.CI_COMMIT_MESSAGE }}"
+          git push
+        fi
