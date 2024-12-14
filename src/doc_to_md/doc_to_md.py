@@ -19,7 +19,7 @@ import ast
 import datetime
 import glob
 import os
-from typing import Tuple, Dict, Optional, Union
+from typing import Dict, Optional, Tuple, Union
 
 summary = {}
 
@@ -81,7 +81,7 @@ def add_summary_to_md(
     :param separate: Create one table per module
     """
     with open(markdown, 'ab+') as f:
-        f.write(f"\n## Functions & Classes  \n".encode('utf-8'))
+        f.write("\n## Functions & Classes  \n".encode('utf-8'))
         if not separate:
             table = "| Module | Type | Name/Call | Description |\n| --- | --- | --- | --- |\n"
         for mod, functions in overview_dict.items():
@@ -98,17 +98,17 @@ def add_summary_to_md(
                     pass
                 else:
                     if separate:
-                        table += f"| {t} {f'({p})' if p is not None else ''} | `{func}` | {desc} |\n"
+                        table += f"| {t} {f'({p})' if p is not None else ''} | <pre>{func}</pre> | {desc} |\n"
                     else:
-                        table += f"| {link} | {t} {f'({p})' if p is not None else ''} | `{func}` | {desc} |\n"
+                        table += f"| {link} | {t} {f'({p})' if p is not None else ''} | <pre>{func}</pre> | {desc} |\n"
             if separate:
                 f.write(table.encode('utf-8'))
         if not separate:
             f.write(table.encode('utf-8'))
-        f.write(f"\nCreated with: "
-                f"[doc_to_readme](https://github.com/ziselsberger/doc_to_readme)  \n"
-                f"[MIT](https://github.com/ziselsberger/doc_to_readme/blob/main/LICENSE) "
-                f"&copy; 2023 Mirjam Ziselsberger\n".encode('utf-8'))
+        f.write("\nCreated with: "
+                "[doc_to_readme](https://github.com/ziselsberger/doc_to_readme)  \n"
+                "[MIT](https://github.com/ziselsberger/doc_to_readme/blob/main/LICENSE) "
+                "&copy; 2023 Mirjam Ziselsberger\n".encode('utf-8'))
         f.write(f"\n---\n**Last Update:** {datetime.date.today()}".encode('utf-8'))
 
 
