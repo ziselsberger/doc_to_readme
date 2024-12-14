@@ -40,8 +40,6 @@ runs:
         python-version: '>=3.9'
 
     - name: Update README
-      permissions:
-        contents: write
       env:
         CI_COMMIT_MESSAGE: Auto-update README.md [skip ci]
         CI_COMMIT_AUTHOR: AUTO-UPDATE-README
