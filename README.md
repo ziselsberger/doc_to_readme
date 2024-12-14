@@ -62,9 +62,9 @@ _This code is free to use under the terms of the [MIT license](/LICENSE)._
 
 | Type | Name/Call | Description |
 | --- | --- | --- |
-| function  | <pre lang='py'>loop_through_repo(<br>  file: str, <br>  root_dir: str = None, <br>  exclude_modules: Optional[Tuple[str, ...]] = None, <br>  specified_modules: Optional[Tuple[str, ...]] = None<br>) -> None</pre> | Collect documentation from functions & classes. |
-| function  | <pre lang='py'>add_summary_to_md(<br>  overview_dict: Dict[str, Optional[Union[str, Dict[str, str]]]], <br>  markdown: str, <br>  separate: bool = True<br>)</pre> | Add Table with all Functions & Classes to Markdown file. |
-| function  | <pre lang='py'>update_markdown_file(<br>  file: str = "../../README.md", <br>  root_dir: str = None, <br>  exclude_modules: Optional[Tuple[str, ...]] = (<br>    "test", <br>    "functions_for_testing", <br>    "classes_for_testing", <br>    "doc_to_md"<br>  ), <br>  specified_modules: Optional[Tuple[str, ...]] = None, <br>  separate: bool = True<br>)</pre> | Add/update 'Functions & Classes' Section in Markdown file. |
+| function  | <pre lang='py'>loop_through_repo(&#13;  file: str, &#13;  root_dir: str = None, &#13;  exclude_modules: Optional[Tuple[str, ...]] = None, &#13;  specified_modules: Optional[Tuple[str, ...]] = None&#13;) -> None</pre> | Collect documentation from functions & classes. |
+| function  | <pre lang='py'>add_summary_to_md(&#13;  overview_dict: Dict[str, Optional[Union[str, Dict[str, str]]]], &#13;  markdown: str, &#13;  separate: bool = True&#13;)</pre> | Add Table with all Functions & Classes to Markdown file. |
+| function  | <pre lang='py'>update_markdown_file(&#13;  file: str = "../../README.md", &#13;  root_dir: str = None, &#13;  exclude_modules: Optional[Tuple[str, ...]] = (&#13;    "test", &#13;    "functions_for_testing", &#13;    "classes_for_testing", &#13;    "doc_to_md"&#13;  ), &#13;  specified_modules: Optional[Tuple[str, ...]] = None, &#13;  separate: bool = True&#13;)</pre> | Add/update 'Functions & Classes' Section in Markdown file. |
 | function  | <pre lang='py'>parse_through_file(file: str) -> Dict[str, Dict[str, str]]</pre> | Parse through file, return dict with classes and functions. |
 
 ### [test_dtm.py](./tests/test_dtm.py)
