@@ -104,9 +104,9 @@ def add_summary_to_md(
                     pass
                 else:
                     if separate:
-                        table += f"| {ftype} {f'({parent})' if parent is not None else ''} | <pre>{func}</pre> | {description} |\n"
+                        table += f"| {ftype} {f'({parent})' if parent is not None else ''} | <pre lang='py'>{func}</pre> | {description} |\n"
                     else:
-                        table += f"| {link} | {ftype} {f'({parent})' if parent is not None else ''} | <pre>{func}</pre> | {description} |\n"
+                        table += f"| {link} | {ftype} {f'({parent})' if parent is not None else ''} | <pre lang='py'>{func}</pre> | {description} |\n"
             if separate:
                 f.write(table.encode("utf-8"))
         if not separate:
@@ -127,7 +127,7 @@ def update_markdown_file(
         "test",
         "functions_for_testing",
         "classes_for_testing",
-        "doc_to_md",
+        "doc_to_md"
     ),
     specified_modules: Optional[Tuple[str, ...]] = None,
     separate: bool = True
@@ -226,9 +226,9 @@ def parse_through_file(file: str) -> Dict[str, Dict[str, str]]:
                 }
                 end = rm_blanks.endswith(":")
             elif not end:
-                rm_blanks = rm_blanks.split('"""')[0]
+                rm_blanks = line.split('"""')[0].rstrip()
                 end = rm_blanks.endswith(":")
-                functions[function_name]["fn"] += rm_blanks
+                functions[function_name]["fn"] += f"<br>{rm_blanks}"
 
     for name in functions.keys():
         try:
