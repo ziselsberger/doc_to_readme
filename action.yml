@@ -30,9 +30,6 @@ inputs:
 
 runs:
   using: "composite"
-  runs-on: ubuntu-latest
-  permissions:
-    contents: write
   steps:
     - name: Checkout Repo
       uses: actions/checkout@v4
@@ -43,6 +40,8 @@ runs:
         python-version: '>=3.9'
 
     - name: Update README
+      permissions:
+        contents: write
       env:
         CI_COMMIT_MESSAGE: Auto-update README.md [skip ci]
         CI_COMMIT_AUTHOR: AUTO-UPDATE-README
