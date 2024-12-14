@@ -134,7 +134,7 @@ def update_markdown_file(
 ):
     """Add/update 'Functions & Classes' Section in Markdown file.
 
-    :param file: Path to Markdown file, defaults to '../README.md'
+    :param file: Path to Markdown file, defaults to '../../README.md'
     :param root_dir: Path to root directory
     :param exclude_modules: Names of excluded modules
     :param specified_modules: Names of specified modules
