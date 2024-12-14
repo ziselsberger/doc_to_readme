@@ -62,20 +62,20 @@ _This code is free to use under the terms of the [MIT license](/LICENSE)._
 
 | Type | Name/Call | Description |
 | --- | --- | --- |
-| function  | <pre>loop_through_repo(file: str, root_dir: str = None, exclude_modules: Optional[Tuple[str, ...]] = None, specified_modules: Optional[Tuple[str, ...]] = None) -> None</pre> | Collect documentation from functions & classes. |
-| function  | <pre>add_summary_to_md(overview_dict: Dict[str, Optional[Union[str, Dict[str, str]]]], markdown: str, separate: bool = True)</pre> | Add Table with all Functions & Classes to Markdown file. |
-| function  | <pre>update_markdown_file(file: str = "../../README.md", root_dir: str = None, exclude_modules: Optional[Tuple[str, ...]] = ("test", "functions_for_testing", "classes_for_testing", "doc_to_md", ), specified_modules: Optional[Tuple[str, ...]] = None, separate: bool = True)</pre> | Add/update 'Functions & Classes' Section in Markdown file. |
-| function  | <pre>parse_through_file(file: str) -> Dict[str, Dict[str, str]]</pre> | Parse through file, return dict with classes and functions. |
+| function  | <pre lang='py'>loop_through_repo(<br>  file: str, <br>  root_dir: str = None, <br>  exclude_modules: Optional[Tuple[str, ...]] = None, <br>  specified_modules: Optional[Tuple[str, ...]] = None<br>) -> None</pre> | Collect documentation from functions & classes. |
+| function  | <pre lang='py'>add_summary_to_md(<br>  overview_dict: Dict[str, Optional[Union[str, Dict[str, str]]]], <br>  markdown: str, <br>  separate: bool = True<br>)</pre> | Add Table with all Functions & Classes to Markdown file. |
+| function  | <pre lang='py'>update_markdown_file(<br>  file: str = "../../README.md", <br>  root_dir: str = None, <br>  exclude_modules: Optional[Tuple[str, ...]] = (<br>    "test", <br>    "functions_for_testing", <br>    "classes_for_testing", <br>    "doc_to_md"<br>  ), <br>  specified_modules: Optional[Tuple[str, ...]] = None, <br>  separate: bool = True<br>)</pre> | Add/update 'Functions & Classes' Section in Markdown file. |
+| function  | <pre lang='py'>parse_through_file(file: str) -> Dict[str, Dict[str, str]]</pre> | Parse through file, return dict with classes and functions. |
 
 ### [test_dtm.py](./tests/test_dtm.py)
 
 | Type | Name/Call | Description |
 | --- | --- | --- |
-| class  | <pre>LoopThroughRepo</pre> | None |
-| method (LoopThroughRepo) | <pre>setUp(self) -> None</pre> | None |
-| method (LoopThroughRepo) | <pre>test_loop_through_repo(self)</pre> | None |
-| method (LoopThroughRepo) | <pre>test_loop_through_repo_specified_modules(self)</pre> | None |
-| method (LoopThroughRepo) | <pre>test_loop_through_repo_exclude_modules(self)</pre> | None |
+| class  | <pre lang='py'>LoopThroughRepo</pre> | None |
+| method (LoopThroughRepo) | <pre lang='py'>setUp(self) -> None</pre> | None |
+| method (LoopThroughRepo) | <pre lang='py'>test_loop_through_repo(self)</pre> | None |
+| method (LoopThroughRepo) | <pre lang='py'>test_loop_through_repo_specified_modules(self)</pre> | None |
+| method (LoopThroughRepo) | <pre lang='py'>test_loop_through_repo_exclude_modules(self)</pre> | None |
 
 Created with: [doc_to_readme](https://github.com/ziselsberger/doc_to_readme)  
 [MIT](https://github.com/ziselsberger/doc_to_readme/blob/main/LICENSE) &copy; 2023 Mirjam Ziselsberger
