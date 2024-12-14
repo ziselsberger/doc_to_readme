@@ -28,7 +28,7 @@ def loop_through_repo(
     file: str,
     root_dir: str = None,
     exclude_modules: Optional[Tuple[str, ...]] = None,
-    specified_modules: Optional[Tuple[str, ...]] = None,
+    specified_modules: Optional[Tuple[str, ...]] = None
 ) -> None:
     """Collect documentation from functions & classes.
 
@@ -78,7 +78,7 @@ def loop_through_repo(
 def add_summary_to_md(
     overview_dict: Dict[str, Optional[Union[str, Dict[str, str]]]],
     markdown: str,
-    separate: bool = True,
+    separate: bool = True
 ):
     """Add Table with all Functions & Classes to Markdown file.
 
@@ -130,7 +130,7 @@ def update_markdown_file(
         "doc_to_md",
     ),
     specified_modules: Optional[Tuple[str, ...]] = None,
-    separate: bool = True,
+    separate: bool = True
 ):
     """Add/update 'Functions & Classes' Section in Markdown file.
 
@@ -208,7 +208,7 @@ def parse_through_file(file: str) -> Dict[str, Dict[str, str]]:
                 docu = func_docs.get(function_name)
                 functions[function_name] = {
                     "fn": None,
-                    "doc": docu if docu and not docu.startswith(wrong_docu) else None,
+                    "doc": None if docu.startswith(wrong_docu) else docu,
                     "type": "method" if function_name in method_names else "function",
                     "parent_class": method_names.get(function_name),
                 }
@@ -259,7 +259,7 @@ if __name__ == "__main__":
         "--separated",
         required=False,
         help="Separate tables for each module",
-        action="store_true",
+        action="store_true"
     )
     args = parser.parse_args()
 
@@ -281,5 +281,5 @@ if __name__ == "__main__":
         root_dir=root_directory,
         exclude_modules=exclude,
         specified_modules=selected_modules,
-        separate=args.separated,
+        separate=args.separated
     )
